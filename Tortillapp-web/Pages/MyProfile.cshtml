@@ -1,0 +1,69 @@
+﻿@page
+@model Tortillapp_web.Pages.MyProfileModel
+@{
+	ViewData["Title"] = "Mi perfil";
+}
+<div class="bg-white">
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-sm">
+                <h1 class="text-center">Mi perfil</h1>
+                <div class="row align-items-center">
+                    <div class="form-outline col-sm text-center">
+                        <label for="ushow" class="form-label fs-3">Hola #show @Model.ushow</label>
+                    </div>
+                </div>
+                <div class="row align-items-center text-center">
+                    <div class="form-outline col-sm">
+                        <label id="UsrName" for="uname" class="form-label fs-4">@Model.uname</label>
+                    </div>
+                </div>
+                <div class="row align-items-center text-center">
+                    <div class="form-outline col-sm">
+                        <img />
+                    </div>
+                </div>
+                <div class="row text-center align-items-center justify-content-center">
+                    <button type="submit" class="btn btn_base w-50 rounded-pill">Subir foto</button></br>
+                </div>
+            </div>
+
+            <div class="col-md">
+                <form method="post">
+                    <h2 class="text-start">Datos generales</h2>
+                    <div class="row align-content-start">
+                        <div class="col-sm mb-3">
+                            <label for="uname" class="form-label">Nombre de usuario</label>
+                            <input type="text" class="form-control" id="uname" name="user_name" disabled readonly placeholder="@Model.uname">
+                        </div>
+                    </div>
+                    <div class="row align-content-start">
+                        <div class="col-sm mb-3">
+                            <label for="ushow" class="form-label">Nombre para mostrar</label>
+                            <input type="text" class="form-control" id="ushow" name="user_show">
+                        </div>
+                    </div>
+                    <div class="row align-content-start">
+                        <div class="col-sm mb-3">
+                        <label for="umail" class="form-label">Correo</label>
+                        <input type="email" class="form-control" id="umail" name="user_mail" placeholder="@Model.umail">
+                        </div>
+                    </div>
+                    <div class="row align-content-start">
+                        <div class="form-outline col-sm mb-3 no-gutters-right">
+                            <label for="upass" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="upass" name="user_pass">
+                        </div>
+                        <div class="form-outline col-sm mb-3"> 
+                            <label for="xpass" class="form-label">Confirma contraseña</label>
+                            <input type="password" class="form-control" id="xpass" name="user_pasx">
+                        </div>
+                    </div>
+                    <div class="row text-center align-items-center justify-content-center">
+                        <button type="submit" class="btn btn_base w-50 rounded-pill">Guardar cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

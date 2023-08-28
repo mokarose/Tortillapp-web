@@ -1,0 +1,45 @@
+﻿@page
+@model Tortillapp_web.Pages.LoginModel
+@{
+	ViewData["Title"] = "Login";
+}
+<div class="bg-white">
+	<div class="container">
+    <div class="row mt-3">
+        <div class="col-sm">
+            <h1 class="text-center">Bienvenido</h1>
+        </div>
+        
+		<div class="col-md">
+			<form method="post">
+				<h2 class="text-start">Inicia sesión</h2>
+				<div class="row align-content-start">
+					<div class="col-sm mb-3">
+						<label for="umail" class="form-label">Dirección de correo</label>
+						<input type="email" class="form-control" id="mail" name="user_mail" placeholder="correo@example.com">
+					</div>
+				</div>
+				<div class="row align-content-start">
+					<div class="col-sm mb-3">
+						<label for="upass" class="form-label">Contraseña</label>
+						<input type="password" class="form-control" id="pass" name="user_pass" placeholder="********">
+					</div>
+				</div>
+				<div class="row no-gutters-right">
+					<div class="col-sm form-check mb-3">
+						<input type="checkbox" class="form-check-input" id="reme" name="remenber_user" value="Yes">
+						<label for="reme" class="form-check-label">Recuédarme</label>
+					</div>
+					<div class="col-sm mb-3">
+						<label for="forget" class=""><a href="#">¿Olvidaste tu contraseña?</a></label>
+					</div>
+				</div>
+				<div class="row text-center align-items-center justify-content-center">
+					<button type="submit" class="btn btn_base w-50 rounded-pill">Ingresar</button>
+					<label for="newbie" class="form-label">¿No tienes cuenta? <a href="/Register">Crea una</a></label>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+

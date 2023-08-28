@@ -1,0 +1,70 @@
+﻿@page
+@model Tortillapp_web.Pages.NewRecipeModel
+@{
+	ViewData["Title"] = "Nueva receta";
+}
+
+<form method="post">
+    <div class="container">
+        <h1>Crear receta</h1>
+
+        <h2>#user</h2>
+        Imagen usuario
+
+        <label for="recipe">Título de la receta</label>
+        <input type="text" id="title" name="recipe_til"></br>
+
+        <button type="submit">Siguiente</button>
+    </div>
+
+    <div class="container">
+        <h1>Título de la receta</h1>
+
+        <h3>Ingredientes</h3>
+        <label>+</label>
+        <input type="number" id="portion" name="recipe_port">
+        <label>-</label><label>Porc.</label>
+        </br>
+
+        <label for="ingredient">Descripción ingrediente</label>
+        <input type="text" id="tip" name="ingredient_tip"></br>
+
+        <label for="quantity">Cantidad</label>
+        <input type="number" id="amount" name="ingredient_amount">
+
+        <label for="unity">Unidad</label>
+        <select name="unidad">
+            <option>#unityRegister</option>
+        </select>
+
+        <button type="button">Agregar otro ingrediente</button> 
+
+    </div>
+
+    <div class="container">
+        <h3>Preparación</h3>
+        <input type="time" id="cooking" name="recipe_time">
+        <label>Mins.</label></br>
+        <textarea name="preparar">Pasos para preparar la receta...</textarea>
+        
+        <h3>Tips</h3>
+        <textarea name="tips">Algún consejo, técnica o para la presentación</textarea>
+
+        <h3>Etiquetas</h3>
+        <input type="text" id="tag" name="recipe_tags">
+        <button type="button">Agregar</button>
+
+        <div class="table">
+            #etiquetas1
+        </div>
+    </div>
+
+    <div class="container">
+        <button type="button" name="upload">Subir una foto</button>
+
+        <button type="button" name="preview">Vista Previa</button>
+        
+        <button type="button" name="public">Publicar</button>
+    </div>
+</form>
+
