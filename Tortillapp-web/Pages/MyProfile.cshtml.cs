@@ -4,7 +4,6 @@ using Microsoft.IdentityModel.Tokens;
 using MySql.Data.MySqlClient;
 using NuGet.Protocol.Plugins;
 using Org.BouncyCastle.Asn1.Ocsp;
-//using System.Web
 
 namespace Tortillapp_web.Pages
 {
@@ -23,7 +22,6 @@ namespace Tortillapp_web.Pages
                        
             try
             {
-                //if (!Page.IsPostBack)
                 nConnect = new CConnection();
                 MySqlDataReader data = null;
                 MySqlCommand cmd = new MySqlCommand();
@@ -44,9 +42,8 @@ namespace Tortillapp_web.Pages
             }
             catch (Exception ex)
             {
-                this.RedirectToPage(ex.Message);
+                this.RedirectToPage("Error", ex.Message);
             }
-
         }
 
         public IActionResult OnPost([FromForm]string uname)

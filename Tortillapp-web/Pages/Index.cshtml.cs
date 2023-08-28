@@ -7,6 +7,9 @@ namespace Tortillapp_web.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
+        private CConnection nConnect;
+        public string itag => (string)TempData[nameof(itag)];
+
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;

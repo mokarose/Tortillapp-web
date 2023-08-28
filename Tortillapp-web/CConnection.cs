@@ -14,9 +14,28 @@ namespace Tortillapp_web
             return conexion;
         }
 
-        public MySqlDataReader readUser()
+        public bool loginUser(string user, string pass)
         {
-            return null;
+            MySqlDataReader data = null;
+            MySqlCommand cmd = new MySqlCommand();
+            cmd.CommandText = "select * from user_data where (user_name=@user and user_pass=@pass)";
+            data = cmd.ExecuteReader();
+            if (data.HasRows)
+            {
+                while (data.Read())
+                {
+                    UserCache.iuser = data.GetInt32("user_id");
+                    UserCache.uname = data.GetString("user_name");
+                    UserCache.umail = data.GetString("user_mail");
+                    UserCache.ushow = data.GetString("user_show");
+                    UserCache.upass = data.GetString("user_pass");
+                }
+                return true;
+            }
+            else
+                return false;
+            
         }
+
     }
 }

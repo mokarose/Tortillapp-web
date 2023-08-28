@@ -9,15 +9,16 @@
 <div class="main">
     <div class="search_bar">
         <form id="form-control mr-sm 2" type="search">
-        <input type="text" id="search" name="look_s" placeholder="Escribe ingrediente, receta o palabra clave"/>
+            <input type="text" id="search" name="look_s" placeholder="Escribe ingrediente, receta o palabra clave"/>
 
-        <button type="submit" class="btn btn_base">Buscar</button>
+            <button type="submit" class="btn btn_base">Buscar</button>
         </form>
         <button type="button" class="btn btn_avance">Avanzado</button>
     </div>
     <div class="popular_tag">
-        <label>#Etiqueta</label>
-        <a class="mb-2 tag_base tag_deco button_deco">Etiqueta</a>
+        <label id="itag">
+            <a class="mb-2 tag_base tag_deco button_deco">Etiqueta @Model.itag</a>
+        </label>
     </div>
 </div>
 
