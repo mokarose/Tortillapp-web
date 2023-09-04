@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.IdentityModel.Tokens;
+//using Microsoft.IdentityModel.Tokens;
 using MySql.Data.MySqlClient;
 using NuGet.Protocol.Plugins;
 using Org.BouncyCastle.Asn1.Ocsp;
@@ -13,14 +13,11 @@ namespace Tortillapp_web.Pages
         public string uname => (string)TempData[nameof(uname)];
         public string ushow => (string)TempData[nameof(ushow)];
         public string umail => (string)TempData[nameof(umail)];
-        protected void Page_Load(object sender, EventArgs e)
-        {
-        }
 
         public void OnGet()
         {
                        
-            try
+            /*try
             {
                 nConnect = new CConnection();
                 MySqlDataReader data = null;
@@ -43,7 +40,7 @@ namespace Tortillapp_web.Pages
             catch (Exception ex)
             {
                 this.RedirectToPage("Error", ex.Message);
-            }
+            }*/
         }
 
         public IActionResult OnPost([FromForm]string uname)

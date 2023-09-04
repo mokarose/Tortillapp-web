@@ -11,20 +11,21 @@
         </div>
         
 		<div class="col-md">
-			<form method="post">
+			<form method="post" asp-page="Login">
 				<h2 class="text-start">Inicia sesión</h2>
 				<div class="row align-content-start">
 					<div class="col-sm mb-3">
 						<label for="umail" class="form-label">Dirección de correo</label>
-						<input type="email" class="form-control" id="mail" name="user_mail" placeholder="correo@example.com">
+							<input type="email" class="form-control" id="umail" name="user_mail" placeholder="correo@example.com" asp-for="@Model.umail">
 					</div>
 				</div>
 				<div class="row align-content-start">
 					<div class="col-sm mb-3">
 						<label for="upass" class="form-label">Contraseña</label>
-						<input type="password" class="form-control" id="pass" name="user_pass" placeholder="********">
+						<input type="password" class="form-control" id="upass" name="user_pass" placeholder="********" asp-for="@Model.upass">
 					</div>
 				</div>
+				<label for="merror" class="form-label">@Model.merror</label>
 				<div class="row no-gutters-right">
 					<div class="col-sm form-check mb-3">
 						<input type="checkbox" class="form-check-input" id="reme" name="remenber_user" value="Yes">

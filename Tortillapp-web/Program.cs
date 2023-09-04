@@ -1,7 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+//builder.Services.AddDbContext<ModelContext>(options =>
+//	options.UseMySQL(builder.Configuration.GetConnectionString("server=localhost;database=tortilla;user=root;password=Lord0Rings;") ?? throw new InvalidOperationException("Connection string 'Tortilla' not found.")));
 
 var app = builder.Build();
 

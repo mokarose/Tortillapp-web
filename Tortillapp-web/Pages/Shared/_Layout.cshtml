@@ -23,12 +23,12 @@
                     <!--<a class="btn dropdown-toggle" href="/MyProfile" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Mi perfil</a>-->
                         <ul class="navbar-nav"> <!--aria-labelledby="dropdownMenu">-->
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="/MyProfile" id="navbarDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuario</a>
+                                <a class="nav-link dropdown-toggle" asp-page="/Index" id="navbarDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuario</a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownLink">
-                                    <li><a class="dropdown-item" href="/MyProfile">Mi perfil</a></li>
-                                    <li><a class="dropdown-item" href="#">Recetas favoritas</a></li>
-                                    <li><a class="dropdown-item" href="/NewRecipe">Crear receta</a></li>
-                                    <li><a class="dropdown-item" href="#">Acerca de</a></li>
+                                    <li><a class="dropdown-item" asp-page="/Login">Mi perfil</a></li>
+                                    <li><a class="dropdown-item" asp-page="#">Recetas favoritas</a></li>
+                                    <li><a class="dropdown-item" asp-page="/NewRecipe">Crear receta</a></li>
+                                    <li><a class="dropdown-item" asp-page="#">Acerca de</a></li>
                                     <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
                                 </ul>
                             </li>
