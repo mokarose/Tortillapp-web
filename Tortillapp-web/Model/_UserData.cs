@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Tortillapp_web.Model
+namespace Tortillapp_web._Model
 {
 
     public partial class UserData

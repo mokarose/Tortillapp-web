@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using MySql.Data.EntityFramework;
 using NuGet.Packaging.Rules;
-using Tortillapp_web.Model;
+using Tortillapp_web._Model;
 
-namespace Tortillapp_web.Data
+namespace Tortillapp_web._Data
 {
 	public class ModelContext : DbContext
 	{

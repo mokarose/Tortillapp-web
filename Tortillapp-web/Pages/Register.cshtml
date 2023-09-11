@@ -1,5 +1,5 @@
 ﻿@page
-@model Tortillapp_web.Pages.RegisterModel
+@model Tortillapp_web.Pages.Users.RegisterModel
 @{
     ViewData["Title"] = "Registro";
 }
@@ -20,26 +20,27 @@
                     <h2 class="text-start">Crear un perfil</h2>
                     <div class="row align-content-start">
                         <div class="col-sm mb-3">
-                            <label for="umail" class="form-label">Dirección de correo</label>
-                            <input type="email" class="form-control" id="mail" name="user_mail" placeholder="correo@example.com">
+                            <label asp-for="User.UserMail" class="form-label">Dirección de correo</label>
+                            <input asp-for="User.UserMail" type="email" class="form-control" placeholder="correo@example.com">
+                            <span asp-validation-for="User.UserMail" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row align-content-start">
                         <div class="col-sm mb-3">
-                            <label for="uname" class="form-label">Nombre de usuario</label>
-                            <input type="text" class="form-control" id="user" name="user_name" placeholder="usuario">
+                            <label asp-for="User.UserName" class="form-label">Nombre de usuario</label>
+                            <input asp-for="User.UserName" type="text" class="form-control" placeholder="usuario">
                         </div>
                     </div>
                     <div class="row align-content-start">
                         <div class="col-sm mb-3">
-                            <label for="upass" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="pass" name="user_pass" placeholder="contraseña">
+                            <label asp-for="User.UserPass" class="form-label">Contraseña</label>
+                            <input asp-for="User.UserPass" type="password" class="form-control" placeholder="********">
                         </div>
                     </div>
                     <div class="row align-content-start">
                         <div class="col-sm mb-3">
-                            <label for="xpass" class="form-label">Confirma contraseña</label>
-                            <input type="password" class="form-control" id="pasx" name="user_pasx" placeholder="confirma contraseña">
+                            <label asp-for="pass2" class="form-label">Confirma contraseña</label>
+                            <input asp-for="pass2" type="password" class="form-control" id="pass2" placeholder="********">
                         </div>
                     </div>
 

@@ -3,20 +3,21 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
-using Tortillapp_web.tortilla;
-using Tortillapp_web.Pages.Users;
+using Tortillapp_web.Data;
+using Tortillapp_web.Model;
 
 namespace Tortillapp_web.Pages
 {
     public class LoginModel : PageModel
     {
         [BindProperty]
-		public string umail { get; set; }
+        public string umail { get; set; }
 		[BindProperty]
 		public string upass { get; set; }
-		public string merror { get; set; }
-
-		public void OnGet()
+        public bool reme { get; set; } 
+        public string? merror { get; set; }
+        public UserData User { get; set; } = default!;
+        public void OnGet()
         {
             /*try
             {
@@ -32,40 +33,41 @@ namespace Tortillapp_web.Pages
             this.Page();*/
         }
 
-        //public async Task<IActionResult> OnPostAsync()
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
+        {
+
+        }
+        /*public IActionResult OnPost()
 		{
-            //nConnect = new CConnection();¿
+            //nConnect = new CConnection();
             //nConnect.loginUser(umail,upass);
             using (var context = new tortillaContext())
             {
                 try
                 {
                     //context.Database.EnsureCreated();
-                    if (!ModelState.IsValid)
+                    if (ModelState.IsValid)
                     {
-                        //var user = context.UserData;
-                        merror = umail.ToString();
-                        //var umodel = new UserModel(context);
-						
-						/*(this.UserModel.UserMail, this.UserModel.UserPass);
-						//foreach (var u in umodel.UserData)
+                        var userMod = context.UserData;
+
+                        //foreach (var u in userMod)
                         //{
-                            if (umail.)
+                        //if (umail.Equals(u.UserMail))
+                        if (umail.Equals(userMod. User.UserName))
                             {
-                                if (upass.Equals(u.UserPass))
+                                //if (upass.Equals(u.UserPass))
+                                if (upass.Equals(User.UserPass))
                                 {
-                                   
-                                    return RedirectToPage("MyProfile");
+                                    return RedirectToPage("MyProfile", User);
                                 }
                             }
                             else
                             {
-                                merror = "El password o la contraseña son incorrectos";
+                                merror = "La contraseña o el correo son incorrectos";
                                 return Page();
                             }
-                        //}*/
-                    }
+                        }
+                    //}
                     else
                     {
                         return Page();
@@ -78,6 +80,6 @@ namespace Tortillapp_web.Pages
 				}
             }
             return Page();
-        }
+        }*/
     }
 }

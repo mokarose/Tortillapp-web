@@ -15,21 +15,21 @@
 				<h2 class="text-start">Inicia sesión</h2>
 				<div class="row align-content-start">
 					<div class="col-sm mb-3">
-						<label for="umail" class="form-label">Dirección de correo</label>
-							<input type="email" class="form-control" id="umail" name="user_mail" placeholder="correo@example.com" asp-for="@Model.umail">
+						<label asp-for="umail" class="form-label">Dirección de correo</label>
+							<input asp-for="umail" type="email" class="form-control" id="umail" placeholder="correo@example.com">
 					</div>
 				</div>
 				<div class="row align-content-start">
 					<div class="col-sm mb-3">
-						<label for="upass" class="form-label">Contraseña</label>
-						<input type="password" class="form-control" id="upass" name="user_pass" placeholder="********" asp-for="@Model.upass">
+						<label asp-for="upass" class="form-label">Contraseña</label>
+						<input asp-for="upass" type="password" class="form-control" id="upass" placeholder="********">
 					</div>
 				</div>
 				<label for="merror" class="form-label">@Model.merror</label>
 				<div class="row no-gutters-right">
 					<div class="col-sm form-check mb-3">
-						<input type="checkbox" class="form-check-input" id="reme" name="remenber_user" value="Yes">
-						<label for="reme" class="form-check-label">Recuédarme</label>
+						<input asp-for="reme" type="checkbox" class="form-check-input" id="reme" value="1">
+						<label asp-for="reme" class="form-check-label">Recuédarme</label>
 					</div>
 					<div class="col-sm mb-3">
 						<label for="forget" class=""><a href="#">¿Olvidaste tu contraseña?</a></label>

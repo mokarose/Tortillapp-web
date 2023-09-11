@@ -1,16 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data.Entity;
-using Tortillapp_web.tortilla;
+using Tortillapp_web.Model;
 
 namespace Tortillapp_web.Pages.Users;
 
 public class UserModel : PageModel
 {
 
-	private readonly Tortillapp_web.tortilla.tortillaContext _context;
+	private readonly Tortillapp_web.Data.tortillaContext _context;
 
-	public UserModel(Tortillapp_web.tortilla.tortillaContext context)
+	public UserModel(Tortillapp_web.Data.tortillaContext context)
 	{
 		_context = context;
 	}

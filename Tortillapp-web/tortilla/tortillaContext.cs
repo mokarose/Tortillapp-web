@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Tortillapp_web.Model;
 
-namespace Tortillapp_web.tortilla
+namespace Tortillapp_web.Data
 {
     public partial class tortillaContext : DbContext
     {

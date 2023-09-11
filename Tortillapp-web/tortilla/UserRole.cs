@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Tortillapp_web.tortilla
+namespace Tortillapp_web.Model
 {
     public partial class UserRole
     {

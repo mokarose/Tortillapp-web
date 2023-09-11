@@ -1,5 +1,5 @@
 ﻿@page
-@model Tortillapp_web.Pages.MyProfileModel
+@model Tortillapp_web.Pages.Users.MyProfileModel
 @{
 	ViewData["Title"] = "Mi perfil";
 }
@@ -10,12 +10,12 @@
                 <h1 class="text-center">Mi perfil</h1>
                 <div class="row align-items-center">
                     <div class="form-outline col-sm text-center">
-                        <label for="ushow" class="form-label fs-3">Hola #show @Model.ushow</label>
+                        <label for="ushow" class="form-label fs-3">Hola @Html.DisplayFor(model => model.User.ShowName)</label>
                     </div>
                 </div>
                 <div class="row align-items-center text-center">
                     <div class="form-outline col-sm">
-                        <label id="UsrName" for="uname" class="form-label fs-4">@Model.uname</label>
+                        <label id="UsrName" for="uname" class="form-label fs-4">@Html.DisplayFor(model => model.User.UserName)</label>
                     </div>
                 </div>
                 <div class="row align-items-center text-center">
@@ -34,29 +34,29 @@
                     <div class="row align-content-start">
                         <div class="col-sm mb-3">
                             <label for="uname" class="form-label">Nombre de usuario</label>
-                            <input type="text" class="form-control" id="uname" name="user_name" disabled readonly placeholder="@Model.uname">
+                            <input type="text" class="form-control" id="uname" disabled readonly placeholder="@Html.DisplayFor(model => model.User.UserName)">
                         </div>
                     </div>
                     <div class="row align-content-start">
                         <div class="col-sm mb-3">
                             <label for="ushow" class="form-label">Nombre para mostrar</label>
-                            <input type="text" class="form-control" id="ushow" name="user_show">
+                            <input type="text" class="form-control" id="ushow" value="@Html.DisplayFor(model => model.User.ShowName)">
                         </div>
                     </div>
                     <div class="row align-content-start">
                         <div class="col-sm mb-3">
                         <label for="umail" class="form-label">Correo</label>
-                        <input type="email" class="form-control" id="umail" name="user_mail" value="@Model.umail">
+                            <input type="email" class="form-control" id="umail" value="@Html.DisplayFor(model => model.User.UserMail)">
                         </div>
                     </div>
                     <div class="row align-content-start">
                         <div class="form-outline col-sm mb-3 no-gutters-right">
                             <label for="upass" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="upass" name="user_pass">
+                            <input type="password" class="form-control" id="upass">
                         </div>
                         <div class="form-outline col-sm mb-3"> 
                             <label for="xpass" class="form-label">Confirma contraseña</label>
-                            <input type="password" class="form-control" id="xpass" name="user_pasx">
+                            <input type="password" class="form-control" id="xpass">
                         </div>
                     </div>
                     <div class="row text-center align-items-center justify-content-center">
