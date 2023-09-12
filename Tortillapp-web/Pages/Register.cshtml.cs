@@ -27,12 +27,14 @@ namespace Tortillapp_web.Pages.Users
 
         public async Task<IActionResult> OnPostAsync()
 		{
-			if (!ModelState.IsValid || _context.UserData == null || User == null)
+            var role = _context.UserRoles.ToList();
+
+            if (!ModelState.IsValid || _context.UserDatas == null || User == null)
 			{
 				return Page();
 			}
 
-			_context.UserData.Add(User);
+			_context.UserDatas.Add(User);
 			await _context.SaveChangesAsync();
 
 			return RedirectToPage("/MyProfile");

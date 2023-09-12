@@ -19,32 +19,23 @@ namespace Tortillapp_web
             return conexion;
         }
 
-        public bool loginUser(string user, string pass)
+        public async Task<List<LoginModel>> LoginMethodAsync(string userMail, string userPass)
         {
-            MySqlDataReader data = null;
-            MySqlCommand cmd = new MySqlCommand();
-            
-            cmd.Connection = getConnection();
-            cmd.CommandText = "select * from user_data where (user_name=@user and user_pass=@pass)";
-			cmd.Parameters.AddWithValue("@user", user);
-			cmd.Parameters.AddWithValue("@pass", pass);
-
-			data = cmd.ExecuteReader();
-            if (data.HasRows)
+            List<LoginModel> login = new List<LoginModel>();
+            try
             {
-                while (data.Read())
-                {
-                    /*UserData.iuser = data.GetInt32("user_id");
-                    UserCache.uname = data.GetString("user_name");
-                    UserCache.umail = data.GetString("user_mail");
-                    UserCache.ushow = data.GetString("user_show");
-                    UserCache.upass = data.GetString("user_pass");*/
-                }
-                return true;
-            }
-            else
-                return false;
+                MySqlParameter mailParam = new MySqlParameter("@user_mail", userMail ?? (object)DBNull.Value);
+                MySqlParameter passParam = new MySqlParameter("@user_pass", userPass ?? (object)DBNull.Value);
             
+                string mysqlQuery = "select * from user_data where (user_name=@user and user_pass=@pass)";
+
+                login = await this.Query<LoginModel>().FromMySql(mysqlQuery,userMail,userPass).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return login;
         }
 
     }

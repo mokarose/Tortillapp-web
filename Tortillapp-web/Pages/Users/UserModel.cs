@@ -19,9 +19,9 @@ public class UserModel : PageModel
 
 	public async Task OnGetAsync()
 	{
-		if (_context.UserData != null)
+		if (_context.UserDatas != null)
 		{
-			UserData = await _context.UserData.ToListAsync();
+			UserData = await _context.UserDatas.ToListAsync();
 		}
 
 	}

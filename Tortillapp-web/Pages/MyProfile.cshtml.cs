@@ -26,11 +26,11 @@ namespace Tortillapp_web.Pages.Users
         public async Task<IActionResult> OnGetAsync(UserData iUser)
         {
                        
-            if (iUser == null || _context.UserData == null) { 
+            if (iUser == null || _context.UserDatas == null) { 
                 return NotFound();
             }
 
-            var user = await _context.UserData.FirstOrDefaultAsync(u => u.UserId == iUser.UserId);
+            var user = await _context.UserDatas.FirstOrDefaultAsync(u => u.UserId == iUser.UserId);
 
             if (user == null)
             {
@@ -46,17 +46,17 @@ namespace Tortillapp_web.Pages.Users
         //public IActionResult OnPost([FromForm]string uname)
         public async Task<IActionResult> OnPostAsync(UserData iUser)
         {
-            if (iUser == null || _context.UserData == null)
+            if (iUser == null || _context.UserDatas == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.UserData.FindAsync(iUser.UserId);
+            var user = await _context.UserDatas.FindAsync(iUser.UserId);
 
             if (user != null)
             {
                 User = user;
-                _context.UserData.Update(User);
+                _context.UserDatas.Update(User);
                 await _context.SaveChangesAsync();  
             }
             return Page();

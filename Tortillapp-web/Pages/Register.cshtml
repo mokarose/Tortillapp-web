@@ -22,7 +22,7 @@
                         <div class="col-sm mb-3">
                             <label asp-for="User.UserMail" class="form-label">Dirección de correo</label>
                             <input asp-for="User.UserMail" type="email" class="form-control" placeholder="correo@example.com">
-                            <span asp-validation-for="User.UserMail" class="text-danger"></span>
+                            <!--<span asp-validation-for="User.UserMail" class="text-danger"></span>-->
                         </div>
                     </div>
                     <div class="row align-content-start">
@@ -40,10 +40,10 @@
                     <div class="row align-content-start">
                         <div class="col-sm mb-3">
                             <label asp-for="pass2" class="form-label">Confirma contraseña</label>
-                            <input asp-for="pass2" type="password" class="form-control" id="pass2" placeholder="********">
+                            <input asp-for="pass2" type="password" class="form-control" placeholder="********">
                         </div>
                     </div>
-
+                    <input asp-for="User.Role" style="visibility:hidden;" value="3">
                     <div class="row text-center align-items-center justify-content-center">
                         <button type="submit" class="btn btn_base w-50  rounded-pill">Enviar</button>
                     </div>

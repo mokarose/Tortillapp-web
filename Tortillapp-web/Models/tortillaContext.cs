@@ -23,7 +23,7 @@ namespace Tortillapp_web.Data
         public virtual DbSet<RecipeTag> RecipeTags { get; set; } = null!;
         public virtual DbSet<Score> Scores { get; set; } = null!;
         public virtual DbSet<Tag> Tags { get; set; } = null!;
-        public virtual DbSet<UserData> UserData { get; set; } = null!;
+        public virtual DbSet<UserData> UserDatas { get; set; } = null!;
         public virtual DbSet<UserFavorite> UserFavorites { get; set; } = null!;
         public virtual DbSet<UserRating> UserRatings { get; set; } = null!;
         public virtual DbSet<UserRole> UserRoles { get; set; } = null!;

@@ -9,9 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<tortillaContext>(options =>
-    options.UseMySQL("server=localhost;port=3306;uid=root;pwd=Lord0Rings;database=tortilla;"));
-
-	//options.UseMySQL(builder.Configuration.GetConnectionString("tortillaContext") ?? throw new InvalidOperationException("Connection string 'Tortilla' not found.")));
+    //options.UseMySQL("server=localhost;port=3306;uid=root;pwd=Lord0Rings;database=tortilla;"));
+	options.UseMySQL(builder.Configuration.GetConnectionString("tortilla") ?? throw new InvalidOperationException("Connection string 'Tortilla' not found.")));
 
 var app = builder.Build();
 

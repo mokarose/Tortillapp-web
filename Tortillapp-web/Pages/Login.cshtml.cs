@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using Tortillapp_web.Data;
 using Tortillapp_web.Model;
+using Tortillapp_web.Control;
 
 namespace Tortillapp_web.Pages
 {
@@ -16,6 +17,7 @@ namespace Tortillapp_web.Pages
 		public string upass { get; set; }
         public bool reme { get; set; } 
         public string? merror { get; set; }
+
         public UserData User { get; set; } = default!;
         public void OnGet()
         {
@@ -33,7 +35,7 @@ namespace Tortillapp_web.Pages
             this.Page();*/
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public void OnPost()
         {
 
         }
@@ -81,5 +83,6 @@ namespace Tortillapp_web.Pages
             }
             return Page();
         }*/
+        
     }
 }

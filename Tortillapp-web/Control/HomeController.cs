@@ -1,10 +1,20 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Sockets;
+using Tortillapp_web.Data;
+using Tortillapp_web.Model;
 
-namespace Tortillapp_web.Data.Controllers
+namespace Tortillapp_web.Controllers
 {
     public class HomeController : Controller
     {
+        /*private readonly ILogger<HomeController> _logger;
+
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }*/
+
         // GET: HomeController
         public ActionResult Index()
         {
