@@ -33,11 +33,11 @@ namespace Tortillapp_web.Pages
             this.Page();*/
         }
 
-        public async Task<IActionResult> OnPostAsync()
-        {
+        //public async Task<IActionResult> OnPostAsync()
+        //{
 
-        }
-        /*public IActionResult OnPost()
+        //}
+        public IActionResult OnPost()
 		{
             //nConnect = new CConnection();
             //nConnect.loginUser(umail,upass);
@@ -50,15 +50,16 @@ namespace Tortillapp_web.Pages
                     {
                         var userMod = context.UserData;
 
-                        //foreach (var u in userMod)
-                        //{
-                        //if (umail.Equals(u.UserMail))
-                        if (umail.Equals(userMod. User.UserName))
+                        foreach (var u in userMod)
+                        {
+                        if (umail.Equals(u.UserMail))
+                        //if (umail.Equals(User.UserName))
                             {
-                                //if (upass.Equals(u.UserPass))
-                                if (upass.Equals(User.UserPass))
+                                if (upass.Equals(u.UserPass))
+                                //if (upass.Equals(User.UserPass))
                                 {
-                                    return RedirectToPage("MyProfile", User);
+                                    //return RedirectToPage("MyProfile", User);
+                                    return RedirectToPage("MyProfile", u);
                                 }
                             }
                             else
@@ -67,7 +68,7 @@ namespace Tortillapp_web.Pages
                                 return Page();
                             }
                         }
-                    //}
+                    }
                     else
                     {
                         return Page();
@@ -80,6 +81,6 @@ namespace Tortillapp_web.Pages
 				}
             }
             return Page();
-        }*/
+        }
     }
 }
