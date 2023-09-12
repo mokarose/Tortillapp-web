@@ -43,7 +43,8 @@
                             <input asp-for="pass2" type="password" class="form-control" placeholder="********">
                         </div>
                     </div>
-                    <input asp-for="User.Role" style="visibility:hidden;" value="3">
+                    <!--<input asp-for="Role.RoleId" asp-items=style="visibility:hidden;" value="3">-->
+                    <!--<select asp-for="User.Role" asp-items=@(new SelectList(role., "RoleId", "RoleName"))></select>-->
                     <div class="row text-center align-items-center justify-content-center">
                         <button type="submit" class="btn btn_base w-50  rounded-pill">Enviar</button>
                     </div>

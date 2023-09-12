@@ -29,7 +29,7 @@ namespace Tortillapp_web
             
                 string mysqlQuery = "select * from user_data where (user_name=@user and user_pass=@pass)";
 
-                login = await this.Query<LoginModel>().FromMySql(mysqlQuery,userMail,userPass).ToListAsync();
+                //login = await this.Query<LoginModel>().FromMySql(mysqlQuery,userMail,userPass).ToListAsync();
             }
             catch (Exception ex)
             {
