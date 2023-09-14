@@ -19,5 +19,12 @@ namespace Tortillapp_web.Pages
         {
 			
 		}
+
+        public IActionResult OnGetLogout() 
+        {
+            HttpContext.Session.Remove("Usuario");
+            return RedirectToPage("Index");
+        }
+        
     }
 }

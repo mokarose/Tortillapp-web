@@ -19,24 +19,5 @@ namespace Tortillapp_web
             return conexion;
         }
 
-        public async Task<List<LoginModel>> LoginMethodAsync(string userMail, string userPass)
-        {
-            List<LoginModel> login = new List<LoginModel>();
-            try
-            {
-                MySqlParameter mailParam = new MySqlParameter("@user_mail", userMail ?? (object)DBNull.Value);
-                MySqlParameter passParam = new MySqlParameter("@user_pass", userPass ?? (object)DBNull.Value);
-            
-                string mysqlQuery = "select * from user_data where (user_name=@user and user_pass=@pass)";
-
-                //login = await this.Query<LoginModel>().FromMySql(mysqlQuery,userMail,userPass).ToListAsync();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            return login;
-        }
-
     }
 }

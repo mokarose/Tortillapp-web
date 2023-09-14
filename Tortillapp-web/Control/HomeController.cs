@@ -8,17 +8,19 @@ namespace Tortillapp_web.Controllers
 {
     public class HomeController : Controller
     {
-        /*private readonly ILogger<HomeController> _logger;
+        private readonly ISession session;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IHttpContextAccessor httpContextAccessor)
         {
-            _logger = logger;
-        }*/
+            this.session = httpContextAccessor.HttpContext.Session;
+        }
 
         // GET: HomeController
         public ActionResult Index()
         {
-            return View();
+            this.session.SetString("isFiltered", "YES");
+            return Content("This action method set session variable value");
+            //return View();
         }
 
         // GET: HomeController/Details/5

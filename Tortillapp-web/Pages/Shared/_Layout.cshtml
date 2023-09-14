@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+@{int isLogged;}
+@if (Context.Session.GetString("Usuario") != null) { isLogged = 1; }
+else { isLogged = 0; }
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -19,26 +24,44 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDropdown" aria-controls="navbarDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="collapse navbar-collapse justify-content-end" id="navbarDropdown">
-                    <!--<a class="btn dropdown-toggle" href="/MyProfile" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Mi perfil</a>-->
-                        <ul class="navbar-nav"> <!--aria-labelledby="dropdownMenu">-->
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" asp-page="/Index" id="navbarDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuario</a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownLink">
-                                    <li><a class="dropdown-item" asp-page="/Login">Mi perfil</a></li>
-                                    <li><a class="dropdown-item" asp-page="#">Recetas favoritas</a></li>
-                                    <li><a class="dropdown-item" asp-page="/NewRecipe">Crear receta</a></li>
-                                    <li><a class="dropdown-item" asp-page="#">Acerca de</a></li>
-                                    <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+ 
+                    @if (isLogged == 0)
+                    {
+                        <div class="collapse navbar-collapse justify-content-end" id="navbarDropdown">
+                            <ul class="navbar-nav"> <!--aria-labelledby="dropdownMenu">-->
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" asp-page="/Index" id="navbarDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuario</a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownLink">
+                                        <li><a class="dropdown-item" asp-page="/Login">Inicia sesión</a></li>
+                                        <li><a class="dropdown-item" asp-page="#">Acerca de</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    }
+                    else {
+                        <div class="collapse navbar-collapse justify-content-end" id="navbarDropdown">
+                        <!--<a class="btn dropdown-toggle" href="/MyProfile" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Mi perfil</a>-->
+                            <ul class="navbar-nav"> <!--aria-labelledby="dropdownMenu">-->
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" asp-page="/Index" id="navbarDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuario</a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownLink">
+                                        <li><a class="dropdown-item" asp-page="/MyProfile">Mi perfil</a></li>
+                                        <li><a class="dropdown-item" asp-page="#">Recetas favoritas</a></li>
+                                        <li><a class="dropdown-item" asp-page="/NewRecipe">Crear receta</a></li>
+                                        <li><a class="dropdown-item" asp-page="#">Acerca de</a></li>
+                                        <li><a class="dropdown-item" asp-page="/Index" asp-page-handler="Logout">Cerrar sesión</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    }
                     <!--<form class="from-inline">
                         <!--<button class="btn" type="button">-->
                         <!--<a class="nav-link text-dark" asp-area="" asp-page="/MyProfile">MyProfile</a><!--Agregar imagen/ Botón circular-->
                         <!--</button>-->
                     <!--</form>-->
-                    </div>
+                    
                 </div>
             </nav>
         </div>

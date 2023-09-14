@@ -22,7 +22,6 @@
                         <div class="col-sm mb-3">
                             <label asp-for="User.UserMail" class="form-label">Dirección de correo</label>
                             <input asp-for="User.UserMail" type="email" class="form-control" placeholder="correo@example.com">
-                            <!--<span asp-validation-for="User.UserMail" class="text-danger"></span>-->
                         </div>
                     </div>
                     <div class="row align-content-start">
@@ -44,7 +43,7 @@
                         </div>
                     </div>
                     <!--<input asp-for="Role.RoleId" asp-items=style="visibility:hidden;" value="3">-->
-                    <!--<select asp-for="User.Role" asp-items=@(new SelectList(role., "RoleId", "RoleName"))></select>-->
+                    <!--<select asp-for="User.Role" asp-items=(new SelectList(role., "RoleId", "RoleName"))></select>-->
                     <div class="row text-center align-items-center justify-content-center">
                         <button type="submit" class="btn btn_base w-50  rounded-pill">Enviar</button>
                     </div>

@@ -11,6 +11,13 @@ namespace Tortillapp_web.Pages
 {
     public class LoginModel : PageModel
     {
+        private readonly Tortillapp_web.Data.tortillaContext _context;
+
+        public LoginModel(Tortillapp_web.Data.tortillaContext context)
+        {
+            _context = context;
+        }
+
         [BindProperty]
         public string umail { get; set; }
 		[BindProperty]
@@ -19,14 +26,38 @@ namespace Tortillapp_web.Pages
         public string? merror { get; set; }
 
         public UserData User { get; set; } = default!;
-        public void OnGet()
+        public IActionResult OnGet()
         {
-
+            return Page();
         }
 
-        public void OnPost()
+        public IActionResult OnPost()
         {
+            var isLoged = Login(umail, upass);
+            if (isLoged == null)
+            {
+                merror = "La contraseña o el correo son incorrectos";
+                return Page();
+            }
+            else
+            {
+                HttpContext.Session.SetString("Usuario", isLoged.UserName);
+                return RedirectToPage("MyProfile", isLoged);
+            }
+        }
 
+        public UserData Login(string iUseMail, string iUserPass)
+        {
+            var user = _context.UserDatas.SingleOrDefault(u => u.UserMail.Equals(iUseMail));
+            if (user != null)
+            {
+                var pass = _context.UserDatas.SingleOrDefault(u => u.UserPass.Equals(iUserPass));
+                if (pass != null)
+                {
+                    return user;
+                }
+            }
+            return null;
         }
     }
 }

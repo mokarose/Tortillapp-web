@@ -14,14 +14,11 @@ namespace Tortillapp_web.Pages.Users
         {
             _context = context;
         }
-        //private CConnection nConnect;
+
         [BindProperty]
         public UserData User { get; set; } = default!;
         public string upass { get; set; }
         public string xpass { get; set; }
-        //public string uname => (string)TempData[nameof(uname)];
-        //public string ushow => (string)TempData[nameof(ushow)];
-        //public string umail => (string)TempData[nameof(umail)];
 
         public async Task<IActionResult> OnGetAsync(UserData iUser)
         {
