@@ -20,32 +20,33 @@
                     <h2 class="text-start">Crear un perfil</h2>
                     <div class="row align-content-start">
                         <div class="col-sm mb-3">
-                            <label asp-for="User.UserMail" class="form-label">Dirección de correo</label>
-                            <input asp-for="User.UserMail" type="email" class="form-control" placeholder="correo@example.com">
+                            <label class="form-label">Dirección de correo</label>
+                            <input asp-for="umail" type="email" class="form-control" placeholder="correo@example.com">
                         </div>
                     </div>
                     <div class="row align-content-start">
                         <div class="col-sm mb-3">
-                            <label asp-for="User.UserName" class="form-label">Nombre de usuario</label>
-                            <input asp-for="User.UserName" type="text" class="form-control" placeholder="usuario">
+                            <label class="form-label">Nombre de usuario</label>
+                            <input asp-for="uname" type="text" class="form-control" placeholder="usuario">
                         </div>
                     </div>
                     <div class="row align-content-start">
                         <div class="col-sm mb-3">
-                            <label asp-for="User.UserPass" class="form-label">Contraseña</label>
-                            <input asp-for="User.UserPass" type="password" class="form-control" placeholder="********">
+                            <label class="form-label">Contraseña</label>
+                            <input asp-for="pass1" type="password" class="form-control" placeholder="********">
                         </div>
                     </div>
                     <div class="row align-content-start">
                         <div class="col-sm mb-3">
-                            <label asp-for="pass2" class="form-label">Confirma contraseña</label>
+                            <label class="form-label">Confirma contraseña</label>
                             <input asp-for="pass2" type="password" class="form-control" placeholder="********">
                         </div>
                     </div>
-                    <!--<input asp-for="Role.RoleId" asp-items=style="visibility:hidden;" value="3">-->
-                    <!--<select asp-for="User.Role" asp-items=(new SelectList(role., "RoleId", "RoleName"))></select>-->
-                    <div class="row text-center align-items-center justify-content-center">
-                        <button type="submit" class="btn btn_base w-50  rounded-pill">Enviar</button>
+                    <label for="merror" class="form-label">@Model.merror</label>
+                    <div class="mb-3">
+                        <div class="row text-center align-items-center justify-content-center">
+                            <button type="submit" class="btn btn_base w-50  rounded-pill">Enviar</button>
+                        </div>
                     </div>
                 </form>
         

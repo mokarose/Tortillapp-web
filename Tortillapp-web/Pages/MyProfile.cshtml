@@ -33,34 +33,42 @@
                     <h2 class="text-start">Datos generales</h2>
                     <div class="row align-content-start">
                         <div class="col-sm mb-3">
-                            <label for="uname" class="form-label">Nombre de usuario</label>
-                            <input type="text" class="form-control" id="uname" disabled readonly placeholder="@Html.DisplayFor(model => model.User.UserName)">
+                            <label class="form-label">Nombre de usuario</label>
+                            <input asp-for="User.UserId" type="hidden" />
+                            <input asp-for="User.UserName" type="text" class="form-control" readonly /> <!--placeholder="Html.DisplayFor(model => model.User.UserName)"-->
+                            <!--span asp-validation-for="User.UserName" class="text-danger"><span-->
                         </div>
                     </div>
                     <div class="row align-content-start">
                         <div class="col-sm mb-3">
-                            <label for="ushow" class="form-label">Nombre para mostrar</label>
-                            <input type="text" class="form-control" id="ushow" value="@Html.DisplayFor(model => model.User.ShowName)">
+                            <label class="form-label">Nombre para mostrar</label>
+                            <input asp-for="User.ShowName" type="text" class="form-control" /> <!--value="Html.DisplayFor(model => model.User.ShowName)"-->
+                            <span asp-validation-for="User.ShowName" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row align-content-start">
                         <div class="col-sm mb-3">
-                        <label for="umail" class="form-label">Correo</label>
-                            <input type="email" class="form-control" id="umail" value="@Html.DisplayFor(model => model.User.UserMail)">
+                            <label class="form-label">Correo</label>
+                            <input asp-for="User.UserMail" type="email" class="form-control" /><!--value="Html.DisplayFor(model => model.User.UserMail)"-->
+                            <span asp-validation-for="User.UserMail" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row align-content-start">
                         <div class="form-outline col-sm mb-3 no-gutters-right">
-                            <label for="upass" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="upass">
+                            <label class="form-label">Contraseña</label>
+                            <input asp-for="upass" type="password" class="form-control">
                         </div>
                         <div class="form-outline col-sm mb-3"> 
-                            <label for="xpass" class="form-label">Confirma contraseña</label>
-                            <input type="password" class="form-control" id="xpass">
+                            <label class="form-label">Confirma contraseña</label>
+                            <input asp-for="xpass" type="password" class="form-control">
                         </div>
+                        <input asp-for="User.UserPass" type="hidden" />
                     </div>
+                    <label for="merror" class="form-label">@Model.merror</label>
                     <div class="row text-center align-items-center justify-content-center">
-                        <button type="submit" class="btn btn_base w-50 rounded-pill">Guardar cambios</button>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn_base w-50 rounded-pill">Guardar cambios</button>
+                        </div>
                     </div>
                 </form>
             </div>

@@ -15,47 +15,74 @@ namespace Tortillapp_web.Pages.Users
             _context = context;
         }
 
+        public string uname { get; set; } //usuario
+        public string ushow { get; set; } //Nombre para mostrar
+        public string umail { get; set; } //Correo
+        public string upass { get; set; } //Contraseña
+        public string xpass { get; set; }
+        public byte[]? picto { get; set; } //Imagen
+        public string merror { get; set; }
+
         [BindProperty]
         public UserData User { get; set; } = default!;
-        public string upass { get; set; }
-        public string xpass { get; set; }
 
         public async Task<IActionResult> OnGetAsync(UserData iUser)
-        {
-                       
-            if (iUser == null || _context.UserDatas == null) { 
+        { 
+            if (iUser == null) //|| _context.UserDatas == null)
+            { 
                 return NotFound();
             }
 
-            var user = await _context.UserDatas.FirstOrDefaultAsync(u => u.UserId == iUser.UserId);
+            var user = await _context.UserDatas.FindAsync(iUser.UserId);//FirstOrDefaultAsync(u => u.UserId == iUser.UserId);
 
             if (user == null)
             {
                 return NotFound();
             }
-            else
-            {
-                User = user;
-            }
+            
+            User = user;
+            
             return Page();
         }
 
-        //public IActionResult OnPost([FromForm]string uname)
         public async Task<IActionResult> OnPostAsync(UserData iUser)
         {
-            if (iUser == null || _context.UserDatas == null)
+            var userToUpdate = await _context.UserDatas.FindAsync(iUser.UserId);
+
+            if (userToUpdate == null)
             {
                 return NotFound();
             }
 
-            var user = await _context.UserDatas.FindAsync(iUser.UserId);
-
-            if (user != null)
+            if (upass != null)
             {
-                User = user;
-                _context.UserDatas.Update(User);
-                await _context.SaveChangesAsync();  
+                if (upass.Equals(xpass))
+                {
+                    User.UserPass = upass;
+                }
+                else
+                {
+                    merror = "Las contraseñas no coinciden";
+                }
             }
+
+            User.RoleId = iUser.RoleId;
+            User.UserCreated = iUser.UserCreated;
+            User.LastUpdated = DateTime.Now;
+
+            _context.Entry(userToUpdate).CurrentValues.SetValues(User);
+            _context.Entry(userToUpdate).State = EntityState.Modified;
+            
+            try
+            {
+                await _context.SaveChangesAsync();
+                return Page();
+            }
+            catch (Exception ex)
+            {
+                merror = ex.Message;
+            }
+
             return Page();
         }
     }

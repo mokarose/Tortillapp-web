@@ -6,6 +6,7 @@ using System.Data.Entity;
 using Tortillapp_web.Data;
 using Tortillapp_web.Model;
 using Tortillapp_web.Control;
+using System.Runtime.CompilerServices;
 
 namespace Tortillapp_web.Pages
 {
@@ -19,15 +20,24 @@ namespace Tortillapp_web.Pages
         }
 
         [BindProperty]
+        [Required(ErrorMessage = "Se requiere el correo")]
+        [Display(Name = "Correo")]
         public string umail { get; set; }
-		[BindProperty]
-		public string upass { get; set; }
+        [BindProperty]
+        [Required(ErrorMessage = "Se requiere la contraseña")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Contraseña")]
+        public string upass { get; set; }
         public bool reme { get; set; } 
         public string? merror { get; set; }
 
         public UserData User { get; set; } = default!;
         public IActionResult OnGet()
         {
+            if (HttpContext.Session.GetString("Usuario") != null)
+            {
+                return RedirectToPage("Index");
+            }
             return Page();
         }
 

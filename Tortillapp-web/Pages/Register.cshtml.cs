@@ -20,27 +20,44 @@ namespace Tortillapp_web.Pages.Users
 		}
 
 		[BindProperty]
-		public UserData User { get; set; } = default!;
-		public UserRole Role { get; set; } = default!;
+		public string umail { get; set; }
+		[BindProperty]
+		public string uname { get; set; }
+		[BindProperty]
         public string? pass1 { get; set; }
+		[BindProperty]
         public string? pass2 { get; set; }
+        public string? merror { get; set; }
+
+        public UserData User { get; set; } = default!;
 
 
         public async Task<IActionResult> OnPostAsync()
 		{
-			var role = _context.UserRoles.ToList();
-			//ViewData.GetViewDataInfo() = role;
-			//Encriptar password
-
-            if (!ModelState.IsValid || _context.UserDatas == null || User == null)
+            if (!ModelState.IsValid)// || _context.UserDatas == null || User == null)
 			{
 				return Page();
 			}
 
-			_context.UserDatas.Add(User);
-			await _context.SaveChangesAsync();
+			if (!pass1.Equals(pass2))
+			{
+				merror = "Las contraseñas no coinciden";
+                return Page();
+            }
+			else
+			{
+                _context.UserDatas.Add(new UserData
+                {
+                    UserMail = umail,
+                    UserName = uname,
+					UserPass = pass1,
+                    RoleId = 3,
+					UserCreated = DateTime.Now
+                });
+                await _context.SaveChangesAsync();
+            }
 
-			return RedirectToPage("/MyProfile");
+			return RedirectToPage("Index");
 		}
 	}
 }

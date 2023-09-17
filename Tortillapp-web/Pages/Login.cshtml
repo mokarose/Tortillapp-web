@@ -16,7 +16,7 @@
 				<div class="row align-content-start">
 					<div class="col-sm mb-3">
 						<label asp-for="umail" class="form-label">Dirección de correo</label>
-							<input asp-for="umail" type="email" class="form-control" id="umail" placeholder="correo@example.com">
+						<input asp-for="umail" type="email" class="form-control" id="umail" placeholder="correo@example.com">
 					</div>
 				</div>
 				<div class="row align-content-start">
@@ -36,8 +36,12 @@
 					</div>
 				</div>
 				<div class="row text-center align-items-center justify-content-center">
-					<button type="submit" class="btn btn_base w-50 rounded-pill">Ingresar</button>
-					<label for="newbie" class="form-label">¿No tienes cuenta? <a href="/Register">Crea una</a></label>
+					<div class="mb-3">
+						<button type="submit" class="btn btn_base w-50 rounded-pill">Ingresar</button>
+					</div>
+					<div class="mb-3">
+						<label for="newbie" class="form-label">¿No tienes cuenta? <a href="/Register">Crea una</a></label>
+					</div>
 				</div>
 			</form>
 		</div>
