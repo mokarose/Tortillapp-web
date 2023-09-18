@@ -2,7 +2,6 @@
 @{
     int isLogged;
     string actualUser = "";
-    string sessionID = "";
 }
 @if (Context.Session.GetString("Usuario") != null) 
 { 
@@ -56,8 +55,8 @@ else { isLogged = 0; }
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" asp-page="/Index" id="navbarDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">@actualUser</a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownLink">
-                                        <li><a class="dropdown-item" asp-page="/MyProfile?@sessionID">Mi perfil</a></li>
-                                        <li><a class="dropdown-item" asp-page="#">Usuarios registrados</a></li>
+                                        <li><a class="dropdown-item" asp-page="MyProfile">Mi perfil</a></li>
+                                        <li><a class="dropdown-item" asp-page="ActualUsers">Usuarios registrados</a></li>
                                         <li><a class="dropdown-item" asp-page="#">Recetas registradas</a></li>
                                         <li><a class="dropdown-item" asp-page="#">Comentarios</a></li>
                                         <li><a class="dropdown-item" asp-page="#">Acerca de</a></li>

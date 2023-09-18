@@ -2,11 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Data.Entity;
 using Tortillapp_web.Data;
 using Tortillapp_web.Model;
-using Tortillapp_web.Control;
-using System.Runtime.CompilerServices;
 
 namespace Tortillapp_web.Pages
 {
