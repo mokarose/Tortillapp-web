@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
 using Tortillapp_web.Model;
 
+
 namespace Tortillapp_web.Pages.Users
 {
     public class MyProfileModel : PageModel
@@ -67,6 +68,7 @@ namespace Tortillapp_web.Pages.Users
             }
 
             User.RoleId = iUser.RoleId;
+            User.RemenberMe = iUser.RemenberMe;
             User.UserCreated = iUser.UserCreated;
             User.LastUpdated = DateTime.Now;
 

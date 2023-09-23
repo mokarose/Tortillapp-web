@@ -1,0 +1,151 @@
+﻿@page
+@model Tortillapp_web.Pages.Receta.NewRecipeModel
+@{
+	ViewData["Title"] = "Nueva receta";
+}
+
+<div class="bg-white">
+    <div class="container">
+        <div class="row mt-3">
+            <form method="post">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 justify-content-center">
+                        <h1 class="text-center">Crear receta</h1>
+
+                        <h2 class="text-start">#user</h2>
+                        <img />Imagen usuario
+                        <div class="row align-content-start">
+                            <div class="col-sm mb-3">
+                                <label for="title" class="form-label">Título de la receta</label>
+                                <input type="text" class="form-control" id="title" placeholder="Nombre receta">
+                            </div>
+                        </div>
+                        <div class="row text-center align-items-center justify-content-center">
+                            <div class="mb-3">
+                                <button type="button" class="btn btn_base w-50 rounded-pill">Siguiente</button>
+                            </div>
+                        </div>
+                        <div class="row text-center align-items-center justify-content-center">
+                            <div class="mb-3">
+                                <button type="button" class="btn btn_contra w-50 rounded-pill">Cancelar</button>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-start">
+                            <div class="row">
+                                <div class="mb-3">
+                                    <h1 class="text-start">#Título de la receta</h1>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm mb-3 justify-content-center">
+                                    <h3 class="text-start fw-bold">Ingredientes</h3>
+                                </div>
+                                <div class="col-md mb-3">
+                                    <table>
+                                        <tr>
+                                            <th><i class="bi bi-plus"></i></th>
+                                            <th><input type="number" class="form-control" id="portion"></th>
+                                            <th><i class="bi bi-dash"></i></th>
+                                            <th><label><i class="bi bi-people"></i>Porc.</label></th>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row align-content-start">
+                            <div class="col-sm mb-3">
+                                <label for="quantity" class="form-label">Cantidad</label>
+                                <table>
+                                    <tr>
+                                        <th><i class="bi bi-plus"></i></th>
+                                        <th><input type="number" class="form-control" id="quantity"></th>
+                                        <th><i class="bi bi-dash"></i></th>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md mb-3">
+                                <label for="unity" class="form-label">Unidad</label>
+                                <select name="unidad" class="form-select">
+                                    <option>#unityRegister</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="row text-center align-items-center justify-content-center">
+                            <div class="mb-3">
+                                <button type="button" class="btn btn_base rounded-pill"><i class="bi bi-plus"></i></button>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Agregar otro ingrediente</label>
+                            </div>
+                        </div>
+
+                        <div class="row align-content-start">
+                            <div class="col-md mb-3">
+                                <h3 class="text-start fw-bold">Preparación</h3>
+                            </div>
+                            <div class="col-sm mb-3">
+                                <table>
+                                    <tr>
+                                        <th><input type="time" id="time-cooking"></th>
+                                        <th><i class="bi bi-clock"></i></th>
+                                        <th><label>Mins.</label></th>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3">
+                                    <textarea class ="form-control" rows="10" id="cooking" placeholder="Pasos para preparar la receta..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row align-content-start">
+                            <div class="mb-3">
+                                <h3 class="text-start fw-bold">Tips</h3>
+                            </div>
+                            <div class="row">
+                                <textarea class="form-control" rows="4" id="tips" placeholder="Algún consejo, técnica o para la presentación"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row align-content-start">
+                            <div class="col-md mb-3">
+                                <h3 class="text-start fw-bold">Tags</h3>
+                            </div>
+                            <div class="row">
+                                <div class="mb-3">
+                                    <table>
+                                        <tr>
+                                            <th><input type="text" class="form-control" id="tag" placeholder="#etiqueta"></th>
+                                            <th><button type="button" class="btn btn_contra w-50 rounded-pill">Agregar</button></th>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="table">
+                                #etiquetas1
+                            </div>
+                        </div>
+
+                        <div class="row align-content-center">
+                            <div class="mb-3">
+                                <button type="button" class="btn btn_contra w-50 rounded-pill" id="upload">Subir una foto</button>
+                            </div>
+                            <div class="mb-3">
+                                <button type="button" class="btn btn_contra w-50 rounded-pill" id="preview">Vista Previa</button>
+                            </div>
+                            <div class="mb-3">
+                                <button type="button" class="btn btn_contra w-50 rounded-pill" id="public">Publicar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

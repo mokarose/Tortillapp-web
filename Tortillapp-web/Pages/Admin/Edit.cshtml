@@ -1,0 +1,70 @@
+﻿@page
+@model Tortillapp_web.Pages.Admin.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>UserData</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="UserData.UserId" />
+            <div class="form-group">
+                <label asp-for="UserData.UserMail" class="control-label"></label>
+                <input asp-for="UserData.UserMail" class="form-control" />
+                <span asp-validation-for="UserData.UserMail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserData.UserName" class="control-label"></label>
+                <input asp-for="UserData.UserName" class="form-control" />
+                <span asp-validation-for="UserData.UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserData.UserPass" class="control-label"></label>
+                <input asp-for="UserData.UserPass" class="form-control" />
+                <span asp-validation-for="UserData.UserPass" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserData.RoleId" class="control-label"></label>
+                <select asp-for="UserData.RoleId" class="form-control" asp-items="ViewBag.RoleId"></select>
+                <span asp-validation-for="UserData.RoleId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserData.ShowName" class="control-label"></label>
+                <input asp-for="UserData.ShowName" class="form-control" />
+                <span asp-validation-for="UserData.ShowName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserData.ShowPic" class="control-label"></label>
+                <input asp-for="UserData.ShowPic" class="form-control" />
+                <span asp-validation-for="UserData.ShowPic" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserData.RemenberMe" class="control-label"></label>
+                <input asp-for="UserData.RemenberMe" class="form-control" />
+                <span asp-validation-for="UserData.RemenberMe" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserData.UserCreated" class="control-label"></label>
+                <input asp-for="UserData.UserCreated" class="form-control" />
+                <span asp-validation-for="UserData.UserCreated" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

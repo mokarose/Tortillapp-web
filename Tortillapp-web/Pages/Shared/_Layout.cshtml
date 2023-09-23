@@ -39,7 +39,7 @@ else { isLogged = 0; }
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" asp-page="Index" id="navbarDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuario</a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownLink"2>
-                                        <li><a class="dropdown-item" asp-page="Login">Inicia sesión</a></li>
+                                        <li><a class="dropdown-item" asp-page="/Login">Inicia sesión</a></li>
                                         <li><a class="dropdown-item" asp-page="#">Acerca de</a></li>
                                     </ul>
                                 </li>
@@ -56,7 +56,7 @@ else { isLogged = 0; }
                                     <a class="nav-link dropdown-toggle" asp-page="/Index" id="navbarDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">@actualUser</a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownLink">
                                         <li><a class="dropdown-item" asp-page="MyProfile">Mi perfil</a></li>
-                                        <li><a class="dropdown-item" asp-page="ActualUsers">Usuarios registrados</a></li>
+                                        <li><a class="dropdown-item" asp-page="/Admin/ViewUsers">Usuarios registrados</a></li>
                                         <li><a class="dropdown-item" asp-page="#">Recetas registradas</a></li>
                                         <li><a class="dropdown-item" asp-page="#">Comentarios</a></li>
                                         <li><a class="dropdown-item" asp-page="#">Acerca de</a></li>
@@ -73,11 +73,11 @@ else { isLogged = 0; }
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" asp-page="/Index" id="navbarDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">@actualUser</a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownLink">
-                                        <li><a class="dropdown-item" asp-page="MyProfile">Mi perfil</a></li>
+                                        <li><a class="dropdown-item" asp-page="/MyProfile">Mi perfil</a></li>
                                         <li><a class="dropdown-item" asp-page="#">Recetas favoritas</a></li>
-                                        <li><a class="dropdown-item" asp-page="NewRecipe">Crear receta</a></li>
+                                        <li><a class="dropdown-item" asp-page="/NewRecipe">Crear receta</a></li>
                                         <li><a class="dropdown-item" asp-page="#">Acerca de</a></li>
-                                        <li><a class="dropdown-item" asp-page="Index" asp-page-handler="Logout">Cerrar sesión</a></li>
+                                        <li><a class="dropdown-item" asp-page="/Index" asp-page-handler="Logout">Cerrar sesión</a></li>
                                     </ul>
                                 </li>
                             </ul>

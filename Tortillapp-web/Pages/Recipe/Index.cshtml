@@ -1,0 +1,84 @@
+﻿@page
+@model Tortillapp_web.Pages.Receta.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RecipeInfo[0].RecipeTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecipeInfo[0].Published)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecipeInfo[0].RecipePortion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecipeInfo[0].RecipeTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecipeInfo[0].RecipePic)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecipeInfo[0].RecipeTips)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecipeInfo[0].RecipeStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecipeInfo[0].LastUpdated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecipeInfo[0].User)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.RecipeInfo) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecipeTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Published)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecipePortion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecipeTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecipePic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecipeTips)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecipeStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastUpdated)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.UserId)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.RecipeId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.RecipeId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.RecipeId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
