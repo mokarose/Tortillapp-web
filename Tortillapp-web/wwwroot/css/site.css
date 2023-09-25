@@ -51,6 +51,12 @@ body {
     color: var(--blanco_base);
 }
 
+.btn_blanco {
+    background-color: var(--blanco_base);
+    color: var(--azul_verde);
+    border-color: var(--azul_verde);
+}
+
 .search_bar {
     background-color: var(--blanco_base);
     box-sizing: border-box;
