@@ -16,17 +16,38 @@ namespace Tortillapp_web.Pages.Receta
             _context = context;
         }
 
+        List<string> units = new List<string>()
+        {
+            "",
+            "Litro",
+            "Mililitro",
+            "Cuarto de kilo",
+            "Medio kilo",
+            "Kilo",
+            "Gramo",
+            "Cucharada",
+            "Cucharadita",
+            "Media taza",
+            "Taza",
+            "Pizca",
+            "Al gusto"
+
+        };
+        public SelectList Itype { get; set; }
+
         public IActionResult OnGet()
         {
             ViewData["UserId"] = new SelectList(_context.UserDatas, "UserId", "UserId"); //Usuario loggeado será el dueño
-            ViewData["IngredientUnit"] = new SelectList(_context.UserDatas, "IngredientUnit", "IngredientUnit");
+            
+            Itype = new SelectList(units);
+
             return Page();
         }
 
         [BindProperty]
         public string rtitle { get; set; }
         [BindProperty]
-        public int rportion { get; set; }
+        public short rportion { get; set; }
         [BindProperty]
         public TimeSpan rtime { get; set; }
         //[BindProperty]
@@ -39,9 +60,8 @@ namespace Tortillapp_web.Pages.Receta
         public RecipeStep Steps { get; set; } = default!;
         public RecipeInfo Recipe { get; set; } = default!;
         public IList<RecipeTag> Tags { get; set; } = default!;
-        public SelectList Itype { get; set; }
+        public UserData UserData { get; set; } = default!;
         public string merror { get; set; }
-        //public string btnOk { get; set; }
 
         [HttpPost]
         public IActionResult OnPostBackToIndex(string btnCancel)
@@ -53,7 +73,7 @@ namespace Tortillapp_web.Pages.Receta
             return Page();
         }
 
-        [HttpPost]
+        //[HttpPost]
         public IActionResult OnPostCreateRecipe(string btnContinue)
         {
             if (btnContinue.Equals("Siguiente"))
@@ -66,11 +86,13 @@ namespace Tortillapp_web.Pages.Receta
                 {
                     //Ocultar esta vista y mostrar la siguiente
                     //Mostrar nombre elegido en todo el siguiente paso
+                    //TitleSection.Visible = false;
                 }
             }
             return Page();
         }
 
+        //[HttpPost]
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid) //|| _context.RecipeInfos == null || RecipeInfo == null)
@@ -80,6 +102,12 @@ namespace Tortillapp_web.Pages.Receta
 
             _context.RecipeInfos.Add(new RecipeInfo 
             {
+                UserId = UserData.UserId,
+                RecipeTitle = rtitle,
+                RecipeTime = rtime,
+                RecipePortion = rportion,
+                RecipeTips = rtips,
+                Published = DateTime.Now
 
             });
             await _context.SaveChangesAsync();

@@ -57,6 +57,11 @@ body {
     border-color: var(--azul_verde);
 }
 
+.btn_invisible {
+    background-color: var(--blanco_base);
+    border-color: transparent;
+}
+
 .search_bar {
     background-color: var(--blanco_base);
     box-sizing: border-box;
