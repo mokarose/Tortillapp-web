@@ -35,6 +35,36 @@ body {
     background-repeat: repeat-x;
 }
 
+.div_verde {
+    background-color: var(--verde);
+    border-radius: 0.5rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    height: 50px;
+}
+
+.div_aqua {
+    background-color: var(--azul_verde);
+    border-radius: 0.5rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    height: 50px;
+}
+
+.div_azul {
+    background-color: var(--azul_gris);
+    border-radius: 0.5rem;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    height: 50px;
+}
+
 .btn_base {
     background-color: var(--azul_gris);
     color: var(--blanco_base);

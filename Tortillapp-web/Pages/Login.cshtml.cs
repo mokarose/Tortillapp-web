@@ -49,7 +49,7 @@ namespace Tortillapp_web.Pages
             else
             {
                 HttpContext.Session.SetString("Usuario", isLoged.UserName);
-                return RedirectToPage("MyProfile", isLoged);
+                return RedirectToPage("MyProfile");
             }
         }
 

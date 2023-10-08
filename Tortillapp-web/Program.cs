@@ -13,7 +13,13 @@ builder.Services.AddDbContext<tortillaContext>(options =>
 	options.UseMySQL(builder.Configuration.GetConnectionString("tortilla") ?? throw new InvalidOperationException("Connection string 'Tortilla' not found.")));
 
 //builder.Services.AddMvc();
-builder.Services.AddSession();
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(60);
+    options.Cookie.HttpOnly = true;
+});
 
 var app = builder.Build();
 

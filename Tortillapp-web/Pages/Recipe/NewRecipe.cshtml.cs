@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using System.Reflection.Metadata;
+using Microsoft.EntityFrameworkCore;
 using Tortillapp_web.Model;
 
 namespace Tortillapp_web.Pages.Receta
@@ -19,6 +18,7 @@ namespace Tortillapp_web.Pages.Receta
         List<string> units = new List<string>()
         {
             "",
+            "Unidad",
             "Litro",
             "Mililitro",
             "Cuarto de kilo",
@@ -35,11 +35,28 @@ namespace Tortillapp_web.Pages.Receta
         };
         public SelectList Itype { get; set; }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-            ViewData["UserId"] = new SelectList(_context.UserDatas, "UserId", "UserId"); //Usuario loggeado será el dueño
-            
+            //ViewData["UserId"] = new SelectList(_context.UserDatas, "UserId", "UserId"); //Usuario loggeado será el dueño
             Itype = new SelectList(units);
+
+            string iUser = HttpContext.Session.GetString("Usuario"); //Usuario actual
+
+            if (iUser == null) //|| _context.UserDatas == null)
+            {
+                return NotFound();
+            }
+
+            var user = await _context.UserDatas.FirstOrDefaultAsync(u => u.UserName == iUser);
+
+            Itype = new SelectList(units);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            UserData = user;
 
             return Page();
         }
@@ -56,6 +73,8 @@ namespace Tortillapp_web.Pages.Receta
         public string rprep { get; set; }
         [BindProperty]
         public string rtips { get; set; }
+        [BindProperty]
+        public ushort ruser { get; set; }
         public RecipeIngredient Ingredient { get; set; } = default!;
         public RecipeStep Steps { get; set; } = default!;
         public RecipeInfo Recipe { get; set; } = default!;
@@ -100,9 +119,16 @@ namespace Tortillapp_web.Pages.Receta
                 return Page();
             }
 
+            /*var userOwner = await _context.UserDatas.FindAsync(UserData.UserId);
+
+            if (userOwner == null)
+            {
+                return NotFound();
+            }*/
+
             _context.RecipeInfos.Add(new RecipeInfo 
             {
-                UserId = UserData.UserId,
+                UserId = ruser,
                 RecipeTitle = rtitle,
                 RecipeTime = rtime,
                 RecipePortion = rportion,
@@ -110,9 +136,37 @@ namespace Tortillapp_web.Pages.Receta
                 Published = DateTime.Now
 
             });
+
+            AddASteps(rprep);
+
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
+        }
+
+        void AddASteps(string Step)
+        {
+            string[] stepsi;
+            byte pos = 0;
+            if (Step != null)
+            {
+                stepsi = Step.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string step in stepsi)
+                {
+                    _context.RecipeSteps.Add(new RecipeStep
+                    {
+                        RecipeId = Recipe.RecipeId,
+                        StepPos = pos,
+                        StepDescrp = step
+                    });
+                    pos++;
+                }
+            }
+        }
+
+        void AddIngredients()
+        {
+
         }
     }
 }

@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using MySql.Data.MySqlClient;
 using Tortillapp_web.Model;
 
 
@@ -27,14 +26,16 @@ namespace Tortillapp_web.Pages.Users
         [BindProperty]
         public UserData User { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(UserData iUser)
-        { 
+        public async Task<IActionResult> OnGetAsync()
+        {
+            string iUser = HttpContext.Session.GetString("Usuario"); //Usuario actual
+            
             if (iUser == null) //|| _context.UserDatas == null)
             { 
                 return NotFound();
             }
 
-            var user = await _context.UserDatas.FindAsync(iUser.UserId);//FirstOrDefaultAsync(u => u.UserId == iUser.UserId);
+            var user = await _context.UserDatas.FirstOrDefaultAsync(u => u.UserName == iUser);
 
             if (user == null)
             {
@@ -46,15 +47,8 @@ namespace Tortillapp_web.Pages.Users
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(UserData iUser)
+        public async Task<IActionResult> OnPostAsync()
         {
-            var userToUpdate = await _context.UserDatas.FindAsync(iUser.UserId);
-
-            if (userToUpdate == null)
-            {
-                return NotFound();
-            }
-
             if (upass != null)
             {
                 if (upass.Equals(xpass))
@@ -67,9 +61,16 @@ namespace Tortillapp_web.Pages.Users
                 }
             }
 
-            User.RoleId = iUser.RoleId;
-            User.RemenberMe = iUser.RemenberMe;
-            User.UserCreated = iUser.UserCreated;
+            var userToUpdate = await _context.UserDatas.FindAsync(User.UserId);
+
+            if (userToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            User.RoleId = userToUpdate.RoleId;
+            User.RemenberMe = userToUpdate.RemenberMe;
+            User.UserCreated = userToUpdate.UserCreated;
             User.LastUpdated = DateTime.Now;
 
             _context.Entry(userToUpdate).CurrentValues.SetValues(User);
