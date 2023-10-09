@@ -35,7 +35,8 @@ namespace Tortillapp_web.Pages.Receta
         };
         public SelectList Itype { get; set; }
 
-        public async Task<IActionResult> OnGetAsync()
+        
+        public async Task<IActionResult> OnGetAsync(int? id)
         {
             //ViewData["UserId"] = new SelectList(_context.UserDatas, "UserId", "UserId"); //Usuario loggeado será el dueño
             Itype = new SelectList(units);
@@ -48,8 +49,6 @@ namespace Tortillapp_web.Pages.Receta
             }
 
             var user = await _context.UserDatas.FirstOrDefaultAsync(u => u.UserName == iUser);
-
-            Itype = new SelectList(units);
 
             if (user == null)
             {
@@ -73,9 +72,9 @@ namespace Tortillapp_web.Pages.Receta
         public string rprep { get; set; }
         [BindProperty]
         public string rtips { get; set; }
-        [BindProperty]
+        //[BindProperty]
         public ushort ruser { get; set; }
-        public RecipeIngredient Ingredient { get; set; } = default!;
+        public RecipeIngredient[] Ingredient { get; set; } = default!;
         public RecipeStep Steps { get; set; } = default!;
         public RecipeInfo Recipe { get; set; } = default!;
         public IList<RecipeTag> Tags { get; set; } = default!;
@@ -92,7 +91,7 @@ namespace Tortillapp_web.Pages.Receta
             return Page();
         }
 
-        //[HttpPost]
+        [HttpPost]
         public IActionResult OnPostCreateRecipe(string btnContinue)
         {
             if (btnContinue.Equals("Siguiente"))
@@ -106,6 +105,7 @@ namespace Tortillapp_web.Pages.Receta
                     //Ocultar esta vista y mostrar la siguiente
                     //Mostrar nombre elegido en todo el siguiente paso
                     //TitleSection.Visible = false;
+                    ruser = UserData.UserId;
                 }
             }
             return Page();
@@ -138,6 +138,7 @@ namespace Tortillapp_web.Pages.Receta
             });
 
             AddASteps(rprep);
+            AddIngredients();
 
             await _context.SaveChangesAsync();
 
