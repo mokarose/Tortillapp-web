@@ -5,80 +5,65 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.RecipeInfo[0].RecipeTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RecipeInfo[0].Published)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RecipeInfo[0].RecipePortion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RecipeInfo[0].RecipeTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RecipeInfo[0].RecipePic)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RecipeInfo[0].RecipeTips)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RecipeInfo[0].RecipeStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RecipeInfo[0].LastUpdated)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RecipeInfo[0].User)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.RecipeInfo) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RecipeTitle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Published)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RecipePortion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RecipeTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RecipePic)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RecipeTips)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RecipeStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastUpdated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.UserId)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.RecipeId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.RecipeId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.RecipeId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container">
+    <div class="row mt-3">
+        <div class="row text-center align-items-center justify-content-center">
+            <div class="col-md-10">
+                <div class="container" id="ButtonSection">
+                    <div class="row">
+                        <div class="col-md mb-3">
+                            <h1 class="text-start">Crear receta</h1>
+                            <a asp-page="Create">
+                                <button type="submit" class="btn btn_base w-50 h-75 rounded-pill"><i class="bi bi-plus"></i></br>Nueva Receta</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="grid_recipe">
+            
+            @foreach (var item in Model.RecipeInfo)
+            {
+            <div class="container block_v">
+                <div class="row">
+                    @Html.DisplayFor(modelItem => item.User.UserId)
+                    <div class="col-3">
+                    <img />
+                    @Html.DisplayFor(modelItem => item.RecipePic)
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+                        @Html.DisplayFor(modelItem => item.RecipeTitle)
+                        </div>
+                        <div class="row">
+                            #rating
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                            <a asp-page="./Edit" asp-route-id="@item.RecipeId"><i class="bi bi-pencil-fill"></i></a>
+                            </div>
+                            <div class="col">
+                            <a asp-page="./Details" asp-route-id="@item.RecipeId"><i class="bi bi-eye-fill"></i></a>
+                            </div>
+                            <div class="col">
+                            <a asp-page="./Delete" asp-route-id="@item.RecipeId"><i class="bi bi-trash-fill"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col">
+                    @Html.DisplayFor(modelItem => item.RecipeStatus)
+                    
+                    </div>
+                </div>
+            </div>
+            }
+            
+        </div>
+    </div>
+</div>

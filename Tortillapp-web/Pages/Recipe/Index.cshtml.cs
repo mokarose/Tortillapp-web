@@ -19,10 +19,11 @@ namespace Tortillapp_web.Pages.Receta
             _context = context;
         }
 
-        public IList<RecipeInfo> RecipeInfo { get;set; } = default!;
+        public IList<RecipeInfo> RecipeInfo { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
+            string iUser = HttpContext.Session.GetString("Usuario");
             if (_context.RecipeInfos != null)
             {
                 RecipeInfo = await _context.RecipeInfos

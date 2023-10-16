@@ -148,3 +148,17 @@ body {
     padding-right: 0;
     padding-left: 0;
 }
+
+.grid_recipe {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    grid-gap: 25px;
+    margin-top: 25px;
+}
+
+.block_v {
+    background-color: var(--verde);
+    color: white;
+    height: 150px;
+    width: 500px;
+}

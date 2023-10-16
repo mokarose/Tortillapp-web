@@ -16,13 +16,13 @@
 				<div class="row align-content-start">
 					<div class="col-sm mb-3">
 						<label asp-for="umail" class="form-label">Dirección de correo</label>
-						<input asp-for="umail" type="email" class="form-control" id="umail" placeholder="correo@example.com">
+						<input asp-for="umail" type="email" class="form-control" id="umail" placeholder="correo@example.com" required>
 					</div>
 				</div>
 				<div class="row align-content-start">
 					<div class="col-sm mb-3">
 						<label asp-for="upass" class="form-label">Contraseña</label>
-						<input asp-for="upass" type="password" class="form-control" id="upass" placeholder="********">
+						<input asp-for="upass" type="password" class="form-control" id="upass" placeholder="********" required>
 					</div>
 				</div>
 				<label for="merror" class="form-label">@Model.merror</label>
