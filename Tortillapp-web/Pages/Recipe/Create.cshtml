@@ -228,10 +228,10 @@
                                 <button type="button" class="btn btn_blanco w-50 rounded-pill" id="preview">Vista Previa<br /><i class="bi bi-eye"></i></button>
                             </div>
                             <div class="mb-3">
-                                <button type="submit" class="btn btn_base w-50 rounded-pill" id="public" asp-page-handler="NewRecipe">Publicar</button>
+                                <input type="submit" class="btn btn_base w-50 rounded-pill" value="Publicar" />
                             </div>
                             <div class="mb-3">
-                                <button type="submit" class="btn btn_contra w-50 rounded-pill" id="public">Guardar borrador</button>
+                                <input type="submit" name="btnDraft" class="btn btn_contra w-50 rounded-pill" value="Guardar borrador" asp-page-handler="SaveDraft" />
                             </div>
                         </div>
                     </div>

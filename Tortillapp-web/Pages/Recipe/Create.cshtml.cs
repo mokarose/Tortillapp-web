@@ -148,6 +148,33 @@ namespace Tortillapp_web.Pages.Recipe
         }***/
 
         [HttpPost]
+        public IActionResult OnPostSaveDraft(string btnDraft)
+        {
+            if (btnDraft.Equals("Guardar borrador"))
+            {
+                if (rprep == null){ rprep = "";}
+                if (rtips == null) { rtips = "";}
+                _context.RecipeInfos.Add(new RecipeInfo
+                {
+                    UserId = ruser,
+                    RecipeTitle = rtitle,
+                    RecipeTime = rtime,
+                    RecipePortion = rportion,
+                    RecipeTips = rtips,
+                    Published = DateTime.Now
+
+                });
+                _context.SaveChanges();
+
+                ushort last_insert = _context.RecipeInfos.Max(r => r.RecipeId);
+
+                AddASteps(rprep, last_insert);
+                AddIngredients(last_insert);
+            }
+            return RedirectToPage("Index", "");
+        }
+
+        [HttpPost]
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid) //|| _context.RecipeInfos == null || RecipeInfo == null)
@@ -169,6 +196,7 @@ namespace Tortillapp_web.Pages.Recipe
                 RecipeTime = rtime,
                 RecipePortion = rportion,
                 RecipeTips = rtips,
+                RecipeStatus = 2,
                 Published = DateTime.Now
 
             });
