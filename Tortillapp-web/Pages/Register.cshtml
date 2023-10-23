@@ -4,55 +4,55 @@
     ViewData["Title"] = "Registro";
 }
 
-<div class="bg-white">
-    <div class="container">
-        <div class="row mt-3">
-            <div class="col-sm">
-                <h1 class="text-center">Se parte de la comunidad</h1>
-                <div class="row h-75 aling-items-center justify-content-center">
-                    <div class="col-auto">
-                        <label for="backto" class="form-label">¿Ya eres parte? <a href="/Login">Inicia sesión</a></label>
-                    </div>
+
+<div class="container bg-white">
+    <div class="row mt-3">
+        <div class="col-sm">
+            <h1 class="text-center">Se parte de la comunidad</h1>
+            <div class="row h-75 aling-items-center justify-content-center">
+                <div class="col-auto">
+                    <label for="backto" class="form-label">¿Ya eres parte? <a href="/Login">Inicia sesión</a></label>
                 </div>
             </div>
-            <div class="col-md">
-                <form method="post">
-                    <h2 class="text-start">Crear un perfil</h2>
-                    <div class="row align-content-start">
-                        <div class="col-sm mb-3">
-                            <label class="form-label">Dirección de correo</label>
-                            <input asp-for="umail" type="email" class="form-control" placeholder="correo@example.com">
-                        </div>
+        </div>
+        <div class="col-md">
+            <form method="post">
+                <h2 class="text-start">Crear un perfil</h2>
+                <div class="row align-content-start">
+                    <div class="col-sm mb-3">
+                        <label class="form-label">Dirección de correo</label>
+                        <input asp-for="umail" type="email" class="form-control" placeholder="correo@example.com">
                     </div>
-                    <div class="row align-content-start">
-                        <div class="col-sm mb-3">
-                            <label class="form-label">Nombre de usuario</label>
-                            <input asp-for="uname" type="text" class="form-control" placeholder="usuario">
-                        </div>
+                </div>
+                <div class="row align-content-start">
+                    <div class="col-sm mb-3">
+                        <label class="form-label">Nombre de usuario</label>
+                        <input asp-for="uname" type="text" class="form-control" placeholder="usuario">
                     </div>
-                    <div class="row align-content-start">
-                        <div class="col-sm mb-3">
-                            <label class="form-label">Contraseña</label>
-                            <input asp-for="pass1" type="password" class="form-control" placeholder="********">
-                        </div>
+                </div>
+                <div class="row align-content-start">
+                    <div class="col-sm mb-3">
+                        <label class="form-label">Contraseña</label>
+                        <input asp-for="pass1" type="password" class="form-control" placeholder="********">
                     </div>
-                    <div class="row align-content-start">
-                        <div class="col-sm mb-3">
-                            <label class="form-label">Confirma contraseña</label>
-                            <input asp-for="pass2" type="password" class="form-control" placeholder="********">
-                        </div>
+                </div>
+                <div class="row align-content-start">
+                    <div class="col-sm mb-3">
+                        <label class="form-label">Confirma contraseña</label>
+                        <input asp-for="pass2" type="password" class="form-control" placeholder="********">
                     </div>
-                    <label for="merror" class="form-label">@Model.merror</label>
-                    <div class="mb-3">
-                        <div class="row text-center align-items-center justify-content-center">
-                            <button type="submit" class="btn btn_base w-50  rounded-pill">Enviar</button>
-                        </div>
+                </div>
+                <label for="merror" class="form-label">@Model.merror</label>
+                <div class="mb-3">
+                    <div class="row text-center align-items-center justify-content-center">
+                        <button type="submit" class="btn btn_base w-50 rounded-pill">Enviar</button>
                     </div>
-                </form>
+                </div>
+            </form>
         
-            </div>
         </div>
     </div>
 </div>
+
 
 

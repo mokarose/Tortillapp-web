@@ -1,0 +1,38 @@
+﻿@model IndexModel
+
+@foreach (var item in Model.RecipeInfo)
+{
+    <div class="container block_v">
+        <div class="row">
+            <div class="col-4">
+                <img />Imagen
+                @Html.DisplayFor(modelItem => item.RecipePic)
+            </div>
+        </div>
+        <div class="row">
+            <div class="row">
+                <a asp-page="View" asp-route-id="@item?.RecipeId">@Html.DisplayFor(modelItem => item.RecipeTitle)</a>
+            </div>
+            <div class="row">
+                #rating
+            </div>
+            <div class="row">
+                <div class="container">
+                    @if (item.RecipeTags == null || item.RecipeTags.Count == 0)
+                    {
+                        <label>No hay etiquetas</label>
+                    }
+                    else
+                    {
+                        //for (int i = 0; i < item.RecipeTags.Count; i++)
+                        @foreach (var tag in item.RecipeTags)
+                        {
+                            <a class="mb-2 tag_base tag_deco button_deco">@Html.Display(tag.Tag.TagName)</a>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

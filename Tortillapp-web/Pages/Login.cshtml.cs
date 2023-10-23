@@ -56,10 +56,10 @@ namespace Tortillapp_web.Pages
         public UserData Login(string iUseMail, string iUserPass)
         {
             var user = _context.UserDatas.SingleOrDefault(u => u.UserMail.Equals(iUseMail));
+            
             if (user != null)
             {
-                var pass = _context.UserDatas.SingleOrDefault(u => u.UserPass.Equals(iUserPass));
-                if (pass != null)
+                if (user.UserPass.Equals(iUserPass))
                 {
                     return user;
                 }

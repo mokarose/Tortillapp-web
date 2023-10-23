@@ -2,72 +2,134 @@
 @model Tortillapp_web.Pages.Receta.DetailsModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles";
 }
 
-<h1>Details</h1>
+<div class="container bg-white">
+    <div class="row mt-3">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <img />Imagen receta
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <h1 class="text-start">@Html.DisplayFor(r => r.RecipeInfo.RecipeTitle)</h1>
+                    </div>
+                    <div class="col-3 mb-3">
+                        <!--Icono Me gusta-->
+                    </div>
+                    <div class="col-sm mb-3">
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="text-start">@Html.DisplayFor(r => r.RecipeInfo.User.UserName)</h6>
+                            </div>
+                            <div class="col">
+                                <img />Imagen usuario
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                            
+            <div class="row mb-3 text-center align-items-center justify-content-center">
+                <div class="col-3 div_base div_verde">
+                    <div class="div_interno text-white text-center">
+                        #Rating
+                    </div>
+                </div>
+                <div class="col-3 div_base div_aqua">
+                    <div class="div_interno text-white text-center">
+                        <i class="bi bi-stopwatch-fill icons-view"></i>
+                        @Html.DisplayFor(r => r.RecipeInfo.RecipeTime)
+                        <label>Preparación</label>
+                    </div>
+                </div>
+                <div class="col-3 div_base div_azul">
+                    <div class="div_interno text-white text-center">
+                        <i class="bi bi-people-fill icons-view"></i>
+                        @Html.DisplayFor(r => r.RecipeInfo.RecipePortion)
+                        <label>Porciones</label>
+                    </div>
+                </div>
+            </div>
 
-<div>
-    <h4>RecipeInfo</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RecipeInfo.RecipeTitle)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RecipeInfo.RecipeTitle)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RecipeInfo.Published)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RecipeInfo.Published)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RecipeInfo.RecipePortion)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RecipeInfo.RecipePortion)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RecipeInfo.RecipeTime)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RecipeInfo.RecipeTime)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RecipeInfo.RecipePic)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RecipeInfo.RecipePic)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RecipeInfo.RecipeTips)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RecipeInfo.RecipeTips)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RecipeInfo.RecipeStatus)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RecipeInfo.RecipeStatus)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RecipeInfo.LastUpdated)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RecipeInfo.LastUpdated)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.RecipeInfo.User)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.RecipeInfo.User.UserId)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.RecipeInfo?.RecipeId">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+            <div class="row mb-3 text-start align-items-start">
+                <div class="container">
+                    <h4 class="text-start">Ingredientes</h4>
+                    <ul>
+                        @if (Model.Ingredient == null || Model.Ingredient.Count == 0)
+                        {
+                            <li>Sin ingredientes</li>
+                        }
+                        else
+                        {
+                            @for (int i = 0; i < Model.Ingredient.Count; i++)
+                            {
+                                <li>
+                                    @Html.DisplayFor(r => r.Ingredient[i].IngredientAmount)
+                                    @Html.DisplayFor(r => r.Ingredient[i].IngredientUnit)
+                                    @Html.DisplayFor(r => r.Ingredient[i].IngredientName)
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="row mb-3 text-start align-items-start">
+                <div class="container">
+                    <h4 class="text-start">Preparación</h4>
+                    <ul>
+                        @if (Model.Step == null || Model.Step.Count == 0)
+                        {
+                            <li>Sin pasos</li>
+                        }
+                        else
+                        {
+                            @for (int i = 0; i < Model.Step.Count; i++)
+                            {
+                                <li>
+                                    @Html.DisplayFor(r => r.Step[i].StepDescrp)
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="row mb-3 text-start align-items-start">
+                <div class="container">
+                    <h4 class="text-start">Tips</h4>
+                    @Html.DisplayFor(r => r.RecipeInfo.RecipeTips)
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="row mb-3 text-start align-items-start">
+                <div class="container">
+                    <h4 class="text-start">Tags</h4>
+                    @if (Model.Tag == null || Model.Tag.Count == 0)
+                    {
+                        <label>No hay etiquetas</label>
+                    }
+                    else
+                    {
+                        @for (int i = 0; i < Model.Tag.Count; i++)
+                        {
+                            <a class="mb-2 tag_base tag_deco button_deco">@Html.DisplayFor(r => r.Tag[i].Tag.TagName)</a>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <a asp-page="./Edit" asp-route-id="@Model.RecipeInfo?.RecipeId">Editar</a> |
+        <a asp-page="./Index">Volver al listado</a>
+    </div>
 </div>

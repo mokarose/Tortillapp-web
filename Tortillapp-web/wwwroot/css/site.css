@@ -12,10 +12,23 @@
 }
 
 html {
-  font-size: 14px;
+    font-size: 14px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 1024px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 768px) {
   html {
     font-size: 16px;
   }
@@ -30,9 +43,28 @@ body {
   margin-bottom: 60px;
 }
 
+hr {
+    color: var(--verde);
+}
+
+li::marker {
+    color: var(--verde);
+}
+
 .header_sitio {
     background-color: var(--azul_gris);
     background-repeat: repeat-x;
+}
+
+.div_base {
+    position: relative;
+}
+
+.div_interno {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .div_verde {
@@ -42,7 +74,7 @@ body {
     margin-left: 0.5rem;
     padding-right: 1rem;
     padding-left: 1rem;
-    height: 50px;
+    height: 90px;
 }
 
 .div_aqua {
@@ -52,7 +84,7 @@ body {
     margin-left: 0.5rem;
     padding-right: 1rem;
     padding-left: 1rem;
-    height: 50px;
+    height: 90px;
 }
 
 .div_azul {
@@ -62,7 +94,7 @@ body {
     margin-left: 0.5rem;
     padding-right: 1rem;
     padding-left: 1rem;
-    height: 50px;
+    height: 90px;
 }
 
 .btn_base {
@@ -90,12 +122,6 @@ body {
 .btn_invisible {
     background-color: var(--blanco_base);
     border-color: transparent;
-}
-
-.search_bar {
-    background-color: var(--blanco_base);
-    box-sizing: border-box;
-    margin-bottom: 25px;
 }
 
 .tag_base {
@@ -150,9 +176,9 @@ body {
 }
 
 .grid_recipe {
-    display: grid;
+    display: inline-grid;
     grid-template-columns: 2fr 2fr;
-    grid-gap: 25px;
+    grid-gap: 30px;
     margin-top: 25px;
 }
 
@@ -160,5 +186,81 @@ body {
     background-color: var(--verde);
     color: white;
     height: 150px;
-    width: 500px;
+    width: 86%;
+    box-shadow: 0px 3px 25px rgba(0,0,0,30%);
+}
+
+.block-minmax {
+    grid-template-columns: repeat(3,minmax(max-content, 100%));
+}
+
+@media screen and (max-width: 768px) {
+    .block-minmax {
+        grid-template-columns: repeat(1,minmax(min-content, 100%));
+    }
+}
+
+.head_pic {
+    background-image: url('/pics/emily-simenauer-IlAPq27FxZ0-unsplash.jpg');
+    background-repeat: no-repeat;
+    background-attachment: inherit;
+    background-size: 100% 100%;
+    height: 30rem;
+    position: relative;
+}
+
+.search_bar {
+    background-color: var(--blanco_base);
+    box-sizing: border-box;
+    margin-bottom: 25px;
+    width: 85%;
+    max-width: 1255px;
+    margin: 0 auto;
+    border-radius: 25px 25px 25px 25px;
+    padding: 19px 7px 97px 7px;
+    transform: translateY(-50%);
+    position: relative;
+    z-index: 10;
+    box-shadow: 0px 3px 25px rgba(0,0,0,30%);
+}
+
+.form-search {
+    border: 0px solid;
+    border-radius: 25px 25px 25px 25px;
+    overflow: hidden;
+    background-color: white;
+    font-size: 20px;
+}
+
+.input-search {
+    display: inline-block;
+    width: 80%;
+    height: 44px;
+    border-color: var(--azul_gris);
+    margin: 5px;
+    text-indent: 1rem;
+    border-radius: 25px 25px 25px 25px;
+}
+
+.button-search {
+    display: inline-block;
+    width: 100px;
+    height: 70%;
+    font-size: 20px;
+    background-position: 5px 50%;
+    background-size: 20px 20px;
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+.button-advance {
+    display: inline-block;
+    width: 150px;
+    height: 80%;
+    font-size: 20px;
+    margin: 5px;
+}
+
+.icons-view {
+    color: var(--amarillo);
 }

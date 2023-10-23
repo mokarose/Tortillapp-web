@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using Org.BouncyCastle.Utilities.Collections;
 using Tortillapp_web.Data;
 using Tortillapp_web.Model;
 
@@ -21,27 +20,57 @@ namespace Tortillapp_web.Pages.Receta
         }
 
         [BindProperty]
-        public RecipeInfo RecipeInfo { get; set; } = default!;
+        public RecipeInfo Recipe { get; set; } = default!;
+        [BindProperty]
+        public IList<RecipeStep> Step { get; set; } = default!;
+        [BindProperty]
+        public IList<RecipeIngredient> Ingredient { get; set; } = default!;
+
+        List<string> units = new List<string>()
+        {
+            "",
+            "Pieza",
+            "Litro",
+            "Mililitro",
+            "Cuarto de kilo",
+            "Medio kilo",
+            "Kilo",
+            "Gramo",
+            "Cucharada",
+            "Cucharadita",
+            "Media taza",
+            "Taza",
+            "Pizca",
+            "Al gusto"
+
+        };
+        public SelectList Itype { get; set; }
 
         public async Task<IActionResult> OnGetAsync(ushort? id)
         {
+            Itype = new SelectList(units);
+ 
             if (id == null || _context.RecipeInfos == null)
             {
                 return NotFound();
             }
 
             var recipeinfo =  await _context.RecipeInfos.FirstOrDefaultAsync(m => m.RecipeId == id);
+
             if (recipeinfo == null)
             {
                 return NotFound();
             }
-            RecipeInfo = recipeinfo;
-           ViewData["UserId"] = new SelectList(_context.UserDatas, "UserId", "UserId");
+
+            Recipe = recipeinfo;
+            Ingredient = await _context.RecipeIngredients
+                .Where(r => r.RecipeId == recipeinfo.RecipeId).ToListAsync();
+            Step = await _context.RecipeSteps
+                .Where(r => r.RecipeId == recipeinfo.RecipeId).ToListAsync();
+
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -49,7 +78,7 @@ namespace Tortillapp_web.Pages.Receta
                 return Page();
             }
 
-            _context.Attach(RecipeInfo).State = EntityState.Modified;
+            _context.Attach(Recipe).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +86,7 @@ namespace Tortillapp_web.Pages.Receta
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RecipeInfoExists(RecipeInfo.RecipeId))
+                if (!RecipeInfoExists(Recipe.RecipeId))
                 {
                     return NotFound();
                 }
@@ -74,5 +103,6 @@ namespace Tortillapp_web.Pages.Receta
         {
           return (_context.RecipeInfos?.Any(e => e.RecipeId == id)).GetValueOrDefault();
         }
+
     }
 }

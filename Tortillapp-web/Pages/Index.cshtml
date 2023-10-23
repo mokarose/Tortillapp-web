@@ -6,18 +6,41 @@
 
 <!--Busqueda por ingredientes -->
 <div class="main">
-    <div class="search_bar">
-        <form id="form-control mr-sm 2" type="search">
-            <input type="text" id="search" name="look_s" placeholder="Escribe ingrediente, receta o palabra clave"/>
-
-            <button type="submit" class="btn btn_base">Buscar</button>
-        </form>
-        <button type="button" class="btn btn_avance">Avanzado</button>
+    <div id="hedpic" class="head_pic">
     </div>
-    <div class="popular_tag">
-        <label id="itag">
-            <a class="mb-2 tag_base tag_deco button_deco">Etiqueta @Model.itag</a>
-        </label>
+    <div class="search_bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-9">
+                    <form id="form-control mr-sm 2" class="form-search" type="search">
+                        <input type="text" id="search" class="input-search" placeholder="Escribe ingrediente, receta o palabra clave" />
+                        <input type="submit" class="btn btn_base rounded-pill button-search" value="Buscar" />
+                    </form>
+                </div>
+                <div class="col-3">
+                    <input type="button" class="btn btn_avance rounded-pill button-advance" value="Avanzado" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="popular_tag">
+                    <label id="itag">
+                        <a class="mb-2 tag_base tag_deco button_deco">Etiqueta</a>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row mt-3">
+        <div class="row text-center align-items-center justify-content-center">
+            <h1 class="text-center">Recetas</h1>
+        </div>
+        <div class="row mt-3">
+            <div class="grid_recipe block-minmax">
+                @await Html.PartialAsync("_IndexFirstView")
+            </div>
+        </div>
     </div>
 </div>
 

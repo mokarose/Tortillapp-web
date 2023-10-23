@@ -1,69 +1,149 @@
 ﻿@page
 @model Tortillapp_web.Pages.Receta.EditModel
-
+ 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar";
 }
 
-<h1>Edit</h1>
-
-<h4>RecipeInfo</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
+<div class="container bg-white">
+    <div class="row mt-3">
+        <div class="col-md">
+            <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="RecipeInfo.RecipeId" />
-            <div class="form-group">
-                <label asp-for="RecipeInfo.UserId" class="control-label"></label>
-                <select asp-for="RecipeInfo.UserId" class="form-control" asp-items="ViewBag.UserId"></select>
-                <span asp-validation-for="RecipeInfo.UserId" class="text-danger"></span>
+            <h2 class="text-center">Editar receta</h2>
+            <input type="hidden" asp-for="Recipe.RecipeId" />
+            <input type="hidden" asp-for="Recipe.UserId" />
+            <div class="row align-content-start">
+                <div class="col-sm mb-3">
+                    <label class="form-label">Título de la receta</label>
+                    <input asp-for="Recipe.RecipeTitle" type="text" id="title" class="form-control" placeholder="Nombre receta" required>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="RecipeInfo.RecipeTitle" class="control-label"></label>
-                <input asp-for="RecipeInfo.RecipeTitle" class="form-control" />
-                <span asp-validation-for="RecipeInfo.RecipeTitle" class="text-danger"></span>
+            <div class="row justify-content-start">
+                <div class="col-md mb-3 justify-content-center">
+                    <h3 class="text-start fw-bold">Ingredientes</h3>
+                </div>
+                <div class="col-sm mb-3">
+                    <table>
+                        <tr>
+                            <td><button type="button" id="btnPlusP" class="btn_invisible" onclick="incrementer()"><i class="bi bi-plus"></i></button></td>
+                            <td><input asp-for="Recipe.RecipePortion" type="text" class="form-control" id="portion" readonly></td>
+                            <td><button type="button" id="btnMinusP" class="btn_invisible" onclick="decrementer()"><i class="bi bi-dash"></i></button></td>
+                            <td><label><i class="bi bi-people"></i>Porc.</label></td>
+                        </tr>
+                    </table>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="RecipeInfo.Published" class="control-label"></label>
-                <input asp-for="RecipeInfo.Published" class="form-control" />
-                <span asp-validation-for="RecipeInfo.Published" class="text-danger"></span>
+            <div class="row justify-content-start">
+                <div class="col-sm mb-3">
+                    <fieldset>
+                        @if (Model.Ingredient == null || Model.Ingredient.Count == 0)
+                        {
+                        <div>None.</div>
+                        } 
+                        else
+                        {
+                        <div id="addIngredients" class="buttons">
+                            @await Html.PartialAsync("_RecipePartial");
+                                    
+                            <div class="row text-center align-items-center justify-content-center">
+                                <div class="mb-3">
+                                    <button type="button" class="btn btn_avance rounded-pill" id="add" onclick="adder(this)" data-number="3"><i class="bi bi-plus"></i></button>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Agregar otro ingrediente</label>
+                                </div>
+                            </div>
+                             
+                        </div>
+                        <a id="addAnother" href="#">Agregar</a>
+                        }
+                        <script type="text/javascript">
+                            $(function () {
+                                $("#addIngredients").sortable();
+                            });
+                        </script>
+                    </fieldset>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="RecipeInfo.RecipePortion" class="control-label"></label>
-                <input asp-for="RecipeInfo.RecipePortion" class="form-control" />
-                <span asp-validation-for="RecipeInfo.RecipePortion" class="text-danger"></span>
+           
+
+            <div class="row align-content-start">
+                <div class="col-md mb-3">
+                    <h3 class="text-start fw-bold">Preparación</h3>
+                </div>
+                <div class="col-sm mb-3">
+                    <table>
+                        <tr>
+                            <th><input asp-for="Recipe.RecipeTime" type="text" class="form-control" id="timepicker" /></th> <!--Time picker-->
+                            <th><i class="bi bi-clock"></i></th>
+                            <th><label>Mins.</label></th>
+                        </tr>
+                    </table>
+                    <script>
+                        $('#timepicker').clockTimePicker();
+                    </script>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="RecipeInfo.RecipeTime" class="control-label"></label>
-                <input asp-for="RecipeInfo.RecipeTime" class="form-control" />
-                <span asp-validation-for="RecipeInfo.RecipeTime" class="text-danger"></span>
+            <div class="row align-content-start">
+                <div class="col-sm mb-3">
+                    @await Html.PartialAsync("_StepsPartial");
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="RecipeInfo.RecipePic" class="control-label"></label>
-                <input asp-for="RecipeInfo.RecipePic" class="form-control" />
-                <span asp-validation-for="RecipeInfo.RecipePic" class="text-danger"></span>
+
+            <div class="row align-content-start">
+                <div class="col-sm mb-3">
+                    <h3 class="text-start fw-bold">Tips</h3>
+                </div>
+                <div class="row align-content-start">
+                    <div class="col-sm mb-3">
+                        <textarea asp-for="Recipe.RecipeTips" class="form-control" rows="4" placeholder="Algún consejo, técnica o para la presentación"></textarea>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="RecipeInfo.RecipeTips" class="control-label"></label>
-                <input asp-for="RecipeInfo.RecipeTips" class="form-control" />
-                <span asp-validation-for="RecipeInfo.RecipeTips" class="text-danger"></span>
+
+            <div class="row align-content-start">
+                <div class="col-sm mb-3">
+                    <h3 class="text-start fw-bold">Tags</h3>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="RecipeInfo.RecipeStatus" class="control-label"></label>
-                <input asp-for="RecipeInfo.RecipeStatus" class="form-control" />
-                <span asp-validation-for="RecipeInfo.RecipeStatus" class="text-danger"></span>
+            <div class="row align-content-start">
+                <div class="col mb-3">
+                    <table>
+                        <tr>
+                            <th><input asp-for="Recipe.RecipeTags" type="text" class="form-control" placeholder="#etiqueta"></th>
+                            <th><button type="button" class="btn btn_contra rounded-pill">Agregar</button></th>
+                        </tr>
+                    </table>
+                </div>
+                <div class="table">
+                    #etiquetas1
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+
+            <div class="row text-center align-items-center justify-content-center">
+                <div class="mb-3">
+                    <button type="button" class="btn btn_base w-50 vh-50 rounded-pill" id="upload">Subir una foto<br /><i class="bi bi-camera"></i></button>
+                </div>
+                <div class="mb-3">
+                    <button type="button" class="btn btn_blanco w-50 rounded-pill" id="preview">Vista Previa<br /><i class="bi bi-eye"></i></button>
+                </div>
+                <div class="mb-3">
+                    <input type="submit" class="btn btn_base w-50 rounded-pill" value="Publicar" />
+                </div>
+                <div class="mb-3">
+                    <input type="submit" name="btnDraft" class="btn btn_contra w-50 rounded-pill" value="Guardar" asp-page-handler="SaveDraft" />
+                </div>
+                <div class="mb-3">
+                    <button type="button" class="btn btn_avance w-50 rounded-pill"><a asp-page="./Index">Volver</a></button>
+                </div>
             </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-page="./Index">Back to List</a>
-</div>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

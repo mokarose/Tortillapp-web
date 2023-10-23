@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Data.Entity.Core.Metadata.Edm;
+using Tortillapp_web.Model;
 
 namespace Tortillapp_web.Control
 {
@@ -10,10 +11,10 @@ namespace Tortillapp_web.Control
             return View();
         }
 
-        /*public IActionResult _RecipePartial()
+        public IActionResult Edit(RecipeIngredient ingredient)
         {
-            return PartialView();
-        }*/
+            return View(ingredient);
+        }
 
     }
 }

@@ -2,25 +2,32 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-function increment(boton) {
-    //const botones = document.getElementsByClassName('.botona');
-    const vista = document.getElementsByClassName('quantity');
-        boton.onclick = (e) => {
-            const control = e.target;
-            let valor = 0;
-            valor = Number(control.dataset.number);
-            valor++;
-            control.dataset.number = valor;
-            for (let i = 0; i < vista.length; i++) {
-                vista[i].value = valor;
-            }
+
+function increment(boton, pos) {
+    const botones = document.querySelector(".buttons");
+    const vista = document.getElementById("Ingredient_" + pos + "__IngredientAmount");
+    let valor;
+    boton.onclick = (e) => {
+        const control = e.target;
+        valor = vista.value;
+        valor++;
+        control.dataset.number = valor;
+        vista.value = valor;
     }
 }
 
-function decrement() {
-    var i = document.getElementById("quantity");
-    if (i.value > 0)
-        i.value--;
+function decrement(boton, pos) {
+    const botones = document.querySelector(".buttons");
+    const vista = document.getElementById("Ingredient_" + pos + "__IngredientAmount");
+    //Ingredient_0__IngredientAmount
+    let valor;
+    boton.onclick = (e) => {
+        const control = e.target;
+        valor = vista.value;
+        valor--;
+        control.dataset.number = valor;
+        vista.value = valor;
+    }
 }
 
 function incrementer() {
@@ -38,30 +45,32 @@ function decrementer() {
 //< input type = "radio" id = "rdBtn" onclick = "if(document.getElementById('rdBtn').checked===true){document.getElementById('texto').style.display ='';}else{document.getElementById('texto').style.display = 'none';}" />
 //    <input type="text" id="texto" style="display:none" />
 
-function adder() {
+function adder(boton) {
     var o = document.getElementById('add');
+    let pos;
+    pos = o.value++ 
     
     html = '<tr><td>' +
         '<div class="row align-content-start">' +
         '<div class="col-sm mb-3">' +
         '<label class="form-label">Cantidad</label>' +
         '<table>' +
-            '<tr>' +
-                '<td><button type="button" id="btnPlusC" class="btn_invisible" onclick="increment()"><i class="bi bi-plus"></i></button></td>' +
-                '<td><input asp-for="Ingredient.IngredientAmount" type="text" class="form-control" id="quantity"></td>' +
-                '<td><button type="button" id="btnMinusC" class="btn_invisible" onclick="decrement()"><i class="bi bi-dash"></i></button></td>' +
-            '</tr>' +
+        '<tr>' +
+        '<td><button type="button" class="btn_invisible botona" onclick="increment(this,' + pos + ')"><i class="bi bi-plus"></i></button></td>' +
+        '<td><input name="Ingredients[' + pos + '].IngredientAmount" type="text" value="0" class="form-control quantity"></td>' +
+        '<td><button type="button" class="btn_invisible botonb" onclick="decrement(this,' + pos + ')"><i class="bi bi-dash"></i></button></td>' +
+        '</tr>' +
         '</table>' +
         '</div>' +
         '<div class="col-sm mb-3">' +
-        '<label class="form-label">Unidad</label>' + 
-        '<select asp-for="Ingredient.IngredientUnit" class="form-select" asp-items="Model.Itype"></select>' +
+        '<label class="form-label">Unidad</label>' +
+        '<select name="Ingredient[' + pos + '].IngredientUnit" class="form-select" asp-items="Model.Itype"></select>' +
         '</div>' +
         '</div>' +
         '<div class="row align-content-start">' +
             '<div class="col-sm mb-3">' +
                 '<label class="form-label">Descripción ingrediente</label>' +
-                '<input asp-for="Ingredient.IngredientName" type="text" class="form-control" placeholder="Nombre ingrediente" />' +
+        '<input name="Ingredient[' + pos + '].IngredientName" type="text" class="form-control" placeholder="Nombre ingrediente" />' +
             '</div>' +
         '</div>' +
         '</td></tr>';
