@@ -1,0 +1,160 @@
+﻿@page
+@model RecipeModel
+@{
+    ViewData["Title"] = "Receta";
+}
+
+<div class="container bg-white">
+    <div class="row mt-3">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="container" id="PictureSection">
+                    <img />Imagen receta
+                    <div class="row">
+                        <div class="col-6 mb-3">
+                            <h1 class="text-start">@Html.DisplayFor(r => r.RecipeInfo.RecipeTitle)</h1>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <!--Icono Me gusta-->
+                        </div>
+                        <div class="col-sm mb-3">
+                            <div class="row">
+                                <div class="col">
+                                    <h6 class="text-start">@Html.DisplayFor(r => r.RecipeInfo.User.UserName)</h6>
+                                </div>
+                                <div class="col">
+                                    <img />Imagen usuario
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3 text-center align-items-center justify-content-center">
+                        <div class="col-3 div_base div_verde">
+                            <div class="div_interno text-white text-center">
+                                #Rating
+                            </div>
+                        </div>
+                        <div class="col-3 div_base div_aqua">
+                            <div class="div_interno text-white text-center">
+                                <i class="bi bi-stopwatch-fill icons-view"></i>
+                                @Html.DisplayFor(r => r.RecipeInfo.RecipeTime)
+                                <label>Preparación</label>
+                            </div>
+                        </div>
+                        <div class="col-3 div_base div_azul">
+                            <div class="div_interno text-white text-center">
+                                <i class="bi bi-people-fill icons-view"></i>
+                                @Html.DisplayFor(r => r.RecipeInfo.RecipePortion)
+                                <label>Porciones</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container" id="DataSection">
+                    <div class="row mb-3 text-start align-items-start">
+                        <div class="container">
+                            <h4 class="text-start">Ingredientes</h4>
+                            <ul>
+                                @if (Model.Ingredient == null || Model.Ingredient.Count == 0)
+                                {
+                                    <li>Sin ingredientes</li>
+                                }
+                                else
+                                {
+                                    @for (int i = 0; i < Model.Ingredient.Count; i++)
+                                    {
+                                        <li>
+                                            @Html.DisplayFor(r => r.Ingredient[i].IngredientAmount)
+                                            @Html.DisplayFor(r => r.Ingredient[i].IngredientUnit)
+                                            @Html.DisplayFor(r => r.Ingredient[i].IngredientName)
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="row mb-3 text-start align-items-start">
+                        <div class="container">
+                            <h4 class="text-start">Preparación</h4>
+                            <ul>
+                                @if (Model.Step == null || Model.Step.Count == 0)
+                                {
+                                    <li>Sin pasos</li>
+                                }
+                                else
+                                {
+                                    @for (int i = 0; i < Model.Step.Count; i++)
+                                    {
+                                        <li>
+                                            @Html.DisplayFor(r => r.Step[i].StepDescrp)
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="row mb-3 text-start align-items-start">
+                        <div class="container">
+                            <h4 class="text-start">Tips</h4>
+                            @Html.DisplayFor(r => r.RecipeInfo.RecipeTips)
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="row mb-3 text-start align-items-start">
+                        <div class="container">
+                            <h4 class="text-start">Tags</h4>
+                            @if (Model.Tag == null || Model.Tag.Count == 0)
+                            {
+                                <label>No hay etiquetas</label>
+                            }
+                            else
+                            {
+                                @for (int i = 0; i < Model.Tag.Count; i++)
+                                {
+                                    <a class="mb-2 tag_base tag_deco button_deco">@Html.DisplayFor(r => r.Tag[i].Tag.TagName)</a>
+                                }
+                            }
+                        </div>
+                    </div>
+
+                    <hr />
+                </div>
+                <div class="container" id="CommentSection">
+                    <form method="post">
+                        <div class="row text-center align-items-center justify-content-center">
+                            <div class="row mb-3">
+                                <h3 class="text-center">¿Te gusto? ¿Qué tan taqueable es?</h3>
+                                <div class="row mb-3">
+                                    #5 tortillas
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-2">
+                                    #Usuario
+                                </div>
+                                <div class="col-10">
+                                        <textarea class="form-control" rows="4" placeholder="Agrega un comentario"></textarea>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="submit" value="Calificar" class="btn btn_contra w-50 rounded-pill" id="upload" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</div>
+

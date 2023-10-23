@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,13 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using Tortillapp_web.Data;
 using Tortillapp_web.Model;
 
-namespace Tortillapp_web.Pages.Receta
+namespace Tortillapp_web.Pages
 {
-    public class IndexModel : PageModel
+    public class FirstViewModel : PageModel
     {
         private readonly Tortillapp_web.Data.tortillaContext _context;
 
-        public IndexModel(Tortillapp_web.Data.tortillaContext context)
+        public FirstViewModel(Tortillapp_web.Data.tortillaContext context)
         {
             _context = context;
         }
@@ -23,18 +23,10 @@ namespace Tortillapp_web.Pages.Receta
 
         public async Task OnGetAsync()
         {
-            string iUser = HttpContext.Session.GetString("Usuario");
-
-            if (iUser == null)
-            {
-                NotFound();
-            }
-            
             if (_context.RecipeInfos != null)
             {
                 RecipeInfo = await _context.RecipeInfos
-                //.Include(r => r.User).ToListAsync();
-                .Where(r => r.User.UserName == iUser).ToListAsync();
+                .Include(r => r.User).ToListAsync();
             }
         }
     }

@@ -239,14 +239,17 @@ namespace Tortillapp_web.Pages.Recipe
             {
                 foreach (_Ingredient ingredients in Ingredients)
                 {
-                    _context.RecipeIngredients.Add(new RecipeIngredient
+                    if (ingredients.IngredientName != null)
                     {
-                        RecipeId = ID,
-                        IngredientName = ingredients.IngredientName,
-                        IngredientAmount = ingredients.IngredientAmount,
-                        IngredientUnit = ingredients.IngredientUnit
-                    });
-                    _context.SaveChanges();
+                        _context.RecipeIngredients.Add(new RecipeIngredient
+                        {
+                            RecipeId = ID,
+                            IngredientName = ingredients.IngredientName,
+                            IngredientAmount = ingredients.IngredientAmount,
+                            IngredientUnit = ingredients.IngredientUnit
+                        });
+                        _context.SaveChanges();
+                    }
                 }
             }
         }

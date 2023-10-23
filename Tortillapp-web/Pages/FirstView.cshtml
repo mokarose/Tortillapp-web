@@ -1,0 +1,15 @@
+﻿@page
+@model Tortillapp_web.Pages.FirstViewModel
+@{
+}
+
+<div class="row mt-3">
+    <div class="row text-center align-items-center justify-content-center">
+        <h1 class="text-center">Recetas</h1>
+    </div>
+    <div class="row mt-3">
+        <div class="grid_recipe block-minmax">
+            @await Html.PartialAsync("_IndexFirstView")
+        </div>
+    </div>
+</div>

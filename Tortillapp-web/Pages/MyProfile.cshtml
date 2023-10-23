@@ -1,78 +1,79 @@
 ﻿@page
 @model Tortillapp_web.Pages.Users.MyProfileModel
+
 @{
 	ViewData["Title"] = "Mi perfil";
 }
-<div class="bg-white">
-    <div class="container">
-        <div class="row mt-3">
-            <div class="col-sm">
-                <h1 class="text-center">Mi perfil</h1>
-                <div class="row align-items-center">
-                    <div class="form-outline col-sm text-center">
-                        <label for="ushow" class="form-label fs-3">Hola @Html.DisplayFor(model => model.User.ShowName)</label>
-                    </div>
-                </div>
-                <div class="row align-items-center text-center">
-                    <div class="form-outline col-sm">
-                        <label id="UsrName" for="uname" class="form-label fs-4">@Html.DisplayFor(model => model.User.UserName)</label>
-                    </div>
-                </div>
-                <div class="row align-items-center text-center">
-                    <div class="form-outline col-sm">
-                        <img />
-                    </div>
-                </div>
-                <div class="row text-center align-items-center justify-content-center">
-                    <button type="submit" class="btn btn_base w-50 rounded-pill">Subir foto</button></br>
-                </div>
-            </div>
 
-            <div class="col-md">
-                <form method="post">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <h2 class="text-start">Datos generales</h2>
-                    <div class="row align-content-start">
-                        <div class="col-sm mb-3">
-                            <label class="form-label">Nombre de usuario</label>
-                            <input asp-for="User.UserId" type="hidden" />
-                            <input asp-for="User.UserName" type="text" class="form-control" readonly /> <!--placeholder="Html.DisplayFor(model => model.User.UserName)"-->
-                            <!--span asp-validation-for="User.UserName" class="text-danger"><span-->
-                        </div>
-                    </div>
-                    <div class="row align-content-start">
-                        <div class="col-sm mb-3">
-                            <label class="form-label">Nombre para mostrar</label>
-                            <input asp-for="User.ShowName" type="text" class="form-control" /> <!--value="Html.DisplayFor(model => model.User.ShowName)"-->
-                            <span asp-validation-for="User.ShowName" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="row align-content-start">
-                        <div class="col-sm mb-3">
-                            <label class="form-label">Correo</label>
-                            <input asp-for="User.UserMail" type="email" class="form-control" /><!--value="Html.DisplayFor(model => model.User.UserMail)"-->
-                            <span asp-validation-for="User.UserMail" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="row align-content-start">
-                        <div class="form-outline col-sm mb-3 no-gutters-right">
-                            <label class="form-label">Contraseña</label>
-                            <input asp-for="upass" type="password" class="form-control">
-                        </div>
-                        <div class="form-outline col-sm mb-3"> 
-                            <label class="form-label">Confirma contraseña</label>
-                            <input asp-for="xpass" type="password" class="form-control">
-                        </div>
-                        <input asp-for="User.UserPass" type="hidden" />
-                    </div>
-                    <label for="merror" class="form-label">@Model.merror</label>
-                    <div class="row text-center align-items-center justify-content-center">
-                        <div class="mb-3">
-                            <input type="submit" class="btn btn_base w-50 rounded-pill" value="Guardar cambios" />
-                        </div>
-                    </div>
-                </form>
+<div class="container bg-white">
+    <div class="row mt-3">
+        <div class="col-sm">
+            <h1 class="text-center">Mi perfil</h1>
+            <div class="row align-items-center">
+                <div class="form-outline col-sm text-center">
+                    <label for="ushow" class="form-label fs-3">Hola @Html.DisplayFor(model => model.User.ShowName)</label>
+                </div>
             </div>
+            <div class="row align-items-center text-center">
+                <div class="form-outline col-sm">
+                    <label id="UsrName" for="uname" class="form-label fs-4">@Html.DisplayFor(model => model.User.UserName)</label>
+                </div>
+            </div>
+            <div class="row align-items-center text-center">
+                <div class="form-outline col-sm">
+                    <img />
+                </div>
+            </div>
+            <div class="row text-center align-items-center justify-content-center">
+                <button type="submit" class="btn btn_base w-50 rounded-pill">Subir foto</button></br>
+            </div>
+        </div>
+
+        <div class="col-md">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <h2 class="text-start">Datos generales</h2>
+                <div class="row align-content-start">
+                    <div class="col-sm mb-3">
+                        <label class="form-label">Nombre de usuario</label>
+                        <input asp-for="User.UserId" type="hidden" />
+                        <input asp-for="User.UserName" type="text" class="form-control" readonly /> <!--placeholder="Html.DisplayFor(model => model.User.UserName)"-->
+                        <!--span asp-validation-for="User.UserName" class="text-danger"><span-->
+                    </div>
+                </div>
+                <div class="row align-content-start">
+                    <div class="col-sm mb-3">
+                        <label class="form-label">Nombre para mostrar</label>
+                        <input asp-for="User.ShowName" type="text" class="form-control" /> <!--value="Html.DisplayFor(model => model.User.ShowName)"-->
+                        <span asp-validation-for="User.ShowName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row align-content-start">
+                    <div class="col-sm mb-3">
+                        <label class="form-label">Correo</label>
+                        <input asp-for="User.UserMail" type="email" class="form-control" /><!--value="Html.DisplayFor(model => model.User.UserMail)"-->
+                        <span asp-validation-for="User.UserMail" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row align-content-start">
+                    <div class="form-outline col-sm mb-3 no-gutters-right">
+                        <label class="form-label">Contraseña</label>
+                        <input asp-for="upass" type="password" class="form-control">
+                    </div>
+                    <div class="form-outline col-sm mb-3"> 
+                        <label class="form-label">Confirma contraseña</label>
+                        <input asp-for="xpass" type="password" class="form-control">
+                    </div>
+                    <input asp-for="User.UserPass" type="hidden" />
+                </div>
+                <label for="merror" class="form-label">@Model.merror</label>
+                <div class="row text-center align-items-center justify-content-center">
+                    <div class="mb-3">
+                        <input type="submit" class="btn btn_base w-50 rounded-pill" value="Guardar cambios" />
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
