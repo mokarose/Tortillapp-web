@@ -27,7 +27,7 @@
                         //for (int i = 0; i < item.RecipeTags.Count; i++)
                         @foreach (var tag in item.RecipeTags)
                         {
-                            <a class="mb-2 tag_base tag_deco button_deco">@Html.Display(tag.Tag.TagName)</a>
+                            <a class="mb-2 tag_base tag_deco button_deco">@Html.DisplayFor(modelItem => tag.Tag.TagName)</a>
                         }
                     }
                 </div>

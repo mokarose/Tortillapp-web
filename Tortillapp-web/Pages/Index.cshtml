@@ -5,16 +5,29 @@
 }
 
 <!--Busqueda por ingredientes -->
+<div id="hedpic" class="head_pic">
+</div>
 <div class="main">
-    <div id="hedpic" class="head_pic">
-    </div>
     <div class="search_bar">
         <div class="container">
             <div class="row">
                 <div class="col-9">
-                    <form id="form-control mr-sm 2" class="form-search" type="search">
-                        <input type="text" id="search" class="input-search" placeholder="Escribe ingrediente, receta o palabra clave" />
-                        <input type="submit" class="btn btn_base rounded-pill button-search" value="Buscar" />
+                    <form method="post" id="form-control" class="form-search" type="search">
+                        <div class="row">
+                            <div class="col-9">
+                                <input asp-for="toSearch" type="text" class="input-search" placeholder="Escribe ingrediente, receta o palabra clave" />
+                            </div>
+                            <div class="col-3">
+                                <input type="submit" class="btn btn_base rounded-pill button-search" value="Buscar" asp-page-handler="Search"/>
+                                <button type="submit" class="btn btn_base rounded-pill mini-search" asp-page-handler="Search"><i class="bi bi-search"></i></button>
+                                <!--<script>
+                                    $(document).ready(function () {
+                                        $("#search").on
+                                        $(this).html($(this).html() == "<i class='fas fa-chevron-left'></i> " ? "<i class='fas fa-chevron-right'></i>" : "<i class='fas fa-chevron-left'></i>   ");
+                                    });
+                                </script>-->
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <div class="col-3">
@@ -22,10 +35,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="popular_tag">
-                    <label id="itag">
-                        <a class="mb-2 tag_base tag_deco button_deco">Etiqueta</a>
-                    </label>
+                <div class="container index-tags">
+                    @await Html.PartialAsync("_IndexTags")
                 </div>
             </div>
         </div>

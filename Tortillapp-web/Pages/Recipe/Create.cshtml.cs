@@ -253,5 +253,10 @@ namespace Tortillapp_web.Pages.Recipe
                 }
             }
         }
+
+        void AddTags(ushort ID)
+        {
+
+        }
     }
 }

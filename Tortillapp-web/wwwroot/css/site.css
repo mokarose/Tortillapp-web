@@ -16,19 +16,19 @@ html {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1280px) {
     html {
         font-size: 16px;
     }
 }
 
-@media screen and (min-width: 768px) and (max-width: 1023px) {
+@media screen and (min-width: 769px) and (max-width: 1279px) {
     html {
         font-size: 16px;
     }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 768px) {
   html {
     font-size: 16px;
   }
@@ -54,6 +54,13 @@ li::marker {
 .header_sitio {
     background-color: var(--azul_gris);
     background-repeat: repeat-x;
+}
+
+.div_translate {
+    position: absolute;
+    top: 100%;
+    left: 20%;
+    transform: translate(-20%, -100%);
 }
 
 .div_base {
@@ -200,6 +207,12 @@ li::marker {
     }
 }
 
+@media screen and (min-width: 769px) and (max-width: 1279px) {
+    .block-minmax {
+        grid-template-columns: repeat(2,minmax(min-content, 100%));
+    }
+}
+
 .head_pic {
     background-image: url('/pics/emily-simenauer-IlAPq27FxZ0-unsplash.jpg');
     background-repeat: no-repeat;
@@ -207,6 +220,7 @@ li::marker {
     background-size: 100% 100%;
     height: 30rem;
     position: relative;
+    
 }
 
 .search_bar {
@@ -215,6 +229,7 @@ li::marker {
     margin-bottom: 25px;
     width: 85%;
     max-width: 1255px;
+    max-height: 250px;
     margin: 0 auto;
     border-radius: 25px 25px 25px 25px;
     padding: 19px 7px 97px 7px;
@@ -222,6 +237,32 @@ li::marker {
     position: relative;
     z-index: 10;
     box-shadow: 0px 3px 25px rgba(0,0,0,30%);
+}
+
+@media screen and (max-width: 768px) {
+    .search_bar {
+        background-color: white;
+        box-shadow: none;
+    }
+
+    .form-search {
+        background-color: transparent!important;
+    }
+
+    .button-search {
+        visibility: collapse!important;
+    }
+
+    .mini-search {
+        background-color: var(--azul_gris)!important;
+        width: 50px;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .mini-search {
+        visibility: hidden !important;
+    }
 }
 
 .form-search {
@@ -234,7 +275,7 @@ li::marker {
 
 .input-search {
     display: inline-block;
-    width: 80%;
+    width: 100%;
     height: 44px;
     border-color: var(--azul_gris);
     margin: 5px;
@@ -245,11 +286,10 @@ li::marker {
 .button-search {
     display: inline-block;
     width: 100px;
-    height: 70%;
     font-size: 20px;
     background-position: 5px 50%;
     background-size: 20px 20px;
-    margin-top: 0px;
+    margin-top: 5px;
     margin-bottom: 5px;
 }
 
@@ -263,4 +303,10 @@ li::marker {
 
 .icons-view {
     color: var(--amarillo);
+}
+
+.index-tags {
+    height: 90px;
+    width: 80%;
+    margin: 25px;
 }
