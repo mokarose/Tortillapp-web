@@ -2,11 +2,18 @@
 
 @foreach (var item in Model.RecipeInfo)
 {
-    <div class="container block_v">
+    <div class="block_v container">
         <div class="row">
-            <div class="col-4">
-                <img />Imagen
-                @Html.DisplayFor(modelItem => item.RecipePic)
+            <div class="img-fluid">
+                @if (item.RecipePic == null)
+                {
+                    <img src="~/pics/tortilla-basic-cuadro.jpg" class="recipe_pic" />
+                }
+                else
+                {
+                    <img src="@Html.DisplayFor(modelItem => item.RecipePic)" class="recipe_pic" />
+                }
+                
             </div>
         </div>
         <div class="row">
