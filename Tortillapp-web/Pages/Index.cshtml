@@ -18,8 +18,8 @@
                                 <input asp-for="toSearch" type="text" class="input-search" placeholder="Escribe ingrediente, receta o palabra clave" />
                             </div>
                             <div class="col-3">
-                                <input type="submit" class="btn btn_base rounded-pill button-search" value="Buscar" asp-page-handler="Search"/>
                                 <button type="submit" class="btn btn_base rounded-pill mini-search" asp-page-handler="Search"><i class="bi bi-search"></i></button>
+                                <input type="submit" class="btn btn_base rounded-pill button-search" value="Buscar" asp-page-handler="Search"/>
                                 <!--<script>
                                     $(document).ready(function () {
                                         $("#search").on
@@ -30,9 +30,9 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-3">
+                <!--<div class="col-3">
                     <input type="button" class="btn btn_avance rounded-pill button-advance" value="Avanzado" />
-                </div>
+                </div>-->
             </div>
             <div class="row">
                 <div class="container index-tags">
@@ -47,9 +47,11 @@
         <div class="row text-center align-items-center justify-content-center">
             <h1 class="text-center">Recetas</h1>
         </div>
-        <div class="row mt-3">
-            <div class="grid_recipe block-minmax">
-                @await Html.PartialAsync("_IndexFirstView")
+        <div class="container"></div>
+            <div class="row mt-3">
+                <div class="grid_recipe block-minmax">
+                    @await Html.PartialAsync("_IndexFirstView")
+                </div>
             </div>
         </div>
     </div>

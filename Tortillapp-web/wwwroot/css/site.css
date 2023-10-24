@@ -74,6 +74,16 @@ li::marker {
     transform: translate(-50%, -50%);
 }
 
+@media screen and (max-width: 768px) {
+    .div_translate {
+        position: initial;
+        text-align: center;
+        top: 0%;
+        left: 0%;
+        transform: translate(0%, 0%);
+    }
+}
+
 .div_verde {
     background-color: var(--verde);
     border-radius: 0.5rem;
@@ -192,8 +202,8 @@ li::marker {
 .block_v {
     background-color: var(--verde);
     color: white;
-    height: 150px;
-    width: 86%;
+    height: 350px;
+    width: 500px;
     box-shadow: 0px 3px 25px rgba(0,0,0,30%);
 }
 
@@ -213,6 +223,11 @@ li::marker {
     }
 }
 
+.recipe_pic {
+    height: 250px;
+    width: 20rem;
+}
+
 .head_pic {
     background-image: url('/pics/emily-simenauer-IlAPq27FxZ0-unsplash.jpg');
     background-repeat: no-repeat;
@@ -220,7 +235,6 @@ li::marker {
     background-size: 100% 100%;
     height: 30rem;
     position: relative;
-    
 }
 
 .search_bar {

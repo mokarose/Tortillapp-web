@@ -25,6 +25,8 @@ namespace Tortillapp_web.Pages
         }
 
         public IList<RecipeInfo> RecipeInfo { get; set; } = default!;
+        //public IList<RecipeIngredient> Ingredient { get; set; } = default!;
+        //public Query[] { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(string? search)
         {
@@ -37,24 +39,47 @@ namespace Tortillapp_web.Pages
                 if (RecipeInfo.Count <= 0)
                 {
                     strSplitSearch = search.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                    //strSplitSearch.Any(s => search.Contains(s));
 
-                    /*RecipeInfo = await _context.RecipeInfos
-                        .Join(_context.RecipeIngredients,
-                        r => r,
-                        i => i.Recipe,
-                        (r, i) =>
-                            new
-                            {
-                                rName = r.RecipeTitle,
-                                iName = i.IngredientName
-                            });*/
-                        //.Where(e => e.iName.Contains(strSplitSearch[0]))
-                        //.ToListAsync();
+                    //bool anyluck = strSplitSearch.ContainsAny(search);
+                    //var query = _context.RecipeIngredients
+                    var query = _context.RecipeIngredients
+                        .Where(i => i.IngredientName.Contains(search))
+                        .Join(_context.RecipeInfos,
+                        i => i.RecipeId,
+                        r => r.RecipeId,
+                        (r, i) => new
+                        {
+                            recipeId = r.RecipeId,
+                            recipeIngredient = r.IngredientName,
+                            recipeName = r.Recipe.RecipeTitle,
+                            recipeImage = r.Recipe.RecipePic,
+                            recipeTags = r.Recipe.RecipeTags
+
+                        }).ToList();
+
+                    RecipeInfo = await _context.RecipeInfos
+                    .Where(r => r.RecipeTitle.Contains(query[0].recipeName)).ToListAsync();
+
+                    /*for (int i = 0;i <= query.Count;i++)
+                    {
+                        query[i].rec
+                    }*/
                 }
             }
             return Page();
         }
 
+        /*public static bool ContainsAny(this string haystack, params string[] needles)
+        {
+            foreach (string needle in needles)
+            {
+                if (haystack.Contains(needle))
+                    return true;
+            }
+
+            return false;
+        }
         /*public async Task<IActionResult> OnGetSearch(string? search)
         {
             
