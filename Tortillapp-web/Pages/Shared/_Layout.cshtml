@@ -33,7 +33,7 @@ else { isLogged = 0; }
                         <span class="mb-0 h1"><img src="/pics/Tortilla-logo.png" width="160" alt="Tortillapp - Inicio" /></span><!--Agregar imagen-->
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDropdown" aria-controls="navbarDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+                        <i class="bi bi-list icon-main"></i>
                     </button>
  
                     @if (isLogged == 0)
@@ -44,7 +44,7 @@ else { isLogged = 0; }
                                     <a class="nav-link dropdown-toggle" asp-page="Index" id="navbarDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuario</a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownLink"2>
                                         <li><a class="dropdown-item" asp-page="/Login">Inicia sesión</a></li>
-                                        <li><a class="dropdown-item" asp-page="#">Acerca de</a></li>
+                                        <li><a class="dropdown-item" asp-page="/Privacy">Acerca de</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -63,7 +63,7 @@ else { isLogged = 0; }
                                         <li><a class="dropdown-item" asp-page="/Admin/ViewUsers">Usuarios registrados</a></li>
                                         <li><a class="dropdown-item" asp-page="#">Recetas registradas</a></li>
                                         <li><a class="dropdown-item" asp-page="#">Comentarios</a></li>
-                                        <li><a class="dropdown-item" asp-page="#">Acerca de</a></li>
+                                        <li><a class="dropdown-item" asp-page="/Privacy">Acerca de</a></li>
                                         <li><a class="dropdown-item" asp-page="Index" asp-page-handler="Logout">Cerrar sesión</a></li>
                                     </ul>
                                 </li>
@@ -78,9 +78,9 @@ else { isLogged = 0; }
                                     <a class="nav-link dropdown-toggle" asp-page="/Index" id="navbarDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">@actualUser</a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownLink">
                                         <li><a class="dropdown-item" asp-page="/MyProfile" asp-page-handler="@actualUser">Mi perfil</a></li>
-                                        <li><a class="dropdown-item" asp-page="#">Recetas favoritas</a></li>
+                                        <li><a class="dropdown-item" asp-page="/Recipe/Favorites">Recetas favoritas</a></li>
                                         <li><a class="dropdown-item" asp-page="/Recipe/Index">Crear receta</a></li>
-                                        <li><a class="dropdown-item" asp-page="#">Acerca de</a></li>
+                                        <li><a class="dropdown-item" asp-page="/Privacy">Acerca de</a></li>
                                         <li><a class="dropdown-item" asp-page="/Index" asp-page-handler="Logout">Cerrar sesión</a></li>
                                     </ul>
                                 </li>
@@ -97,7 +97,7 @@ else { isLogged = 0; }
             </nav>
         </div>
     </header>
-    <div class="container-fluid">
+    <div class="container-fluid no-gutters">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MessagePack;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +31,10 @@ namespace Tortillapp_web.Pages
         }
 
         public IList<RecipeInfo> RecipeInfo { get; set; } = default!;
-        public IList<RecipeTag> Tags { get; set; } = default!;
+        public IList<Tag> Tags { get; set; } = default!;
+
+        [BindProperty]
+        public string toSearch { get; set; }
 
         public async Task OnGetAsync()
         {
@@ -38,6 +42,8 @@ namespace Tortillapp_web.Pages
             {
                 RecipeInfo = await _context.RecipeInfos
                 .Include(r => r.User).ToListAsync();
+
+                Tags = await _context.Tags.ToListAsync();
             }
         }
 
@@ -45,6 +51,16 @@ namespace Tortillapp_web.Pages
         {
             HttpContext.Session.Remove("Usuario");
             return RedirectToPage("Index");
+        }
+
+        
+        public IActionResult OnPostSearch()
+        {
+            if (toSearch == null)
+            {
+                return RedirectToPage("Index");
+            }
+            return Redirect("/Search?search=" + toSearch );
         }
         
     }

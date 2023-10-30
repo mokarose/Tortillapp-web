@@ -1,0 +1,65 @@
+﻿@page
+@model Tortillapp_web.Pages.FirstViewModel
+@{
+    ViewData["Title"] = "Resultados";
+}
+
+<div class="row mt-3">
+    <div class="row text-center align-items-center justify-content-center">
+        <h1 class="text-center">Recetas</h1>
+    </div>
+    <div class="container"></div>
+        <div class="row mt-3">
+            <div class="grid_recipe block-minmax">
+            
+            @if (Model.RecipeInfo == null || Model.RecipeInfo.Count == 0)
+            {
+                <h3 class="text-center">Sin resultados</h3>
+            }
+            else
+            {
+                @foreach (var item in Model.RecipeInfo)
+                {
+                    <div class="container block_v">
+                        <div class="row">
+                            <div class="img-fluid"> 
+                                @if (item.RecipePic == null)
+                                {
+                                    <img src="~/pics/tortilla-basic-cuadro.jpg" class="recipe_pic" />
+                                }
+                                else
+                                {
+                                    <img src="@Html.DisplayFor(modelItem => item.RecipePic)" class="recipe_pic" />
+                                }
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="row">
+                                <a asp-page="View" asp-route-id="@item?.RecipeId">@Html.DisplayFor(modelItem => item.RecipeTitle)</a>
+                            </div>
+                            <div class="row">
+                                #rating
+                            </div>
+                            <div class="row">
+                                <div class="container">
+                                    @if (item.RecipeTags == null || item.RecipeTags.Count == 0)
+                                    {
+                                        <label>No hay etiquetas</label>
+                                    }
+                                    else
+                                    {
+                                        @foreach (var tag in item.RecipeTags)
+                                        {
+                                            <a class="mb-2 tag_base tag_deco button_deco">@Html.DisplayFor(modelItem => tag.Tag.TagName)</a>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>        
+
