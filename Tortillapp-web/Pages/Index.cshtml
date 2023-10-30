@@ -1,54 +1,51 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Tortillapp";
+    ViewData["Title"] = "Inicio";
 }
 
 <!--Busqueda por ingredientes -->
 <div id="hedpic" class="head_pic">
 </div>
-<div class="main">
-    <div class="search_bar">
-        <div class="container">
-            <div class="row">
-                <div class="col-9">
-                    <form method="post" id="form-control" class="form-search" type="search">
-                        <div class="row">
-                            <div class="col-9">
-                                <input asp-for="toSearch" type="text" class="input-search" placeholder="Escribe ingrediente, receta o palabra clave" />
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="search_bar">
+                <div class="container">
+                    <div class="row">
+                        <form method="post" id="form-control" class="form-search" type="search">
+                            <div class="row">
+                                <div class="col-9">
+                                    <input asp-for="toSearch" type="search" class="input-search" placeholder="Escribe ingrediente, receta o palabra clave" aria-describedby="search-addon" />
+                                </div>
+                                <div class="col-3">
+                                    <button type="submit" class="btn btn_base rounded-pill mini-search" asp-page-handler="Search"><i class="bi bi-search"></i></button>
+                                    <input type="submit" class="btn btn_base rounded-pill button-search" value="Buscar" asp-page-handler="Search" />
+                                </div>
                             </div>
-                            <div class="col-3">
-                                <button type="submit" class="btn btn_base rounded-pill mini-search" asp-page-handler="Search"><i class="bi bi-search"></i></button>
-                                <input type="submit" class="btn btn_base rounded-pill button-search" value="Buscar" asp-page-handler="Search"/>
-                                <!--<script>
-                                    $(document).ready(function () {
-                                        $("#search").on
-                                        $(this).html($(this).html() == "<i class='fas fa-chevron-left'></i> " ? "<i class='fas fa-chevron-right'></i>" : "<i class='fas fa-chevron-left'></i>   ");
-                                    });
-                                </script>-->
-                            </div>
+                        </form>
+                        <!--<div class="col-3">
+                            <input type="button" class="btn btn_avance rounded-pill button-advance" value="Avanzado" />
+                        </div>-->
+                    </div>
+               
+                    <div class="row">
+                        <div class="container index-tags">
+                            @await Html.PartialAsync("_IndexTags")
                         </div>
-                    </form>
-                </div>
-                <!--<div class="col-3">
-                    <input type="button" class="btn btn_avance rounded-pill button-advance" value="Avanzado" />
-                </div>-->
-            </div>
-            <div class="row">
-                <div class="container index-tags">
-                    @await Html.PartialAsync("_IndexTags")
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="container-fluid">
+<div class="container">
     <div class="row mt-3">
         <div class="row text-center align-items-center justify-content-center">
             <h1 class="text-center">Recetas</h1>
         </div>
-        <div class="container"></div>
-            <div class="row mt-3">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
                 <div class="grid_recipe block-minmax">
                     @await Html.PartialAsync("_IndexFirstView")
                 </div>

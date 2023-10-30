@@ -56,7 +56,10 @@ namespace Tortillapp_web.Pages
         
         public IActionResult OnPostSearch()
         {
-            //return RedirectToPage("Search", "Search", new { toSearch });
+            if (toSearch == null)
+            {
+                return RedirectToPage("Index");
+            }
             return Redirect("/Search?search=" + toSearch );
         }
         

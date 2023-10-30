@@ -14,27 +14,23 @@
             
             @if (Model.RecipeInfo == null || Model.RecipeInfo.Count == 0)
             {
-                //if (Model)
                 <h3 class="text-center">Sin resultados</h3>
             }
             else
             {
-                
                 @foreach (var item in Model.RecipeInfo)
                 {
                     <div class="container block_v">
                         <div class="row">
-                            <div class="col-4">
-                                <div class="img-fluid"> 
-                                    @if (item.RecipePic == null)
-                                    {
-                                        <img src="~/pics/tortilla-basic-cuadro.jpg" class="recipe_pic" />
-                                    }
-                                    else
-                                    {
-                                        <img src="@Html.DisplayFor(modelItem => item.RecipePic)" class="recipe_pic" />
-                                    }
-                                </div>
+                            <div class="img-fluid"> 
+                                @if (item.RecipePic == null)
+                                {
+                                    <img src="~/pics/tortilla-basic-cuadro.jpg" class="recipe_pic" />
+                                }
+                                else
+                                {
+                                    <img src="@Html.DisplayFor(modelItem => item.RecipePic)" class="recipe_pic" />
+                                }
                             </div>
                         </div>
                         <div class="row">
