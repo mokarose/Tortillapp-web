@@ -14,10 +14,12 @@
             
             @if (Model.RecipeInfo == null || Model.RecipeInfo.Count == 0)
             {
+                //if (Model)
                 <h3 class="text-center">Sin resultados</h3>
             }
             else
             {
+                
                 @foreach (var item in Model.RecipeInfo)
                 {
                     <div class="container block_v">

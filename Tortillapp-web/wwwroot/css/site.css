@@ -244,6 +244,11 @@ li::marker {
     }
 }
 
+.recipe_pic {
+    height: 250px;
+    width: 20rem;
+}
+
 .head_pic {
     background-image: url('/pics/emily-simenauer-IlAPq27FxZ0-unsplash.jpg');
     background-repeat: no-repeat;

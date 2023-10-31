@@ -28,6 +28,8 @@ namespace Tortillapp_web.Pages
         }
 
         public IList<RecipeInfo> RecipeInfo { get; set; } = default!;
+        //public IList<RecipeIngredient> Ingredient { get; set; } = default!;
+        //public Query[] { get; set; } = default!;
 
         public async Task<IActionResult> OnGetAsync(string? search)
         {
@@ -42,6 +44,7 @@ namespace Tortillapp_web.Pages
                 if (RecipeInfo.Count <= 0) //busqueda por ingrediente
                 {
                     strSplitSearch = search.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                    
                     //var anyluck = strSplitSearch.Any(s => search.Contains(s));
 
                     foreach (var ingredient in strSplitSearch)
