@@ -24,17 +24,15 @@
                 {
                     <div class="container block_v">
                         <div class="row">
-                            <div class="col-4">
-                                <div class="img-fluid"> 
-                                    @if (item.RecipePic == null)
-                                    {
-                                        <img src="~/pics/tortilla-basic-cuadro.jpg" class="recipe_pic" />
-                                    }
-                                    else
-                                    {
-                                        <img src="@Html.DisplayFor(modelItem => item.RecipePic)" class="recipe_pic" />
-                                    }
-                                </div>
+                            <div class="img-fluid"> 
+                                @if (item.RecipePic == null)
+                                {
+                                    <img src="~/pics/tortilla-basic-cuadro.jpg" class="recipe_pic" />
+                                }
+                                else
+                                {
+                                    <img src="@Html.DisplayFor(modelItem => item.RecipePic)" class="recipe_pic" />
+                                }
                             </div>
                         </div>
                         <div class="row">
