@@ -24,7 +24,7 @@
             <!--using (Html.BeginForm("Upload", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
             {-->
                 <div class="row align-items-center text-center">
-                    <div class="div_base form-outline col-sm">
+                    <div class="form-outline col-sm">
                         <!--if (Model.User.ShowPic == null)
                         {
                             <img src="~/pics/profile1.png" class="profile_pic" />
@@ -40,7 +40,7 @@
                 <br />
                 <div class="row text-center align-items-center justify-content-center">
                     <div class="col mb-3">
-                        <input name="image" type="file" class="form-control btn_base" onchange="displaySelectedImage(event, 'imgSelect')" />
+                        <input name="image" type="file" class="form-control btn_base profile_btn" onchange="displaySelectedImage(event, 'imgSelect')" />
                         <!--<input type="submit" class="btn btn_base w-50 rounded-pill" value="Subir foto" asp-page-handler="Upload"/>-->
                     </div>
                 </div>
