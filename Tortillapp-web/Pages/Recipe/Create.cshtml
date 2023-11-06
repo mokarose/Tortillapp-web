@@ -68,89 +68,72 @@
 
                 <div class="container" id="IngredientsSection" runat="server">
                     <div class="buttons">
-                        <table class="table" style="white-space: nowrap; overflow-x: auto;">
-                            <tbody id="point">
-                                <tr>
-                                    <td>
-                                        <div class="row align-content-start">
-                                            <div class="col-sm mb-3">
-                                                <label class="form-label">Cantidad</label>
-                                                    <table>
-                                                        <tr>
-                                                            <td><button type="button" class="btn_invisible botona" onclick="increment(this,0)"><i class="bi bi-plus"></i></button></td>
-                                                            <td><input asp-for="Ingredients[0].IngredientAmount" type="text" value="0" class="form-control quantity"></td>
-                                                            <td><button type="button" class="btn_invisible botonb" onclick="decrement(this,0)"><i class="bi bi-dash"></i></button></td>
-                                                        
-                                                        </tr>
-                                                    </table>
-                                            </div>
-                                            <div class="col-sm mb-3">
-                                                <label class="form-label">Unidad</label>
-                                                <select asp-for="Ingredients[0].IngredientUnit" class="form-select" asp-items="Model.Itype"></select>
-                                            </div>
-                                        </div>
-                                        <div class="row align-content-start">
-                                            <div class="col-sm mb-3">
-                                                <label class="form-label">Descripción ingrediente</label>
-                                                <input asp-for="Ingredients[0].IngredientName" type="text" class="form-control" placeholder="Nombre ingrediente" />
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="row align-content-start">
-                                            <div class="col-sm mb-3">
-                                                <label class="form-label">Cantidad</label>
-                                                <table>
-                                                    <tr>
-                                                        <td><button type="button" class="btn_invisible botona" onclick="increment(this,1)"><i class="bi bi-plus"></i></button></td>
-                                                        <td><input asp-for="Ingredients[1].IngredientAmount" type="text" value="0" class="form-control quantity"></td>
-                                                        <td><button type="button" class="btn_invisible botonb" onclick="decrement(this,1)"><i class="bi bi-dash"></i></button></td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                            <div class="col-sm mb-3">
-                                                <label class="form-label">Unidad</label>
-                                                <select asp-for="Ingredients[1].IngredientUnit" class="form-select" asp-items="Model.Itype"></select>
-                                            </div>
-                                        </div>
-                                        <div class="row align-content-start">
-                                            <div class="col-sm mb-3">
-                                                <label class="form-label">Descripción ingrediente</label>
-                                                <input asp-for="Ingredients[1].IngredientName" type="text" class="form-control" placeholder="Nombre ingrediente" />
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="row align-content-start">
-                                            <div class="col-sm mb-3">
-                                                <label class="form-label">Cantidad</label>
-                                                <table>
-                                                    <tr>
-                                                        <td><button type="button" class="btn_invisible botona" onclick="increment(this,2)"><i class="bi bi-plus"></i></button></td>
-                                                        <td><input asp-for="Ingredients[2].IngredientAmount" type="text" value="0" class="form-control quantity"></td>
-                                                        <td><button type="button" class="btn_invisible botonb" onclick="decrement(this,2)"><i class="bi bi-dash"></i></button></td>
-                                                    </tr>
-                                                </table>
-                                            </div>
-                                            <div class="col-sm mb-3">
-                                                <label class="form-label">Unidad</label>
-                                                <select asp-for="Ingredients[2].IngredientUnit" class="form-select" asp-items="Model.Itype"></select>
-                                            </div>
-                                        </div>
-                                        <div class="row align-content-start">
-                                            <div class="col-sm mb-3">
-                                                <label class="form-label">Descripción ingrediente</label>
-                                                <input asp-for="Ingredients[2].IngredientName" type="text" class="form-control" placeholder="Nombre ingrediente" />
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="container">
+                            <div class="row align-content-start">
+                                <div class="col mb-3 col-quanxi">
+                                    <label class="form-label">Cantidad</label>
+                                    <table>
+                                        <tr>
+                                            <td><button type="button" class="btn_invisible botona" onclick="increment(this,0)"><i class="bi bi-plus"></i></button></td>
+                                                <td><input asp-for="Ingredient[0].IngredientAmount" type="text" value="0" class="form-control input-quanxi quantity "></td>
+                                            <td><button type="button" class="btn_invisible botonb" onclick="decrement(this,0)"><i class="bi bi-dash"></i></button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col mb-3 col-unit">
+                                    <label class="form-label">Unidad</label>
+                                    <select asp-for="Ingredient[0].IngredientUnit" class="form-select input-unit" asp-items="Model.Itype"></select>
+                                </div>
+                                <div class="col mb-3 col-des">
+                                    <label class="form-label">Descripción ingrediente</label>
+                                    <input asp-for="Ingredient[0].IngredientName" type="text" class="form-control input-des" placeholder="Nombre ingrediente" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row align-content-start">
+                                <div class="col mb-3 col-quanxi">
+                                    <label class="form-label">Cantidad</label>
+                                    <table>
+                                        <tr>
+                                            <td><button type="button" class="btn_invisible botona" onclick="increment(this,0)"><i class="bi bi-plus"></i></button></td>
+                                            <td><input asp-for="Ingredient[1].IngredientAmount" type="text" value="0" class="form-control input-quanxi quantity "></td>
+                                            <td><button type="button" class="btn_invisible botonb" onclick="decrement(this,0)"><i class="bi bi-dash"></i></button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col mb-3 col-unit">
+                                    <label class="form-label">Unidad</label>
+                                    <select asp-for="Ingredient[1].IngredientUnit" class="form-select input-unit" asp-items="Model.Itype"></select>
+                                </div>
+                                <div class="col mb-3 col-des">
+                                    <label class="form-label">Descripción ingrediente</label>
+                                    <input asp-for="Ingredient[1].IngredientName" type="text" class="form-control input-des" placeholder="Nombre ingrediente" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row align-content-start">
+                                <div class="col mb-3 col-quanxi">
+                                    <label class="form-label">Cantidad</label>
+                                    <table>
+                                        <tr>
+                                            <td><button type="button" class="btn_invisible botona" onclick="increment(this,0)"><i class="bi bi-plus"></i></button></td>
+                                            <td><input asp-for="Ingredient[2].IngredientAmount" type="text" value="0" class="form-control input-quanxi quantity "></td>
+                                            <td><button type="button" class="btn_invisible botonb" onclick="decrement(this,0)"><i class="bi bi-dash"></i></button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col mb-3 col-unit">
+                                    <label class="form-label">Unidad</label>
+                                    <select asp-for="Ingredient[2].IngredientUnit" class="form-select input-unit" asp-items="Model.Itype"></select>
+                                </div>
+                                <div class="col mb-3 col-des">
+                                    <label class="form-label">Descripción ingrediente</label>
+                                    <input asp-for="Ingredient[2].IngredientName" type="text" class="form-control input-des" placeholder="Nombre ingrediente" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="row text-center align-items-center justify-content-center">
                         <div class="mb-3">
@@ -160,7 +143,6 @@
                             <label class="form-label">Agregar otro ingrediente</label>
                         </div>
                     </div>
-    
                 </div>
 
                 <div class="container" id="PreparationSection" runat="server">
@@ -197,7 +179,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
+                <div class="container" id="TagsSection" runat="server">
                     <div class="row align-content-start">
                         <div class="col-sm mb-3">
                             <h3 class="text-start fw-bold">Tags</h3>
@@ -207,7 +191,7 @@
                         <div class="col mb-3">
                             <table>
                                 <tr>
-                                    <th><input asp-for="Tags" type="text" class="form-control" placeholder="#etiqueta"></th>
+                                    <th><input asp-for="Tags" type="text" class="form-control" placeholder="etiquetas"></th>
                                     <th><button type="button" class="btn btn_contra rounded-pill">Agregar</button></th>
                                 </tr>
                             </table>

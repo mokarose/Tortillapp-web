@@ -39,7 +39,7 @@
                     <fieldset>
                         @if (Model.Ingredient == null || Model.Ingredient.Count == 0)
                         {
-                        <div>None.</div>
+                            <div>None.</div>
                         } 
                         else
                         {
@@ -60,7 +60,7 @@
                         }
                         <script type="text/javascript">
                             $(function () {
-                                $("#addIngredients").sortable();
+                                $("#addIngredients").sortable()
                             });
                         </script>
                     </fieldset>
@@ -81,7 +81,7 @@
                         </tr>
                     </table>
                     <script>
-                        $('#timepicker').clockTimePicker();
+                        $('#timepicker').clockTimePicker()
                     </script>
                 </div>
             </div>
