@@ -24,13 +24,13 @@ html {
 
 @media screen and (min-width: 769px) and (max-width: 1279px) {
     html {
-        font-size: 16px;
+        font-size: 14px;
     }
 }
 
 @media screen and (max-width: 768px) {
   html {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 
@@ -49,6 +49,42 @@ hr {
 
 li::marker {
     color: var(--verde);
+}
+
+i {
+    color: var(--azul_verde);
+}
+
+.col-quanxi {
+    width: 100%;
+    max-width: 160px;
+}
+
+.col-unit {
+    width: 100%;
+    max-width: 200px;
+}
+
+@media screen and (max-width: 990px) {
+    .col-des {
+        width: 200px;
+        min-width: 250px;
+    }
+
+    .input-des {
+        width: 100%;
+        min-width: 200px;
+    }
+}
+
+.input-quanxi {
+    width: 100%;
+    max-width: 70px;
+}
+
+.input-unit {
+    width: 100%;
+    max-width: 160px;
 }
 
 .header_sitio {
@@ -199,6 +235,23 @@ li::marker {
 .recipe_pic {
     height: 250px;
     width: 99%;
+}
+
+.profile_pic {
+    height: 160px;
+    width: 160px;
+    border: solid;
+    border-color: var(--verde_limon);
+    border-radius: 50%;
+}
+
+.profile_btn {
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+    width: 300px;
 }
 
 .grid_recipe {

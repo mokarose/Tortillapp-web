@@ -106,9 +106,9 @@ namespace Tortillapp_web.Pages.Recipe
         [BindProperty]
         public ushort ruser { get; set; }
         [BindProperty]
-        public _Ingredient[] Ingredients { get; set; } = default!;
+        public _Ingredient[] Ingredient { get; set; } = default!;
         //Models
-        public RecipeIngredient[] Ingredient { get; set; } = default!;
+        public RecipeIngredient[] Ingredients { get; set; } = default!;
         public RecipeStep[] Steps { get; set; } = default!;
         public RecipeInfo Recipe { get; set; } = default!;
         public IList<RecipeTag> Tags { get; set; } = default!;
@@ -235,9 +235,9 @@ namespace Tortillapp_web.Pages.Recipe
 
         void AddIngredients(ushort ID)
         {
-            if (Ingredients != null)
+            if (Ingredient != null)
             {
-                foreach (_Ingredient ingredients in Ingredients)
+                foreach (_Ingredient ingredients in Ingredient)
                 {
                     if (ingredients.IngredientName != null)
                     {

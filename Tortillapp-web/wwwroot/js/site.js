@@ -6,6 +6,7 @@
 function increment(boton, pos) {
     const botones = document.querySelector(".buttons");
     const vista = document.getElementById("Ingredient_" + pos + "__IngredientAmount");
+    //Ingredients_0__IngredientAmount
     let valor;
     boton.onclick = (e) => {
         const control = e.target;
@@ -76,6 +77,21 @@ function adder(boton) {
         '</td></tr>';
 
     $('#point').append(html);
+}
+
+function displaySelectedImage(event, elementId) {
+    const selectedImage = document.getElementById(elementId);
+    const fileInput = event.target;
+
+    if (fileInput.files && fileInput.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            selectedImage.src = e.target.result;
+        };
+
+        reader.readAsDataURL(fileInput.files[0]);
+    }
 }
 
 function titleDisplay() {
