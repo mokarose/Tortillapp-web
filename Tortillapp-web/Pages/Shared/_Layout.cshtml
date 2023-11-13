@@ -1,12 +1,18 @@
 ﻿@using Microsoft.AspNetCore.Http;
+
 @{
     int isLogged;
     string actualUser = "";
+    string userImage = "";
 }
 @if (Context.Session.GetString("Usuario") != null) 
 { 
     isLogged = 1; 
     actualUser = Context.Session.GetString("Usuario").ToString();
+    if (Context.Session.GetString("Imagen").ToString() != null)
+    {
+        userImage = Context.Session.GetString("Imagen").ToString();
+    }
 }
 else { isLogged = 0; }
 
@@ -33,7 +39,7 @@ else { isLogged = 0; }
                         <span class="mb-0 h1"><img src="/pics/Tortilla-logo.png" width="160" alt="Tortillapp - Inicio" /></span><!--Agregar imagen-->
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDropdown" aria-controls="navbarDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="bi bi-list icon-main"></i>
+                        <i class="bi bi-list"></i>
                     </button>
  
                     @if (isLogged == 0)
@@ -41,7 +47,7 @@ else { isLogged = 0; }
                         <div class="collapse navbar-collapse justify-content-end" id="navbarDropdown">
                             <ul class="navbar-nav"> <!--aria-labelledby="dropdownMenu">-->
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" asp-page="Index" id="navbarDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Usuario</a>
+                                    <a class="nav-link dropdown-toggle" asp-page="Index" id="navbarDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="/pics/profile1.png" class="profile_pic profile_mini"/></a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownLink"2>
                                         <li><a class="dropdown-item" asp-page="/Login">Inicia sesión</a></li>
                                         <li><a class="dropdown-item" asp-page="/Privacy">Acerca de</a></li>
@@ -75,7 +81,7 @@ else { isLogged = 0; }
                         <!--<a class="btn dropdown-toggle" href="/MyProfile" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">Mi perfil</a>-->
                             <ul class="navbar-nav"> <!--aria-labelledby="dropdownMenu">-->
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" asp-page="/Index" id="navbarDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">@actualUser</a>
+                                    <a class="nav-link dropdown-toggle" asp-page="/Index" id="navbarDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="~/pics/@userImage" class="profile_pic profile_mini" /></a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownLink">
                                         <li><a class="dropdown-item" asp-page="/MyProfile" asp-page-handler="@actualUser">Mi perfil</a></li>
                                         <li><a class="dropdown-item" asp-page="/Recipe/Favorites">Recetas favoritas</a></li>

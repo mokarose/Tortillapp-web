@@ -52,7 +52,19 @@ li::marker {
 }
 
 i {
+    color: var(--blanco_base);
+}
+
+.icons-special {
     color: var(--azul_verde);
+}
+
+.icons-view {
+    color: var(--amarillo);
+}
+
+.icons-main {
+    color: var(--azul_gris);
 }
 
 .col-quanxi {
@@ -96,11 +108,27 @@ i {
     width: 100%;*/
 }
 
+.div_fixedh {
+    height: 480px;
+    width: 100%;
+}
+
+.div_comment {
+    height: 60px;
+}
+
 .div_translate {
     position: absolute;
     top: 100%;
     left: 20%;
     transform: translate(-20%, -100%);
+}
+
+.div_start {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translate(0%,50%);
 }
 
 .div_base {
@@ -113,6 +141,17 @@ i {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.div_interno_w {
+    width: 500px;
+}
+
+@media screen and (max-width: 768px) {
+    .div_interno_w {
+        width: 250px;
+    }
+}
+
 
 @media screen and (max-width: 768px) {
     .div_translate {
@@ -181,6 +220,14 @@ i {
     border-color: transparent;
 }
 
+.btn_like {
+    background-color: var(--tortilla);
+    border-color: var(--amarillo);
+    width: 42px;
+    height: 42px;
+    border-radius: 50% !important;
+}
+
 .tag_base {
     background-color: var(--blanco_base);
     color: var(--verde);
@@ -232,9 +279,38 @@ i {
     padding-left: 0;
 }
 
+.form-profile {
+    display: flex;
+}
+
+@media screen and (max-width: 768px) {
+    .form-profile {
+        display: initial;
+    }
+}
+
 .recipe_pic {
     height: 250px;
-    width: 99%;
+    width: 100%;
+}
+
+.recipe_pic-wide {
+    height: 384px;
+    width: 100%;
+}
+
+.title-height {
+    height: 100px;
+}
+
+@media screen and (max-width: 768px) {
+    .title-height {
+        width: 100%;
+    }
+
+    .title-width {
+        width: 250px;
+    }
 }
 
 .profile_pic {
@@ -245,13 +321,20 @@ i {
     border-radius: 50%;
 }
 
+.profile_mini {
+    height: 42px;
+    width: 42px;
+}
+
 .profile_btn {
     /*position:absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: transparent;*/
-    width: 300px;
+    width: 335px;
+    display: initial;
+    font-size: 14px;
 }
 
 .grid_recipe {
@@ -259,6 +342,12 @@ i {
     grid-template-columns: 2fr 2fr;
     grid-gap: 30px;
     margin-top: 25px;
+}
+
+.recipe_btn {
+    min-width: 300px;
+    display: initial;
+    font-size: 14px;
 }
 
 .block_v {
@@ -323,7 +412,7 @@ i {
     margin-bottom: 25px;
     width: 85%;
     max-width: 1255px;
-    max-height: 250px;
+    max-height: 220px;
     margin: 0 auto;
     border-radius: 25px 25px 25px 25px;
     padding: 19px 7px 97px 7px;
@@ -408,16 +497,13 @@ i {
     margin: 5px;
 }
 
-.icons-view {
-    color: var(--amarillo);
-}
-
 .index-tags {
     height: 90px;
     width: 80%;
     margin: 25px;
 }
 
-.icon-main {
-    color: white;
+.rounded-photo {
+    height: 220px;
+    border-radius: 10px;
 }

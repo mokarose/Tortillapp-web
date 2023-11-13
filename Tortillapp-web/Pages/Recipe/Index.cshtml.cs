@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Tortillapp_web.Data;
 using Tortillapp_web.Model;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Tortillapp_web.Pages.Receta
 {
@@ -21,13 +22,14 @@ namespace Tortillapp_web.Pages.Receta
 
         public IList<RecipeInfo> RecipeInfo { get; set; } = default!;
 
-        public async Task OnGetAsync()
+        [HttpGet]
+        public async Task<IActionResult> OnGetAsync()
         {
             string iUser = HttpContext.Session.GetString("Usuario");
 
             if (iUser == null)
             {
-                NotFound();
+                return NotFound();
             }
             
             if (_context.RecipeInfos != null)
@@ -36,6 +38,8 @@ namespace Tortillapp_web.Pages.Receta
                 //.Include(r => r.User).ToListAsync();
                 .Where(r => r.User.UserName == iUser).ToListAsync();
             }
+
+            return Page();
         }
     }
 }

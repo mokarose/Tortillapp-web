@@ -35,15 +35,22 @@ namespace Tortillapp_web.Pages
 
         [BindProperty]
         public string toSearch { get; set; }
+        public List<float> rscore { get; set; } = new List<float>();
 
         public async Task OnGetAsync()
         {
+            int iter = 0;
             if (_context.RecipeInfos != null)
             {
                 RecipeInfo = await _context.RecipeInfos
                 .Include(r => r.User).ToListAsync();
 
                 Tags = await _context.Tags.ToListAsync();
+            }
+            foreach (var recipe in RecipeInfo)
+            {
+                rscore.Add(GetRecipeRating(recipe.RecipeId));
+                iter++;
             }
         }
 
@@ -52,7 +59,6 @@ namespace Tortillapp_web.Pages
             HttpContext.Session.Remove("Usuario");
             return RedirectToPage("Index");
         }
-
         
         public IActionResult OnPostSearch()
         {
@@ -62,6 +68,30 @@ namespace Tortillapp_web.Pages
             }
             return Redirect("/Search?search=" + toSearch );
         }
-        
+
+        public float GetRecipeRating(ushort id_recipe)
+        {
+            float sumScore = 0;
+            float scoreTotal = 0;
+
+            var scoreall = _context.Scores
+                .Where(r => r.Title == id_recipe.ToString()).ToList();
+
+            if (scoreall != null)
+            {
+                for (int i = 0; i < scoreall.Count(); i++)
+                {
+                    sumScore += scoreall[i].ScorePoints;
+                }
+                scoreTotal = sumScore / scoreall.Count();
+            }
+            else
+            {
+                scoreTotal = 0;
+            }
+
+            return scoreTotal;
+        }
+
     }
 }

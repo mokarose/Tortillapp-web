@@ -1,7 +1,9 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
 using Tortillapp_web.Data;
 using Tortillapp_web.Model;
 
@@ -49,6 +51,14 @@ namespace Tortillapp_web.Pages
             else
             {
                 HttpContext.Session.SetString("Usuario", isLoged.UserName);
+                if (isLoged.ShowPic != null)
+                {
+                    HttpContext.Session.SetString("Imagen", Encoding.UTF8.GetString(isLoged.ShowPic));
+                }
+                else
+                {
+                    HttpContext.Session.SetString("Imagen", "profile3.png");
+                }
                 return RedirectToPage("MyProfile");
             }
         }
@@ -59,12 +69,20 @@ namespace Tortillapp_web.Pages
             
             if (user != null)
             {
-                if (user.UserPass.Equals(iUserPass))
+                if (user.UserPass.Equals(EcryptPass(iUserPass)))
                 {
                     return user;
                 }
             }
             return null;
+        }
+
+        public string EcryptPass(string password)
+        {
+            string result = null;
+            byte[] encrypt = System.Text.Encoding.Unicode.GetBytes(password);
+            result = Convert.ToBase64String(encrypt);
+            return result;
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿@model IndexModel
-
+@{int iterator = 0;}
 @foreach (var item in Model.RecipeInfo)
 {
     <div class="block_v container">
@@ -21,7 +21,25 @@
                 <a asp-page="View" asp-route-id="@item?.RecipeId">@Html.DisplayFor(modelItem => item.RecipeTitle)</a>
             </div>
             <div class="row">
-                #rating
+                <div class="text-white text-center">
+                    @if (Model.rscore[iterator] == 0)
+                    {
+                        for (float j = 0; j < 5; j++)
+                        {
+                            <i class="bi bi-star icons-view"></i>
+                        }
+                    }
+                    else{
+                        for (int i = 0; i < Model.rscore[iterator]; i++)
+                        {
+                            <i class="bi bi-star-fill icons-view"></i>
+                        }
+                        for (float j = Model.rscore[iterator]; j < 5; j++)
+                        {
+                            <i class="bi bi-star icons-view"></i>
+                        }
+                    }
+                </div>
             </div>
             <div class="row">
                 <div class="container">
@@ -41,5 +59,6 @@
             </div>
         </div>
     </div>
+    iterator++;
 }
 
