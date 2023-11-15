@@ -224,7 +224,7 @@ namespace Tortillapp_web.Pages
             {
                 var userComment = await _context.UserDatas.FirstOrDefaultAsync(u => u.UserName.Equals(userShowLog));
 
-                if (userComment != null)
+                if (ucomment != null)
                 {
                     _context.Scores.Add(new Score
                     {
@@ -252,7 +252,7 @@ namespace Tortillapp_web.Pages
 
                 ushort last_insert = _context.Scores.Max(r => r.ScoreId);
 
-                UpdateRating(idRecipe, userComment.UserId, last_insert);
+                UpdateRating(idRecipe, actualUserLog, last_insert);
 
                 return Redirect("View?id=" + idRecipe);
             }
