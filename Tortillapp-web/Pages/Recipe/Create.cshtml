@@ -2,6 +2,7 @@
 @model Tortillapp_web.Pages.Recipe.CreateModel
 @{
     ViewData["Title"] = "Nueva receta";
+    int posicion = 2;
 }
 
 <div class="container bg-white">
@@ -138,17 +139,85 @@
                                 </div>
                             </div>
                         </div>
+                            <div class="container" id="ingredient_3">
+                            <div class="row align-content-start">
+                                <div class="col mb-3 col-quanxi">
+                                    <label class="form-label">Cantidad</label>
+                                    <table>
+                                        <tr>
+                                            <td><button type="button" class="btn_invisible botona" onclick="increment(this,3)"><i class="bi bi-plus icons-special"></i></button></td>
+                                            <td><input asp-for="Ingredient[3].IngredientAmount" type="text" value="0" class="form-control input-quanxi quantity"></td>
+                                            <td><button type="button" class="btn_invisible botonb" onclick="decrement(this,3)"><i class="bi bi-dash icons-special"></i></button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col mb-3 col-unit">
+                                    <label class="form-label">Unidad</label>
+                                    <select asp-for="Ingredient[3].IngredientUnit" class="form-select input-unit" asp-items="Model.Itype"></select>
+                                </div>
+                                <div class="col mb-3 col-des">
+                                    <label class="form-label">Descripción ingrediente</label>
+                                    <input asp-for="Ingredient[3].IngredientName" type="text" class="form-control input-des" placeholder="Nombre ingrediente" minlength="1" maxlenght="49" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container" id="ingredient_4">
+                            <div class="row align-content-start">
+                                <div class="col mb-3 col-quanxi">
+                                    <label class="form-label">Cantidad</label>
+                                    <table>
+                                        <tr>
+                                            <td><button type="button" class="btn_invisible botona" onclick="increment(this,4)"><i class="bi bi-plus icons-special"></i></button></td>
+                                            <td><input asp-for="Ingredient[4].IngredientAmount" type="text" value="0" class="form-control input-quanxi quantity"></td>
+                                            <td><button type="button" class="btn_invisible botonb" onclick="decrement(this,4)"><i class="bi bi-dash icons-special"></i></button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col mb-3 col-unit">
+                                    <label class="form-label">Unidad</label>
+                                    <select asp-for="Ingredient[4].IngredientUnit" class="form-select input-unit" asp-items="Model.Itype"></select>
+                                </div>
+                                <div class="col mb-3 col-des">
+                                    <label class="form-label">Descripción ingrediente</label>
+                                    <input asp-for="Ingredient[4].IngredientName" type="text" class="form-control input-des" placeholder="Nombre ingrediente" minlength="1" maxlenght="49" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container" id="ingredient_5">
+                            <div class="row align-content-start">
+                                <div class="col mb-3 col-quanxi">
+                                    <label class="form-label">Cantidad</label>
+                                    <table>
+                                        <tr>
+                                            <td><button type="button" class="btn_invisible botona" onclick="increment(this,5)"><i class="bi bi-plus icons-special"></i></button></td>
+                                            <td><input asp-for="Ingredient[5].IngredientAmount" type="text" value="0" class="form-control input-quanxi quantity"></td>
+                                            <td><button type="button" class="btn_invisible botonb" onclick="decrement(this,5)"><i class="bi bi-dash icons-special"></i></button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col mb-3 col-unit">
+                                    <label class="form-label">Unidad</label>
+                                    <select asp-for="Ingredient[5].IngredientUnit" class="form-select input-unit" asp-items="Model.Itype"></select>
+                                </div>
+                                <div class="col mb-3 col-des">
+                                    <label class="form-label">Descripción ingrediente</label>
+                                    <input asp-for="Ingredient[5].IngredientName" type="text" class="form-control input-des" placeholder="Nombre ingrediente" minlength="1" maxlenght="49" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="row text-center align-items-center justify-content-center">
                         <div class="mb-3">
-                            <button type="button" class="btn btn_blanco rounded-pill" id="add" onclick="adder(this)" data-number="3">
+                            <button type="button" class="btn btn_blanco rounded-pill" id="add" onclick="showIng(this)" data-number="3">
                                 <i class="bi bi-plus icons-special" style="font-size:20px; font-weight:bolder;"></i>
                             </button>
-                        </div>
+                        </div> 
                         <div class="mb-3">
                             <label class="form-label icons-special">Agregar otro ingrediente</label>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="container" id="PreparationSection" runat="server">

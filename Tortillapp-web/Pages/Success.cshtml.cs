@@ -48,8 +48,8 @@ namespace Tortillapp_web.Pages
             rmail.From = new MailAddress("notificaciones@tortillapp.com.mx", "Tortillapp", System.Text.Encoding.UTF8);
             //rmail.From = new MailAddress("rosario_3b2_eab@yahoo.com.mx", "Tortillapp", System.Text.Encoding.UTF8);
             rmail.To.Add(user.UserMail);
-            rmail.Subject = "Correo de prueba";
-            rmail.Body = "Este es un correo de prueba";
+            rmail.Subject = "Bienvenido";
+            rmail.Body = "<table cellpadding=\"0\", cellspacing=\"0\" align=\"center\" width=\"100%\">\r\n\t<tbody>\r\n\t\t<tr style=\"border-collapse:collapse\">\r\n\t\t\t<td><h3>Hola</h3></td>\r\n\t\t</tr>\r\n\t\t<tr style=\"border-collapse:collapse\">\r\n\t\t\t<td><span>Bienvenido a la comunidad de la tortilla, entra y comienza a agregar recetas a tu lista</span></td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>";
             rmail.IsBodyHtml = true;
             rmail.Priority = MailPriority.Normal;
 
@@ -57,7 +57,7 @@ namespace Tortillapp_web.Pages
             smtp.Host = "smtpout.secureserver.net"; //GoDaddy mail
             ///smtp.Host = "smtp.office365.com";
             //smtp.Host = "smtp.mail.yahoo.com";
-            smtp.Port = 465;
+            smtp.Port = 80;
             //smtp.Port = 587;
             smtp.Credentials = new System.Net.NetworkCredential("notificaciones@tortillapp.com.mx", "#Pulpot4k0");
             ///smtp.Credentials = new System.Net.NetworkCredential("mary_chayo_@hormail.com", "130619961d","outlook.com");
@@ -76,8 +76,8 @@ namespace Tortillapp_web.Pages
             rmail.From = new MailAddress("notificaciones@tortillapp.com.mx", "Tortillapp", System.Text.Encoding.UTF8);
             //rmail.From = new MailAddress("rosario_3b2_eab@yahoo.com.mx", "Tortillapp", System.Text.Encoding.UTF8);
             rmail.To.Add(user.UserMail);
-            rmail.Subject = "Correo de prueba";
-            rmail.Body = "Este es un correo de prueba";
+            rmail.Subject = "Actualización de contraseña";
+            rmail.Body = "<table cellpadding=\"0\", cellspacing=\"0\" align=\"center\" width=\"100%\">\r\n\t<tbody>\r\n\t\t<tr style=\"border-collapse:collapse\">\r\n\t\t\t<td><h3>Hola</h3></td>\r\n\t\t</tr>\r\n\t\t<tr style=\"border-collapse:collapse\">\r\n\t\t\t<td><span>Tu contraseña ha sido actualizada, puedes seguir disfrutando de las recetas</span></td>\r\n\t\t</tr>\r\n\t</tbody>\r\n</table>";
             rmail.IsBodyHtml = true;
             rmail.Priority = MailPriority.Normal;
 

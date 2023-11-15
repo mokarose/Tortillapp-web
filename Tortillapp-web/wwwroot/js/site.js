@@ -94,6 +94,17 @@ function adder(boton) {
     $('#point').append(html);
 }
 
+function showIng(boton, pos) {
+    var x = document.getElementById("ingredient_" + pos);
+    let pos;
+    pos = x.value++ 
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+
 function displaySelectedImage(event, elementId) {
     const selectedImage = document.getElementById(elementId);
     const fileInput = event.target;

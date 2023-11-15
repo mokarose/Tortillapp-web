@@ -152,16 +152,13 @@ namespace Tortillapp_web.Pages
                 }
 
                 var userfavorite = await _context.UserFavorites.Where(r => r.RecipeId == RecipeInfo.RecipeId).ToListAsync();
-                foreach(var fav in userfavorite)
+                foreach (var fav in userfavorite)
                 {
                     if (fav.UserId == actualUserLog)
                     {
                         UserFavorites = fav;
                     }
                 }
-                /*RecipeInfo = iRecipe.GroupBy(r => r.RecipeTitle)
-                            .Where(r => r.Count() != 0)
-                            .Select(r => r.First()).ToList();*/
             }
             else
             {
