@@ -7,7 +7,9 @@ using System.Collections.Generic;
 using Org.BouncyCastle.Utilities.Collections;
 using Tortillapp_web.Data;
 using Tortillapp_web.Model;
+using Tortillapp_web.Control;
 using System.Text;
+using NuGet.Packaging;
 
 namespace Tortillapp_web.Pages
 {
@@ -19,10 +21,13 @@ namespace Tortillapp_web.Pages
         {
             _context = context;
         }
+
         public RecipeInfo RecipeInfo { get; set; } = default!;
+        public UserFavorite UserFavorites { get; set; } = default!;
         public IList<RecipeStep> Step { get; set; } = default!;
         public IList<RecipeIngredient> Ingredient { get; set; } = default!;
         public IList<RecipeTag> Tag { get; set; } = default!;
+        public List<Tag> NameTags { get; set; } = new List<Tag>();
         public List<Score> AllScore { get; set; } = default!;
         public UserRating Score { get; set; } = default!;
         public UserData User { get; set; } = default!;
@@ -32,6 +37,7 @@ namespace Tortillapp_web.Pages
         public string userShow { get; set; } 
         public string picUserLog { get; set; }
         [BindProperty]
+        public ushort actualUserLog { get; set; }
         public string userShowLog { get; set; }
         [BindProperty]
         public ushort idRecipe { get; set; }
@@ -53,7 +59,7 @@ namespace Tortillapp_web.Pages
                 .Where(r => r.RecipeId == recipeinfo.RecipeId).ToListAsync();
             Step = await _context.RecipeSteps
                 .Where(r => r.RecipeId == recipeinfo.RecipeId).ToListAsync();
-            Tag = await _context.RecipeTags
+            var tags = await _context.RecipeTags
                 .Where(r => r.RecipeId == recipeinfo.RecipeId).ToListAsync();
 
             var scorerating = await _context.UserRatings.FirstOrDefaultAsync(s => s.RecipeId == id);
@@ -70,6 +76,7 @@ namespace Tortillapp_web.Pages
                 User = userinfo;
                 Score = scorerating;
                 idRecipe = RecipeInfo.RecipeId;
+                Tag = tags;
 
                 if (Score != null)
                 {
@@ -106,6 +113,15 @@ namespace Tortillapp_web.Pages
                 {
                     userShow = User.UserName;
                 }
+
+                if (Tag.Count > 0)
+                {
+                    foreach (var tag in Tag) {
+                        var nametags = await _context.Tags.FirstOrDefaultAsync(t => t.TagId == tag.TagId);
+                        NameTags.Add(nametags);
+                    }
+                    
+                }
             }
 
             string iUser = HttpContext.Session.GetString("Usuario");
@@ -127,11 +143,25 @@ namespace Tortillapp_web.Pages
                 if (UserLogged.ShowName != null)
                 {
                     userShowLog = UserLogged.ShowName;
+                    actualUserLog = UserLogged.UserId;
                 }
                 else
                 {
                     userShowLog = UserLogged.UserName;
+                    actualUserLog = UserLogged.UserId;
                 }
+
+                var userfavorite = await _context.UserFavorites.Where(r => r.RecipeId == RecipeInfo.RecipeId).ToListAsync();
+                foreach(var fav in userfavorite)
+                {
+                    if (fav.UserId == actualUserLog)
+                    {
+                        UserFavorites = fav;
+                    }
+                }
+                /*RecipeInfo = iRecipe.GroupBy(r => r.RecipeTitle)
+                            .Where(r => r.Count() != 0)
+                            .Select(r => r.First()).ToList();*/
             }
             else
             {
@@ -143,21 +173,57 @@ namespace Tortillapp_web.Pages
         }
 
         [HttpPost]
-        public IActionResult RecipeLikePost()
+        //public async Task<UserFavorite> OnPostAdd(ushort id_recipe, ushort id_user)
+        public async Task<IActionResult> OnPostAddFavorite()
         {
-            return Page();
+            if (idRecipe > 0 && actualUserLog > 0)
+            {
+                var recipe = await _context.RecipeInfos.FindAsync(idRecipe);
+                var user = await _context.UserDatas.FindAsync(actualUserLog);
+
+                if (user != null && recipe != null)
+                {
+                    _context.UserFavorites.Add(new UserFavorite
+                    {
+                        UserId = user.UserId,
+                        RecipeId = idRecipe,
+                        UserAdded = DateTime.Now
+                    });
+                }
+            }
+            await _context.SaveChangesAsync();
+
+            var favorite = await _context.UserFavorites.FindAsync(idRecipe, actualUserLog);
+            return Redirect("View?id=" + idRecipe);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> OnPostRemoveFavorite()
+        {
+            var userfavorite = await _context.UserFavorites.Where(r => r.RecipeId == idRecipe).ToListAsync();
+            foreach (var fav in userfavorite)
+            {
+                if (fav.UserId == actualUserLog)
+                {
+                    UserFavorites = fav;
+                }
+            }
+            _context.UserFavorites.Remove(UserFavorites);
+
+            await _context.SaveChangesAsync();
+            return Redirect("View?id=" + idRecipe);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPostAsync()
         {
-            if (userShowLog.Equals("Usuario"))
+            if (actualUserLog == 0)
             {
                 return RedirectToPage("Login");
             }
 
-            if (uscore > 0 && uscore < 5)
+            if (uscore > 0)
             {
                 var userComment = await _context.UserDatas.FirstOrDefaultAsync(u => u.UserName.Equals(userShowLog));
 

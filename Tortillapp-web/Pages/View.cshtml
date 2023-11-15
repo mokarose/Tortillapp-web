@@ -1,5 +1,5 @@
 ﻿@page
-@model RecipeModel
+@model Tortillapp_web.Pages.RecipeModel
 @{
     ViewData["Title"] = "Receta";
 }
@@ -13,6 +13,7 @@
                         <img src="~/pics/@Model.picRecipe" class="recipe_pic-wide" />
                     </div>
                 </div>
+
                 <div class="container" id="TitleSection">
                     <div class="row">
                         <div class="col-9 title-height">
@@ -22,11 +23,47 @@
                                         <h1 class="text-start">@Html.DisplayFor(r => r.RecipeInfo.RecipeTitle)</h1>
                                     </div>
                                 </div>
+                                
                                 <div class="col div_base"><!--Icono Me gusta-->
-                                    <div class="div_start">
-                                        <button type="submit" class="btn rounded btn_like" asp-page-handler="RecipeLike"><i class="bi bi-heart-fill"></i></button>
+                                    <div class="div_start" id="div-like">
+                                        @if (Model.actualUserLog == 0) {
+                                            <button class="btn rounded btn_like"><i class="bi bi-heart-fill"></i></button>
+                                        }
+                                        else
+                                        {
+                                            @if(Model.UserFavorites != null){
+                                                <!--<button class="btn rounded btn_like" onclick="Remove(Model.idRecipe,Model.actualUserLog)"><i class="bi bi-heart-fill"></i></button>-->
+                                                <form method="post">
+                                                    <input asp-for="actualUserLog" hidden />
+                                                    <input asp-for="idRecipe" hidden />
+                                                    <button type="submit" name="removeLike" class="btn rounded btn_like_this" asp-page-handler="RemoveFavorite"><i class="bi bi-heart-fill icons-like"></i></button>
+                                                </form>
+                                            }
+                                            else
+                                            {
+                                                <form method="post">
+                                                    <input asp-for="actualUserLog" hidden />
+                                                    <input asp-for="idRecipe" hidden />
+                                                    <button type="submit" name="addLike" class="btn rounded btn_like" asp-page-handler="AddFavorite"> <i class="bi bi-heart-fill"></i></button>
+                                                </form> 
+                                            }
+                                        }
                                     </div>
                                 </div>
+                                <script>
+                                    function Add(id_recipe, id_user)
+                                    {
+                                        $.ajax({
+                                            type: "POST",
+                                            data: { id_recipe: id_recipe, id_user: id_user },
+                                            url: 'View?id=' + id_recipe + '/Add',
+                                        }).done(function (result) {
+                                            var html = ""
+                                            html = '<button class="btn rounded btn_like_this" onclick="Remove(' + result.id_recipe + ',' + result.id_user + ')"><i class="bi bi-heart-fill icons-like"></i></button>'
+                                            document.getElementById("div-like").innerHTML = html;
+                                        });
+                                    }
+                                </script>
                             </div>
                         </div>
                         <div class="col title-height">
@@ -138,9 +175,9 @@
                             }
                             else
                             {
-                                @for (int i = 0; i < Model.Tag.Count; i++)
+                                @for (int i = 0; i < @Model.NameTags.Count(); i++)
                                 {
-                                    <a class="mb-2 tag_base tag_deco button_deco">@Html.DisplayFor(r => r.Tag[i].Tag.TagName)</a>
+                                    <a class="mb-2 tag_base tag_deco button_deco">@Html.DisplayFor(r => r.NameTags[i].TagName)</a>
                                 }
                             }
                         </div>
@@ -199,7 +236,6 @@
                 </div>
             </div>
         </div>
-       
     </div>
 </div>
 

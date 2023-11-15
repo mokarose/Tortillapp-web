@@ -11,19 +11,24 @@
                 <!--using (Html.BeginForm("","User",FormMethod.Get))
                 {}-->
                 <div class="container" id="UserSection" runat="server">
-                    <div class="mb-3">
+                    <div class="row mb-3">
                         <h1 class="text-start">Crear receta</h1>
                     </div>
-                    <div class="mb-3">
-                        <h2 class="text-start">@TempData.Peek("rname")</h2>
-                            
-                        <img />Imagen usuario
-                            
+                    <div class="row mb-3">
+                        <div class="container" >
+                            <!--Imagen usuario dueño-->
+                            <h2 class="text-center">@TempData.Peek("rname")</h2>
+                            <div class="div_base" style="height:80px;">
+                                <div class="div_interno">
+                                    <img src="~/pics/@Model.userpic" class="profile_pic profile_mini" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!--using (Html.BeginForm("GetTitleRecipe", "", FormMethod.Post))
                 {}-->
-                <form method="post" name="NewRecipe">
+                <form method="post" enctype="multipart/form-data" name="NewRecipe">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input asp-for="ruser" type="hidden" />
                     <div class="container" id="TitleSection" runat="server">
@@ -31,7 +36,6 @@
                             <div class="col-sm mb-3">
                                 <label class="form-label">Título de la receta</label>
                                 <input asp-for="rtitle" type="text" id="title" class="form-control" placeholder="Nombre receta" required>
-                                <label for="merror" class="form-label">@Model.merror</label>
                             </div>
                         </div>
                         <!--<div class="row text-center align-items-center justify-content-center">
@@ -75,7 +79,7 @@
                                     <table>
                                         <tr>
                                             <td><button type="button" class="btn_invisible botona" onclick="increment(this,0)"><i class="bi bi-plus icons-special"></i></button></td>
-                                            <td><input asp-for="Ingredient[0].IngredientAmount" type="text" value="0" class="form-control input-quanxi quantity "></td>
+                                            <td><input asp-for="Ingredient[0].IngredientAmount" type="text" value="0" class="form-control input-quanxi quantity"></td>
                                             <td><button type="button" class="btn_invisible botonb" onclick="decrement(this,0)"><i class="bi bi-dash icons-special"></i></button></td>
                                         </tr>
                                     </table>
@@ -86,7 +90,7 @@
                                 </div>
                                 <div class="col mb-3 col-des">
                                     <label class="form-label">Descripción ingrediente</label>
-                                    <input asp-for="Ingredient[0].IngredientName" type="text" class="form-control input-des" placeholder="Nombre ingrediente" />
+                                    <input asp-for="Ingredient[0].IngredientName" type="text" class="form-control input-des" placeholder="Nombre ingrediente" minlength="1" maxlenght="49" required/>
                                 </div>
                             </div>
                         </div>
@@ -96,9 +100,9 @@
                                     <label class="form-label">Cantidad</label>
                                     <table>
                                         <tr>
-                                            <td><button type="button" class="btn_invisible botona" onclick="increment(this,0)"><i class="bi bi-plus icons-special"></i></button></td>
-                                            <td><input asp-for="Ingredient[1].IngredientAmount" type="text" value="0" class="form-control input-quanxi quantity "></td>
-                                            <td><button type="button" class="btn_invisible botonb" onclick="decrement(this,0)"><i class="bi bi-dash icons-special"></i></button></td>
+                                            <td><button type="button" class="btn_invisible botona" onclick="increment(this,1)"><i class="bi bi-plus icons-special"></i></button></td>
+                                            <td><input asp-for="Ingredient[1].IngredientAmount" type="text" value="0" class="form-control input-quanxi quantity"></td>
+                                            <td><button type="button" class="btn_invisible botonb" onclick="decrement(this,1)"><i class="bi bi-dash icons-special"></i></button></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -108,7 +112,7 @@
                                 </div>
                                 <div class="col mb-3 col-des">
                                     <label class="form-label">Descripción ingrediente</label>
-                                    <input asp-for="Ingredient[1].IngredientName" type="text" class="form-control input-des" placeholder="Nombre ingrediente" />
+                                    <input asp-for="Ingredient[1].IngredientName" type="text" class="form-control input-des" placeholder="Nombre ingrediente" minlength="1" maxlenght="49" required/>
                                 </div>
                             </div>
                         </div>
@@ -118,9 +122,9 @@
                                     <label class="form-label">Cantidad</label>
                                     <table>
                                         <tr>
-                                            <td><button type="button" class="btn_invisible botona" onclick="increment(this,0)"><i class="bi bi-plus icons-special"></i></button></td>
-                                            <td><input asp-for="Ingredient[2].IngredientAmount" type="text" value="0" class="form-control input-quanxi quantity "></td>
-                                            <td><button type="button" class="btn_invisible botonb" onclick="decrement(this,0)"><i class="bi bi-dash icons-special"></i></button></td>
+                                            <td><button type="button" class="btn_invisible botona" onclick="increment(this,2)"><i class="bi bi-plus icons-special"></i></button></td>
+                                            <td><input asp-for="Ingredient[2].IngredientAmount" type="text" value="0" class="form-control input-quanxi quantity"></td>
+                                            <td><button type="button" class="btn_invisible botonb" onclick="decrement(this,2)"><i class="bi bi-dash icons-special"></i></button></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -130,7 +134,7 @@
                                 </div>
                                 <div class="col mb-3 col-des">
                                     <label class="form-label">Descripción ingrediente</label>
-                                    <input asp-for="Ingredient[2].IngredientName" type="text" class="form-control input-des" placeholder="Nombre ingrediente" />
+                                    <input asp-for="Ingredient[2].IngredientName" type="text" class="form-control input-des" placeholder="Nombre ingrediente" minlength="1" maxlenght="49" required/>
                                 </div>
                             </div>
                         </div>
@@ -167,7 +171,7 @@
                     </div>
                     <div class="row align-content-start">
                         <div class="col-sm mb-3">
-                            <textarea asp-for="rprep" class ="form-control" rows="10" placeholder="Pasos para preparar la receta..."></textarea>
+                            <textarea asp-for="rprep" class ="form-control" rows="10" placeholder="Pasos para preparar la receta..." required></textarea>
                         </div>
                     </div>
 
@@ -189,12 +193,22 @@
                             <h3 class="text-start fw-bold">Tags</h3>
                         </div>
                     </div>
-                    <div class="row align-content-start">
+                    <div class="row align-content-center align-items-center">
                         <div class="col mb-3">
                             <table>
                                 <tr>
-                                    <th><input asp-for="Tags" type="text" class="form-control" placeholder="etiqueta"></th>
-                                    <th><button type="button" class="btn btn_contra rounded-pill">Agregar</button></th>
+                                    <td><input asp-for="tagit[0]" type="text" class="form-control" placeholder="etiqueta"/></td>
+                                    <td><input asp-for="tagit[1]" type="text" class="form-control" placeholder="etiqueta"/></td>
+                                    <td><input asp-for="tagit[2]" type="text" class="form-control" placeholder="etiqueta"/></td>
+                                    <td><input asp-for="tagit[3]" type="text" class="form-control" placeholder="etiqueta"/></td>
+                                    <!--<th><input asp-for="Tags" type="text" class="form-control" placeholder="etiqueta"></th>-->
+                                    <!--<th><button type="button" class="btn btn_contra rounded-pill">Agregar</button></th>-->
+                                </tr>
+                                <tr>
+                                    <td><input asp-for="tagit[4]" type="text" class="form-control" placeholder="etiqueta"/></td>
+                                    <td><input asp-for="tagit[5]" type="text" class="form-control" placeholder="etiqueta"/></td>
+                                    <td><input asp-for="tagit[6]" type="text" class="form-control" placeholder="etiqueta"/></td>
+                                    <td><input asp-for="tagit[7]" type="text" class="form-control" placeholder="etiqueta"/></td>
                                 </tr>
                             </table>
                         </div>
@@ -207,14 +221,15 @@
                 <div class="container" id="SubmitSection" runat="server">
                     <div class="row text-center align-items-center justify-content-center">
                         <div class="mb-3 div_base">
-                            <img id="imgSelect" src="/pics/@Model.picto" class="btn_base rounded-photo w-50 text-center" />
+                            <img id="imgRecipeSelect" src="/pics/@Model.picto" class="btn_base rounded-photo w-50 text-center" />
                                 <div class="div_interno text-white">Subir una foto <i class="bi bi-camera"></i></div>
                             <br />
-                            <input asp-for="image" type="file" accept="image/*" class="form-control btn_base recipe_btn w-50" onchange="displaySelectedImage(event, 'imgSelect')" />
+                                <input asp-for="rimage" type="file" accept="image/*" class="form-control btn_base recipe_btn w-50" onchange="displaySelectedImage(event, 'imgRecipeSelect')" />
                         </div>
                         <div class="mb-3">
                             <button type="button" class="btn btn_blanco w-50 rounded-pill" id="preview">Vista Previa<br /><i class="bi bi-eye icons-special"></i></button>
                         </div>
+                        <label for="rmerror" class="form-label text-warning">@Model.rmerror</label>
                         <div class="mb-3">
                             <input type="submit" class="btn btn_base w-50 rounded-pill" value="Publicar" />
                         </div>

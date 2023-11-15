@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Google.Protobuf.WellKnownTypes;
 using Microsoft.AspNetCore.Mvc;
@@ -28,8 +29,10 @@ namespace Tortillapp_web.Pages
         }
 
         public IList<RecipeInfo> RecipeInfo { get; set; } = default!;
-        //public IList<RecipeIngredient> Ingredient { get; set; } = default!;
-        //public Query[] { get; set; } = default!;
+        public List<string> rpicto { get; set; } = new List<string>();
+        public List<float> rscore { get; set; } = new List<float>();
+        public List<string> tags { get; set; } = new List<string>();
+        List<List<string>> listOfLists = new List<List<string>>();
 
         public async Task<IActionResult> OnGetAsync(string? search)
         {
@@ -76,10 +79,91 @@ namespace Tortillapp_web.Pages
                         RecipeInfo = iRecipe.GroupBy(r => r.RecipeTitle)
                             .Where(r => r.Count() != 0)
                             .Select(r => r.First()).ToList();
+
+                        foreach (var recipe in RecipeInfo)
+                        {
+                            rscore.Add(GetRecipeRating(recipe.RecipeId));
+                            
+                            if (recipe.RecipePic != null)
+                            {
+                                rpicto.Add(Load(recipe.RecipePic));
+                            }
+                            else
+                            {
+                                rpicto.Add("tortilla-basic-cuadro.jpg");
+                            }
+
+                            var recipeTags = await _context.RecipeTags.
+                                Where(t => t.RecipeId == recipe.RecipeId).ToListAsync();
+
+                            if (recipeTags != null)
+                            {
+                                foreach (var tag in recipeTags)
+                                {
+                                    var thistag = _context.Tags.FirstOrDefault(t => t.TagId == tag.TagId);
+                                    tags.Add(thistag.TagName);
+                                }
+                            }
+                            listOfLists.Add(tags);
+                        }
+
+                    }
+                }
+                else
+                {
+                    foreach (var recipe in RecipeInfo)
+                    {
+                        rscore.Add(GetRecipeRating(recipe.RecipeId));
+
+                        if (recipe.RecipePic != null)
+                        {
+                            rpicto.Add(Load(recipe.RecipePic));
+                        }
+                        else
+                        {
+                            rpicto.Add("tortilla-basic-cuadro.jpg");
+                        }
+                        var recipeTags = await _context.RecipeTags.
+                             Where(t => t.RecipeId == recipe.RecipeId).ToListAsync();
+
+                        if (recipeTags != null)
+                        {
+                            foreach (var tag in recipeTags)
+                            {
+                                var thistag = _context.Tags.FirstOrDefault(t => t.TagId == tag.TagId);
+                                tags.Add(thistag.TagName);
+                            }
+                        }
+                        listOfLists.Add(tags);
                     }
                 }
             }
             return Page();
+        }
+
+        public float GetRecipeRating(ushort id_recipe)
+        {
+            float sumScore = 0;
+            float scoreTotal = 0;
+
+            var scoreall = _context.Scores
+                .Where(r => r.Title == id_recipe.ToString()).ToList();
+
+            if (scoreall.Count() > 0)
+            {
+                for (int i = 0; i < scoreall.Count(); i++)
+                {
+                    sumScore += scoreall[i].ScorePoints;
+                }
+                scoreTotal = sumScore / scoreall.Count();
+            }
+
+            return scoreTotal;
+        }
+
+        public string Load(byte[] data)
+        {
+            return Encoding.UTF8.GetString(data);
         }
 
         /*public static bool ContainsAny(this string haystack, params string[] needles)

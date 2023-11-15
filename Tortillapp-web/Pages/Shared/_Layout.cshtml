@@ -63,7 +63,7 @@ else { isLogged = 0; }
                             <ul class="navbar-nav">
                                 <!--aria-labelledby="dropdownMenu">-->
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" asp-page="/Index" id="navbarDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">@actualUser</a>
+                                    <a class="nav-link dropdown-toggle" asp-page="/Index" id="navbarDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="~/pics/@userImage" class="profile_pic profile_mini" /></a>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownLink">
                                         <li><a class="dropdown-item" asp-page="MyProfile">Mi perfil</a></li>
                                         <li><a class="dropdown-item" asp-page="/Admin/ViewUsers">Usuarios registrados</a></li>
@@ -109,11 +109,7 @@ else { isLogged = 0; }
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - Tortillapp - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
+    @await Html.PartialAsync("_Footer")
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
