@@ -94,7 +94,7 @@ function adder(boton) {
     $('#point').append(html);
 }
 
-function showIng(boton, pos) {
+/*function show(boton, pos) {
     var x = document.getElementById("ingredient_" + pos);
     let pos;
     pos = x.value++ 
@@ -103,7 +103,7 @@ function showIng(boton, pos) {
     } else {
         x.style.display = "none";
     }
-}
+}*/
 
 function displaySelectedImage(event, elementId) {
     const selectedImage = document.getElementById(elementId);

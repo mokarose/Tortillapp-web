@@ -7,24 +7,41 @@ using System.Collections.Generic;
 using Org.BouncyCastle.Utilities.Collections;
 using Tortillapp_web.Data;
 using Tortillapp_web.Model;
+using System.Text;
 
 namespace Tortillapp_web.Pages.Receta
 {
     public class EditModel : PageModel
     {
         private readonly Tortillapp_web.Data.tortillaContext _context;
+        private IWebHostEnvironment _environment;
 
-        public EditModel(Tortillapp_web.Data.tortillaContext context)
+        public EditModel(Tortillapp_web.Data.tortillaContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
+        }
+
+        public partial class _Ingredient //Modelo para los ingredientes
+        {
+            public string? IngredientName { get; set; }
+            public short IngredientAmount { get; set; }
+            public string? IngredientUnit { get; set; }
         }
 
         [BindProperty]
         public RecipeInfo Recipe { get; set; } = default!;
-        [BindProperty]
-        public IList<RecipeStep> Step { get; set; } = default!;
+        public IList<RecipeStep> RecipeStep { get; set; } = default!;
         [BindProperty]
         public IList<RecipeIngredient> Ingredient { get; set; } = default!;
+        public IList<Tag> Tags { get; set; } = default!;
+        public IList<RecipeTag> RecipeTags { get; set; } = default!;
+        [BindProperty]
+        public string RecipePrep { get; set; }
+        public string[] TagIt;
+        public string picto { get; set; }
+        public IFormFile rimage { get; set; }
+
 
         List<string> units = new List<string>()
         {
@@ -65,20 +82,57 @@ namespace Tortillapp_web.Pages.Receta
             Recipe = recipeinfo;
             Ingredient = await _context.RecipeIngredients
                 .Where(r => r.RecipeId == recipeinfo.RecipeId).ToListAsync();
-            Step = await _context.RecipeSteps
+            var steps = await _context.RecipeSteps
                 .Where(r => r.RecipeId == recipeinfo.RecipeId).ToListAsync();
+
+            RecipePrep = GetSteps(steps);
 
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            byte[]? bytes = null;
+
+            var recipeToUpdate = await _context.RecipeInfos.FindAsync(Recipe.RecipeId);
+
+            if (recipeToUpdate == null)
             {
-                return Page();
+                return BadRequest();
             }
 
-            _context.Attach(Recipe).State = EntityState.Modified;
+            if (rimage != null)
+            {
+                bytes = Upload(rimage);
+                if (bytes != null)
+                {
+                    if (recipeToUpdate.RecipePic != null)
+                    {
+                        Delete(Load(recipeToUpdate.RecipePic));
+                    }
+                    Recipe.RecipePic = bytes;
+                }
+            }
+            else
+            {
+                Recipe.RecipePic = recipeToUpdate.RecipePic;
+            }
+
+            Recipe.RecipeTitle = recipeToUpdate.RecipeTitle;
+            Recipe.RecipeTime = recipeToUpdate.RecipeTime;
+            Recipe.RecipePortion = recipeToUpdate.RecipePortion;
+            Recipe.RecipeTips = recipeToUpdate.RecipeTips;
+            Recipe.Published = DateTime.Now;
+
+            _context.Entry(recipeToUpdate).CurrentValues.SetValues(Recipe);
+            _context.Entry(recipeToUpdate).State = EntityState.Modified;
+            /*if (!ModelState.IsValid)
+            {
+                return Page();
+            }*/
+
+            //_context.Entry()
+            //_context.Attach(Recipe).State = EntityState.Modified;
 
             try
             {
@@ -96,12 +150,119 @@ namespace Tortillapp_web.Pages.Receta
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("Index", "");
         }
 
         private bool RecipeInfoExists(ushort id)
         {
           return (_context.RecipeInfos?.Any(e => e.RecipeId == id)).GetValueOrDefault();
+        }
+
+        private string GetSteps(IList<RecipeStep> recipeStep)
+        {
+            string allsteps = "";
+            foreach(var step in recipeStep)
+            {
+                allsteps += step.StepDescrp + "\n";
+            }
+            return allsteps;
+        }
+
+        void UpdateSteps(string Step, ushort ID)
+        {
+            string[] stepsi;
+            byte pos = 1;
+
+            var steps = _context.RecipeSteps
+                .Where(r => r.RecipeId == ID).ToList();
+
+            RecipeStep = steps;
+
+            if (Step != null)
+            {
+                stepsi = Step.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string step in stepsi)
+                {
+                    if (RecipeStep[pos].StepPos == pos)
+                    {
+                        RecipeStep[pos].StepDescrp = step;
+                    }
+                    else
+                    {
+                        _context.RecipeSteps.Add(new RecipeStep
+                        {
+                            RecipeId = ID,
+                            StepPos = pos,
+                            StepDescrp = step
+                        });
+                    }
+                    pos++;
+                    _context.SaveChanges();
+                }
+            }
+        }
+
+        public byte[] Upload(IFormFile image)
+        {
+            string wwwPath = this._environment.WebRootPath;
+            byte[] data = null;
+            string filepath = null;
+
+            string path = Path.Combine(wwwPath, "pics");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            string filename = Path.GetFileName(image.FileName);
+
+            using (FileStream stream = new FileStream(Path.Combine(path, filename), FileMode.Create))
+            {
+                if (stream.Length <= 5242880)
+                {
+                    image.CopyTo(stream);
+                }
+                else
+                {
+                    TempData["merror"] = "El archivo es muy grande (5MB max)";
+                }
+            }
+
+            bool exists = System.IO.File.Exists(Path.Combine(path, filename));
+            if (exists)
+            {
+                filepath = System.Guid.NewGuid().ToString();
+                System.IO.File.Move(Path.Combine(path, filename), Path.Combine(path, Path.ChangeExtension(filepath, ".jpg")));
+                System.IO.File.Delete(Path.Combine(path, filename));
+            }
+            else
+            {
+                TempData["merror"] = "Hay un problema para copiar la imagen";
+            }
+
+            using (FileStream file = new FileStream(Path.Combine(path, Path.ChangeExtension(filepath, ".jpg")), FileMode.Create))
+            {
+                image.CopyTo(file);
+
+                using (MemoryStream memory = new MemoryStream())
+                {
+                    file.Write(memory.ToArray());
+                    data = Encoding.ASCII.GetBytes(Path.ChangeExtension(filepath, ".jpg"));
+                }
+            }
+            return data;
+        }
+
+        public string Load(byte[] data)
+        {
+            return Encoding.UTF8.GetString(data);
+        }
+
+        public void Delete(string filename)
+        {
+            string wwwPath = this._environment.WebRootPath;
+            string path = Path.Combine(wwwPath, "pics");
+            System.IO.File.Delete(Path.Combine(path, filename));
         }
 
     }
