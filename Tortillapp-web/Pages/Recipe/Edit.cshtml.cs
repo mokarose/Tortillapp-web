@@ -38,7 +38,9 @@ namespace Tortillapp_web.Pages.Receta
         public IList<RecipeTag> RecipeTags { get; set; } = default!;
         [BindProperty]
         public string RecipePrep { get; set; }
-        public string[] TagIt;
+        [BindProperty]
+        public string[] TagIt { get; set; }
+        //public List<string> TagIt = new List<string>();
         public string picto { get; set; }
         public IFormFile rimage { get; set; }
 
@@ -124,6 +126,8 @@ namespace Tortillapp_web.Pages.Receta
             Recipe.RecipeTips = recipeToUpdate.RecipeTips;
             Recipe.Published = DateTime.Now;
 
+            AddTags(recipeToUpdate.RecipeId);
+
             _context.Entry(recipeToUpdate).CurrentValues.SetValues(Recipe);
             _context.Entry(recipeToUpdate).State = EntityState.Modified;
             /*if (!ModelState.IsValid)
@@ -166,6 +170,47 @@ namespace Tortillapp_web.Pages.Receta
                 allsteps += step.StepDescrp + "\n";
             }
             return allsteps;
+        }
+        void AddTags(ushort ID)
+        {
+            if (TagIt != null)
+            {
+                foreach (string tag in TagIt)
+                {
+                    if (tag != null)
+                    {
+                        var atags = _context.Tags.FirstOrDefault(r => r.TagName == tag);
+                        if (atags != null)
+                        {
+                            _context.RecipeTags.Add(new RecipeTag
+                            {
+                                RecipeId = ID,
+                                TagId = atags.TagId,
+                                TagAdded = DateTime.Now
+                            });
+                        }
+                        else
+                        {
+                            _context.Tags.Add(new Tag
+                            {
+                                TagName = tag,
+                                TagCreated = DateTime.Now
+                            });
+
+                            _context.SaveChanges();
+                            ushort last_insert = _context.Tags.Max(t => t.TagId);
+
+                            _context.RecipeTags.Add(new RecipeTag
+                            {
+                                RecipeId = ID,
+                                TagId = last_insert,
+                                TagAdded = DateTime.Now
+                            });
+                        }
+                        _context.SaveChanges();
+                    }
+                }
+            }
         }
 
         void UpdateSteps(string Step, ushort ID)
