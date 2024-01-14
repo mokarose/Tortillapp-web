@@ -1,18 +1,21 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Sockets;
+using System.Text;
 using Tortillapp_web.Data;
 using Tortillapp_web.Model;
 
-namespace Tortillapp_web.Controllers
+namespace Tortillapp_web.Control
 {
     public class HomeController : Controller
     {
         private readonly ISession session;
+        private readonly Tortillapp_web.Data.tortillaContext _context;
 
-        public HomeController(IHttpContextAccessor httpContextAccessor)
+        public HomeController(IHttpContextAccessor httpContextAccessor, tortillaContext context)
         {
             this.session = httpContextAccessor.HttpContext.Session;
+            _context = context;
         }
 
         // GET: HomeController
@@ -91,5 +94,14 @@ namespace Tortillapp_web.Controllers
                 return View();
             }
         }
+
+        /***public ActionResult GetImage()
+        {
+            string user = HttpContext.Session.GetString("Usuario");
+            var _user = _context.UserDatas.FirstOrDefault(u => u.UserName == user);
+            ViewBag["ShowPic"] = Encoding.UTF8.GetString(_user.ShowPic);
+
+            return View();
+        }***/
     }
 }

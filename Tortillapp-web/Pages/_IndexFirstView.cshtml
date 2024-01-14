@@ -1,27 +1,28 @@
 ﻿@model IndexModel
-
+@{int iterator = 0;}
 @foreach (var item in Model.RecipeInfo)
 {
     <div class="block_v container">
         <div class="row">
             <div class="img-fluid">
-                @if (item.RecipePic == null)
-                {
-                    <img src="~/pics/tortilla-basic-cuadro.jpg" class="recipe_pic" />
-                }
-                else
-                {
-                    <img src="@Html.DisplayFor(modelItem => item.RecipePic)" class="recipe_pic" />
-                }
-                
+                <img src="~/pics/@Model.rpicto[iterator]" class="recipe_pic" />
             </div>
         </div>
         <div class="row">
             <div class="row">
-                <a asp-page="View" asp-route-id="@item?.RecipeId">@Html.DisplayFor(modelItem => item.RecipeTitle)</a>
+                <a asp-page="View" class="text-center link-white" asp-route-id="@item?.RecipeId">@Html.DisplayFor(modelItem => item.RecipeTitle)</a>
             </div>
             <div class="row">
-                #rating
+                <div class="text-white text-center">
+                    @for (float i = 0; i < Model.rscore[iterator]; i++)
+                    {
+                        <i class="bi bi-star-fill icons-view"></i>
+                    }
+                    @for (float j = Model.rscore[iterator]; j < 5; j++)
+                    {
+                        <i class="bi bi-star icons-view"></i>
+                    }
+                </div>
             </div>
             <div class="row">
                 <div class="container">
@@ -31,15 +32,15 @@
                     }
                     else
                     {
-                        //for (int i = 0; i < item.RecipeTags.Count; i++)
                         @foreach (var tag in item.RecipeTags)
                         {
-                            <a class="mb-2 tag_base tag_deco button_deco">@Html.DisplayFor(modelItem => tag.Tag.TagName)</a>
+                            <label class="mb-2 tag_base tag_deco tag_recipe button_deco">@Html.DisplayFor(modelItem => tag.Tag.TagName)</label>
                         }
                     }
                 </div>
             </div>
         </div>
     </div>
+    iterator++;
 }
 

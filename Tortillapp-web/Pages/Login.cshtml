@@ -22,7 +22,7 @@
 				<div class="row align-content-start">
 					<div class="col-sm mb-3">
 						<label asp-for="upass" class="form-label">Contraseña</label>
-						<input asp-for="upass" type="password" class="form-control" id="upass" placeholder="********" required>
+						<input asp-for="upass" type="password" class="form-control" id="upass" placeholder="********" minlength="8" maxlenght="16" required>
 					</div>
 				</div>
 				<label for="merror" class="form-label">@Model.merror</label>
@@ -32,7 +32,7 @@
 						<label asp-for="reme" class="form-check-label">Recuédarme</label>
 					</div>
 					<div class="col-sm mb-3">
-						<label for="forget" class=""><a href="#">¿Olvidaste tu contraseña?</a></label><!--Agregar recuperación-->
+						<label for="forget" class=""><a href="/Reset">¿Olvidaste tu contraseña?</a></label><!--Agregar recuperación-->
 					</div>
 				</div>
 				<div class="row text-center align-items-center justify-content-center">

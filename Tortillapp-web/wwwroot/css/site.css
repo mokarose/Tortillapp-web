@@ -24,13 +24,13 @@ html {
 
 @media screen and (min-width: 769px) and (max-width: 1279px) {
     html {
-        font-size: 16px;
+        font-size: 14px;
     }
 }
 
 @media screen and (max-width: 768px) {
   html {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 
@@ -51,6 +51,58 @@ li::marker {
     color: var(--verde);
 }
 
+i {
+    color: var(--blanco_base);
+}
+
+.icons-special {
+    color: var(--azul_verde);
+}
+
+.icons-view {
+    color: var(--amarillo);
+}
+
+.icons-like {
+    color: var(--tortilla);
+}
+
+.icons-main {
+    color: var(--azul_gris);
+}
+
+.col-quanxi {
+    width: 100%;
+    max-width: 160px;
+}
+
+.col-unit {
+    width: 100%;
+    max-width: 200px;
+}
+
+@media screen and (max-width: 990px) {
+    .col-des {
+        width: 200px;
+        min-width: 250px;
+    }
+
+    .input-des {
+        width: 100%;
+        min-width: 200px;
+    }
+}
+
+.input-quanxi {
+    width: 100%;
+    max-width: 70px;
+}
+
+.input-unit {
+    width: 100%;
+    max-width: 160px;
+}
+
 .header_sitio {
     background-color: var(--azul_gris);
     background-repeat: repeat-x;
@@ -60,11 +112,35 @@ li::marker {
     width: 100%;*/
 }
 
+.footer_sitio {
+    background-color: var(--azul_gris);
+    background-repeat: repeat-x;
+    position: absolute;
+    width: 100%;
+    height: 200px;
+}
+
+.div_fixedh {
+    height: 480px;
+    width: 100%;
+}
+
+.div_comment {
+    height: 60px;
+}
+
 .div_translate {
     position: absolute;
     top: 100%;
     left: 20%;
     transform: translate(-20%, -100%);
+}
+
+.div_start {
+    position: absolute;
+    top: 50%;
+    left: 0%;
+    transform: translate(0%,50%);
 }
 
 .div_base {
@@ -77,6 +153,17 @@ li::marker {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.div_interno_w {
+    width: 500px;
+}
+
+@media screen and (max-width: 768px) {
+    .div_interno_w {
+        width: 250px;
+    }
+}
+
 
 @media screen and (max-width: 768px) {
     .div_translate {
@@ -145,6 +232,22 @@ li::marker {
     border-color: transparent;
 }
 
+.btn_like {
+    background-color: var(--tortilla);
+    border-color: var(--amarillo);
+    width: 42px;
+    height: 42px;
+    border-radius: 50% !important;
+}
+
+.btn_like_this {
+    background-color: var(--blanco_base);
+    border-color: var(--tortilla);
+    width: 42px;
+    height: 42px;
+    border-radius: 50% !important;
+}
+
 .tag_base {
     background-color: var(--blanco_base);
     color: var(--verde);
@@ -155,6 +258,10 @@ li::marker {
     border-radius: 1.6rem!important;
     padding-left: 1.2rem;
     padding-right: 1.2rem;
+}
+
+.tag_recipe {
+    font-size: 11px;
 }
 
 .button_deco {
@@ -196,9 +303,72 @@ li::marker {
     padding-left: 0;
 }
 
+.form-profile {
+    display: flex;
+}
+
+@media screen and (max-width: 768px) {
+    .form-profile {
+        display: initial;
+    }
+}
+
 .recipe_pic {
     height: 250px;
-    width: 99%;
+    width: 100%;
+}
+
+.recipe_pic-wide {
+    height: 384px;
+    width: 100%;
+}
+
+.title-height {
+    height: 100px;
+}
+
+.link-white {
+    color: var(--blanco_base);
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.unistyle {
+    all: unset;
+}
+
+@media screen and (max-width: 768px) {
+    .title-height {
+        width: 100%;
+    }
+
+    .title-width {
+        width: 250px;
+    }
+}
+
+.profile_pic {
+    height: 160px;
+    width: 160px;
+    border: solid;
+    border-color: var(--verde_limon);
+    border-radius: 50%;
+}
+
+.profile_mini {
+    height: 42px;
+    width: 42px;
+}
+
+.profile_btn {
+    /*position:absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: transparent;*/
+    width: 335px;
+    display: initial;
+    font-size: 14px;
 }
 
 .grid_recipe {
@@ -206,6 +376,12 @@ li::marker {
     grid-template-columns: 2fr 2fr;
     grid-gap: 30px;
     margin-top: 25px;
+}
+
+.recipe_btn {
+    min-width: 300px;
+    display: initial;
+    font-size: 14px;
 }
 
 .block_v {
@@ -217,13 +393,35 @@ li::marker {
     box-shadow: 0px 3px 25px rgba(0,0,0,30%);
 }
 
+.block_user {
+    background-color: var(--verde);
+    color: white;
+    height: 260px;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0px 3px 25px rgba(0,0,0,30%);
+}
+
+.recipe_pic_user {
+    height: 100%;
+    width: 12rem;
+}
+
 .block-minmax {
     grid-template-columns: repeat(3,minmax(max-content, 100%));
+}
+
+.block-minmax-user {
+    grid-template-columns: repeat(2,minmax(max-content, 100%));
 }
 
 @media screen and (max-width: 768px) {
     .block-minmax {
         grid-template-columns: repeat(1,minmax(min-content, 100%));
+    }
+
+    .block-minmax-user {
+        grid-template-columns: repeat(1,minmax(max-content, 100%));
     }
 
     .block_v {
@@ -244,6 +442,11 @@ li::marker {
     }
 }
 
+.recipe_pic {
+    height: 250px;
+    width: 20rem;
+}
+
 .head_pic {
     background-image: url('/pics/emily-simenauer-IlAPq27FxZ0-unsplash.jpg');
     background-repeat: no-repeat;
@@ -253,13 +456,19 @@ li::marker {
     position: static;
 }
 
+@media screen and (max-width: 768px) {
+    .head_pic {
+        height: 20rem;
+    }
+}
+
 .search_bar {
     background-color: var(--blanco_base);
     box-sizing: border-box;
     margin-bottom: 25px;
     width: 85%;
     max-width: 1255px;
-    max-height: 250px;
+    max-height: 220px;
     margin: 0 auto;
     border-radius: 25px 25px 25px 25px;
     padding: 19px 7px 97px 7px;
@@ -344,16 +553,13 @@ li::marker {
     margin: 5px;
 }
 
-.icons-view {
-    color: var(--amarillo);
-}
-
 .index-tags {
     height: 90px;
     width: 80%;
     margin: 25px;
 }
 
-.icon-main {
-    color: white;
+.rounded-photo {
+    height: 220px;
+    border-radius: 10px;
 }

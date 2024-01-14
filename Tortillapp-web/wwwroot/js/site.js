@@ -3,9 +3,14 @@
 
 // Write your JavaScript code.
 
+function addLabel(label) {
+    
+}
+
 function increment(boton, pos) {
     const botones = document.querySelector(".buttons");
     const vista = document.getElementById("Ingredient_" + pos + "__IngredientAmount");
+    //Ingredients_0__IngredientAmount
     let valor;
     boton.onclick = (e) => {
         const control = e.target;
@@ -39,7 +44,18 @@ function decrementer() {
     var i = document.getElementById("portion");
     if (i.value > 0)
         i.value--;
+}
 
+function incrementerScore() {
+    var i = document.getElementById("score");
+    if (i.value < 5)
+        i.value++;
+}
+
+function decrementerScore() {
+    var i = document.getElementById("score");
+    if (i.value > 0)
+        i.value--;
 }
 
 //< input type = "radio" id = "rdBtn" onclick = "if(document.getElementById('rdBtn').checked===true){document.getElementById('texto').style.display ='';}else{document.getElementById('texto').style.display = 'none';}" />
@@ -76,6 +92,32 @@ function adder(boton) {
         '</td></tr>';
 
     $('#point').append(html);
+}
+
+/*function show(boton, pos) {
+    var x = document.getElementById("ingredient_" + pos);
+    let pos;
+    pos = x.value++ 
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}*/
+
+function displaySelectedImage(event, elementId) {
+    const selectedImage = document.getElementById(elementId);
+    const fileInput = event.target;
+
+    if (fileInput.files && fileInput.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            selectedImage.src = e.target.result;
+        };
+
+        reader.readAsDataURL(fileInput.files[0]);
+    }
 }
 
 function titleDisplay() {

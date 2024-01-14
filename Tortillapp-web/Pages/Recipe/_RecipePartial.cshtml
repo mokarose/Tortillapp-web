@@ -9,7 +9,7 @@
                 <div>
                     <div class="row">
                         <div class="col-2"><button type="button" class="btn_invisible botona" onclick="increment(this,@i)"><i class="bi bi-plus"></i></button></div>
-                        <div class="col-4">
+                        <div class="col-5">
                             @Html.TextBoxFor(r => r.Ingredient[i].IngredientAmount, new { @class = "form-control"})
                         </div>
                         <div class="col-2"><button type="button" class="btn_invisible botonb" onclick="decrement(this,@i)"><i class="bi bi-dash"></i></button></div>
@@ -25,6 +25,6 @@
                 @Html.TextBoxFor(r => r.Ingredient[i].IngredientName, new { @class = "form-control"})
             </div>
         </div>
-        <a href="#" onclick="$(this).parent().remove();">Eliminar</a>
+        <!--<a href="#" onclick="$(this).parent().remove()">Eliminar</a>-->
     </div>
 }

@@ -16,5 +16,11 @@ namespace Tortillapp_web.Control
             return View(ingredient);
         }
 
+        public IActionResult LikeRecipe(RecipeInfo recipeInfo)
+        {
+            return View(recipeInfo);
+        }
+
+
     }
 }

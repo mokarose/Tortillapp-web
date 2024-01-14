@@ -23,28 +23,29 @@
                 <div class="row align-content-start">
                     <div class="col-sm mb-3">
                         <label class="form-label">Dirección de correo</label>
-                        <input asp-for="umail" type="email" class="form-control" placeholder="correo@example.com">
+                        <input asp-for="umail" type="email" class="form-control" placeholder="correo@example.com" required>
                     </div>
                 </div>
                 <div class="row align-content-start">
                     <div class="col-sm mb-3">
                         <label class="form-label">Nombre de usuario</label>
-                        <input asp-for="uname" type="text" class="form-control" placeholder="usuario">
+                        <input asp-for="uname" type="text" class="form-control" placeholder="usuario" required>
                     </div>
                 </div>
                 <div class="row align-content-start">
                     <div class="col-sm mb-3">
                         <label class="form-label">Contraseña</label>
-                        <input asp-for="pass1" type="password" class="form-control" placeholder="********">
+                        <input asp-for="pass1" type="password" class="form-control" placeholder="********" minlength="8" maxlenght="16" required>
                     </div>
                 </div>
                 <div class="row align-content-start">
                     <div class="col-sm mb-3">
                         <label class="form-label">Confirma contraseña</label>
-                        <input asp-for="pass2" type="password" class="form-control" placeholder="********">
+                        <input asp-for="pass2" type="password" class="form-control" placeholder="********" minlength="8" maxlenght="16" required>
                     </div>
                 </div>
-                <label for="merror" class="form-label">@Model.merror</label>
+                <label for="merror" class="form-label text-danger">@Model.merror</label>
+                
                 <div class="mb-3">
                     <div class="row text-center align-items-center justify-content-center">
                         <button type="submit" class="btn btn_base w-50 rounded-pill">Enviar</button>

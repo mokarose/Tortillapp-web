@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Tortillapp_web.Data;
 using Tortillapp_web.Model;
+using Microsoft.AspNetCore.Authorization;
+using System.Text;
 
 namespace Tortillapp_web.Pages.Receta
 {
@@ -20,14 +22,17 @@ namespace Tortillapp_web.Pages.Receta
         }
 
         public IList<RecipeInfo> RecipeInfo { get; set; } = default!;
+        public List<string> rpicto { get; set; } = new List<string>();
+        public List<float> rscore { get; set; } = new List<float>();
 
-        public async Task OnGetAsync()
+        [HttpGet]
+        public async Task<IActionResult> OnGetAsync()
         {
             string iUser = HttpContext.Session.GetString("Usuario");
 
             if (iUser == null)
             {
-                NotFound();
+                return NotFound();
             }
             
             if (_context.RecipeInfos != null)
@@ -36,6 +41,45 @@ namespace Tortillapp_web.Pages.Receta
                 //.Include(r => r.User).ToListAsync();
                 .Where(r => r.User.UserName == iUser).ToListAsync();
             }
+
+            foreach (var recipeInfo in RecipeInfo)
+            {
+                rscore.Add(GetRecipeRating(recipeInfo.RecipeId));
+                if (recipeInfo.RecipePic != null)
+                {
+                    rpicto.Add(Load(recipeInfo.RecipePic));
+                }
+                else
+                {
+                    rpicto.Add("tortilla-basic-cuadro.jpg");
+                }
+            }
+
+            return Page();
+        }
+        public float GetRecipeRating(ushort id_recipe)
+        {
+            float sumScore = 0;
+            float scoreTotal = 0;
+
+            var scoreall = _context.Scores
+                .Where(r => r.Title == id_recipe.ToString()).ToList();
+
+            if (scoreall.Count() > 0)
+            {
+                for (int i = 0; i < scoreall.Count(); i++)
+                {
+                    sumScore += scoreall[i].ScorePoints;
+                }
+                scoreTotal = sumScore / scoreall.Count();
+            }
+
+            return scoreTotal;
+        }
+
+        public string Load(byte[] data)
+        {
+            return Encoding.UTF8.GetString(data);
         }
     }
 }
