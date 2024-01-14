@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Tortillapp_web.Pages
+namespace Tortillapp_web.Pages.Shared
 {
-    public class NewRecipeModel : PageModel
+    public class _FooterModel : PageModel
     {
         public void OnGet()
         {

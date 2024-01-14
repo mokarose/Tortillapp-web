@@ -1,0 +1,40 @@
+﻿@page
+@model Tortillapp_web.Pages.ResetModel
+@{
+    ViewData["Title"] = "Cambia tu contraseña";
+}
+
+
+<div class="container bg-white div_fixedh div_base">
+    <div class="div_interno div_interno_w">
+        <form method="post">
+            <div class="row mt-3">
+                <div class="col-sm">
+                    <h2 class="text-start">Recupera tu cuenta</h2>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-sm">
+                    <div class="row align-content-start">
+                        <div class="col-sm mb-3">
+                            <label class="form-label">Agrega tu correo</label>
+                            <input asp-for="umail" type="email" class="form-control" placeholder="correo@example.com">
+                        </div>
+                    </div>
+                    <label for="merror" class="form-label text-danger">@Model.merror</label>
+                    <label for="mesdage" class="form-label text-danger">@TempData["message"]</label>
+                    <div class="mb-3">
+                        <div class="row text-center align-items-center justify-content-center">
+                            <div class="col">
+                                <input type="submit" name="btnCancel" value="Cancelar" class="btn btn_contra w-75 rounded-pill" asp-page-handler="BackToIndex" />
+                            </div>
+                            <div class="col">
+                                <button type="submit" class="btn btn_base w-75 rounded-pill">Siguiente</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

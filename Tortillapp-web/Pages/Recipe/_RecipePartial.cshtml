@@ -1,0 +1,30 @@
+﻿@model Tortillapp_web.Pages.Receta.EditModel
+
+@for (int i = 0; i < Model.Ingredient.Count; i++)
+{
+    <div class="container">
+        <div class="row align-content-start">
+            <div class="col-3 mb-3">
+                <label class="form-label">Cantidad</label>
+                <div>
+                    <div class="row">
+                        <div class="col-2"><button type="button" class="btn_invisible botona" onclick="increment(this,@i)"><i class="bi bi-plus"></i></button></div>
+                        <div class="col-5">
+                            @Html.TextBoxFor(r => r.Ingredient[i].IngredientAmount, new { @class = "form-control"})
+                        </div>
+                        <div class="col-2"><button type="button" class="btn_invisible botonb" onclick="decrement(this,@i)"><i class="bi bi-dash"></i></button></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3 mb-3">
+                <label class="form-label">Unidad</label>
+                @Html.DropDownListFor(r => r.Ingredient[i].IngredientUnit, Model.Itype, htmlAttributes:new { @class = "form-select" })
+            </div>
+            <div class="col-6 mb-3">
+                <label class="form-label">Descripción ingrediente</label>
+                @Html.TextBoxFor(r => r.Ingredient[i].IngredientName, new { @class = "form-control"})
+            </div>
+        </div>
+        <!--<a href="#" onclick="$(this).parent().remove()">Eliminar</a>-->
+    </div>
+}

@@ -1,0 +1,97 @@
+﻿@page
+@model Tortillapp_web.Pages.Receta.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+@{
+    int iterator = 0;
+}
+
+<div class="container">
+    <div class="row mt-3">
+        <div class="row text-center align-items-center justify-content-center">
+            <div class="col-md-10">
+                <div class="container" id="ButtonSection">
+                    <div class="row">
+                        <div class="col-md mb-3">
+                            <h1 class="text-start">Crear receta</h1>
+                            <a asp-page="Create">
+                                <button type="submit" class="btn btn_base w-50 h-75 rounded-pill"><i class="bi bi-plus"></i></br>Nueva Receta</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="grid_recipe bblock-minmax-user">
+            
+            @foreach (var item in Model.RecipeInfo)
+            {
+            <div class="container block_user">
+                <div class="row">
+                    @Html.DisplayFor(modelItem => item.User.UserId)
+                    <div class="col" style="width:180px;height:180px;">
+                        <img src="~/pics/@Model.rpicto[iterator]" class="recipe_pic_user" />
+                    </div>
+                        <div class="col" style="width:260px;height:60px;">
+                        <div class="row" style="height:60px;">
+                            <h3 class="text-center">@Html.DisplayFor(modelItem => item.RecipeTitle)</h3>
+                        </div>
+                            <div class="row" style="height:60px;">
+                            <div class="col">
+                                @if (item.RecipeStatus == 3)
+                                {
+                                    @for (float i = 0; i < Model.rscore[iterator]; i++)
+                                    {
+                                        <i class="bi bi-star-fill icons-view"></i>
+                                    }
+                                    @for (float j = Model.rscore[iterator]; j < 5; j++)
+                                    {
+                                        <i class="bi bi-star icons-view"></i>
+                                    }
+                                }
+                                
+                            </div>
+                        </div>
+                        <div class="row" style="height:60px;">
+                            <div class="col">
+                            <a asp-page="./Edit" asp-route-id="@item.RecipeId"><i class="bi bi-pencil-fill"></i></a>
+                            </div>
+                            <div class="col">
+                            <a asp-page="./Details" asp-route-id="@item.RecipeId"><i class="bi bi-eye-fill"></i></a>
+                            </div>
+                            <div class="col">
+                            <a asp-page="./Delete" asp-route-id="@item.RecipeId"><i class="bi bi-trash-fill"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col div_base">
+                        <div class="div_start">
+                            @if (item.RecipeStatus == 1)
+                            {
+                                <label class="form-label">Estatus: Editando</label>
+                            }
+                            else if (item.RecipeStatus == 2)
+                            {
+                                <label class="form-label">Estatus: En revisión</label>
+                            }
+                            else
+                            {
+                                <label class="form-label">Estatus: Publicada</label>
+                            }
+                            <!--Html.DisplayFor(modelItem => item.RecipeStatus)-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            iterator++;
+            }
+            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+﻿@page
+@model Tortillapp_web.Pages.Admin.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>UserData</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserData.UserMail)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserData.UserMail)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserData.UserName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserData.UserName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserData.UserPass)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserData.UserPass)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserData.ShowName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserData.ShowName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserData.ShowPic)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserData.ShowPic)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserData.RemenberMe)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserData.RemenberMe)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserData.UserCreated)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserData.UserCreated)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserData.LastUpdated)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserData.LastUpdated)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserData.Role)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserData.Role.RoleId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.UserData?.UserId">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

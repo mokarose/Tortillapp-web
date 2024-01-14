@@ -1,69 +1,90 @@
 ﻿@page
-@model Tortillapp_web.Pages.MyProfileModel
+@model Tortillapp_web.Pages.Users.MyProfileModel
+
 @{
 	ViewData["Title"] = "Mi perfil";
 }
-<div class="bg-white">
-    <div class="container">
-        <div class="row mt-3">
+
+<div class="container bg-white">
+    <div class="row mt-3">
+        <form method="post" enctype="multipart/form-data" class="form-profile">
             <div class="col-sm">
                 <h1 class="text-center">Mi perfil</h1>
                 <div class="row align-items-center">
                     <div class="form-outline col-sm text-center">
-                        <label for="ushow" class="form-label fs-3">Hola #show @Model.ushow</label>
+                        <label for="ushow" class="form-label fs-3 icons-main">Hola @Html.DisplayFor(model => model.User.ShowName)</label>
                     </div>
                 </div>
                 <div class="row align-items-center text-center">
                     <div class="form-outline col-sm">
-                        <label id="UsrName" for="uname" class="form-label fs-4">@Model.uname</label>
+                        <label id="UsrName" for="uname" class="form-label fs-4 icons-special">@Html.DisplayFor(model => model.User.UserName)</label>
                     </div>
                 </div>
+                <!--<form method="post" enctype="multipart/form-data" asp-controller="UserController" asp-action="Upload">-->
+                <!--using (Html.BeginForm("Upload", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {-->
                 <div class="row align-items-center text-center">
-                    <div class="form-outline col-sm">
-                        <img />
+                    <div class="form-outline col mb-3">
+                        <img id="imgSelect" src="/pics/@Model.picto" class="profile_pic" />
                     </div>
                 </div>
                 <div class="row text-center align-items-center justify-content-center">
-                    <button type="submit" class="btn btn_base w-50 rounded-pill">Subir foto</button></br>
+                    <div class="col mb-3">
+                        <input asp-for="image" type="file" accept="image/*" class="form-control btn_base profile_btn" onchange="displaySelectedImage(event, 'imgSelect')" />
+                        <!--<input type="submit" class="btn btn_base w-50 rounded-pill" value="Subir foto" asp-page-handler="Upload"/>-->
+                    </div>
                 </div>
+                <!--}-->
+                <!--</form>-->
             </div>
 
             <div class="col-md">
-                <form method="post">
-                    <h2 class="text-start">Datos generales</h2>
-                    <div class="row align-content-start">
-                        <div class="col-sm mb-3">
-                            <label for="uname" class="form-label">Nombre de usuario</label>
-                            <input type="text" class="form-control" id="uname" name="user_name" disabled readonly placeholder="@Model.uname">
-                        </div>
+            <!--<form method="post">-->
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <h2 class="text-start">Datos generales</h2>
+                <div class="row align-content-start">
+                    <div class="col-sm mb-3">
+                        <label class="form-label">Nombre de usuario</label>
+                        <input asp-for="User.UserId" type="hidden" />
+                        <input asp-for="User.UserName" type="text" class="form-control" readonly /> <!--placeholder="Html.DisplayFor(model => model.User.UserName)"-->
+                        <!--span asp-validation-for="User.UserName" class="text-danger"><span-->
                     </div>
-                    <div class="row align-content-start">
-                        <div class="col-sm mb-3">
-                            <label for="ushow" class="form-label">Nombre para mostrar</label>
-                            <input type="text" class="form-control" id="ushow" name="user_show">
-                        </div>
+                </div>
+                <div class="row align-content-start">
+                    <div class="col-sm mb-3">
+                        <label class="form-label">Nombre para mostrar</label>
+                        <input asp-for="User.ShowName" type="text" class="form-control" /> <!--value="Html.DisplayFor(model => model.User.ShowName)"-->
+                        <span asp-validation-for="User.ShowName" class="text-danger"></span>
                     </div>
-                    <div class="row align-content-start">
-                        <div class="col-sm mb-3">
-                        <label for="umail" class="form-label">Correo</label>
-                        <input type="email" class="form-control" id="umail" name="user_mail" placeholder="@Model.umail">
-                        </div>
+                </div>
+                <div class="row align-content-start">
+                    <div class="col-sm mb-3">
+                        <label class="form-label">Correo</label>
+                        <input asp-for="User.UserMail" type="email" class="form-control" /><!--value="Html.DisplayFor(model => model.User.UserMail)"-->
+                        <span asp-validation-for="User.UserMail" class="text-danger"></span>
                     </div>
-                    <div class="row align-content-start">
-                        <div class="form-outline col-sm mb-3 no-gutters-right">
-                            <label for="upass" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" id="upass" name="user_pass">
-                        </div>
-                        <div class="form-outline col-sm mb-3"> 
-                            <label for="xpass" class="form-label">Confirma contraseña</label>
-                            <input type="password" class="form-control" id="xpass" name="user_pasx">
-                        </div>
+                </div>
+                <div class="row align-content-start">
+                    <div class="form-outline col-sm mb-3 no-gutters-right">
+                        <label class="form-label">Contraseña</label>
+                        <input asp-for="upass" type="password" class="form-control">
                     </div>
-                    <div class="row text-center align-items-center justify-content-center">
-                        <button type="submit" class="btn btn_base w-50 rounded-pill">Guardar cambios</button>
+                    <div class="form-outline col-sm mb-3"> 
+                        <label class="form-label">Confirma contraseña</label>
+                        <input asp-for="xpass" type="password" class="form-control">
                     </div>
-                </form>
+                    <input asp-for="User.UserPass" type="hidden" />
+                </div>
+                <label for="merror" class="form-label text-warning">@Model.merror</label>
+                <label for="message" class="form-label text-success">@TempData.Peek("message")</label>
+                <div class="row text-center align-items-center justify-content-center">
+                    <div class="mb-3">
+                        <input type="submit" class="btn btn_base w-50 rounded-pill" value="Guardar cambios" />
+                    </div>
+                </div>
+            <!--</form>-->
             </div>
-        </div>
+        </form>
     </div>
 </div>
+

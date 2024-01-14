@@ -1,0 +1,47 @@
+﻿@page
+@model Tortillapp_web.Pages.SuccessModel
+@{
+    ViewData["Title"] = "Bienvenido";
+}
+
+
+<div class="container bg-white div_fixedh div_base">
+    <div class="div_interno">
+        @if (Model.utype == "registro")
+        {
+            <div class="row mt-3">
+                <div class="col-sm">
+                    <h1 class="text-center">Bienvenido</h1>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-sm">
+                    <p class="text-center">
+                        <label>Tu registro ha sido exitoso</label>
+                        <br />
+                        <label>Puedes iniciar con tu cuenta:</label>
+                        <a href="/Login">Inicia sesión</a>
+                    </p>
+                </div>
+            </div>
+        }
+        else if (Model.utype == "actualizacion")
+        {
+            <div class="row mt-3">
+                <div class="col-sm">
+                    <h1 class="text-center">Hola</h1>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-sm">
+                    <p class="text-center">
+                        <label>Tu contraseña ha sido actualizada</label>
+                        <br />
+                        <label>Puedes iniciar con tu cuenta:</label>
+                        <a href="/Login">Inicia sesión</a>
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+</div>

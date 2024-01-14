@@ -1,0 +1,173 @@
+﻿@page
+@model Tortillapp_web.Pages.Receta.EditModel
+ 
+@{
+    ViewData["Title"] = "Editar";
+}
+
+<div class="container bg-white">
+    <div class="row mt-3">
+        <div class="col-md">
+            <form method="post" enctype="multipart/form-data" name="UpdateRecipe">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <h2 class="text-center">Editar receta</h2>
+            <input type="hidden" asp-for="Recipe.RecipeId" />
+            <input type="hidden" asp-for="Recipe.UserId" />
+            <div class="row align-content-start">
+                <div class="col-sm mb-3">
+                    <label class="form-label">Título de la receta</label>
+                    <input asp-for="Recipe.RecipeTitle" type="text" id="title" class="form-control" placeholder="Nombre receta" required>
+                </div>
+            </div>
+            <div class="row justify-content-start">
+                <div class="col-md mb-3 justify-content-center">
+                    <h3 class="text-start fw-bold">Ingredientes</h3>
+                </div>
+                <div class="col-sm mb-3">
+                    <table>
+                        <tr>
+                            <th><button type="button" id="btnPlusP" class="btn_invisible" onclick="incrementer()"><i class="bi bi-plus icons-special"></i></button></th>
+                            <th><input asp-for="Recipe.RecipePortion" type="text" class="form-control" id="portion" readonly></th>
+                            <th><button type="button" id="btnMinusP" class="btn_invisible" onclick="decrementer()"><i class="bi bi-dash icons-special"></i></button></th>
+                            <th><label class="icons-main"><i class="bi bi-people-fill icons-main"></i> Porc.</label></th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row justify-content-start">
+                <div class="col-sm mb-3">
+                    <fieldset>
+                        @if (Model.Ingredient == null || Model.Ingredient.Count == 0)
+                        {
+                            <div>None.</div>
+                        } 
+                        else
+                        {
+                        <div id="addIngredients" class="buttons">
+                            @await Html.PartialAsync("_RecipePartial")
+                                    
+                            <!--<div class="row text-center align-items-center justify-content-center">
+                                <div class="mb-3">
+                                    <button type="button" class="btn btn_avance rounded-pill" id="add" onclick="adder(this)" data-number="3"><i class="bi bi-plus"></i></button>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Agregar otro ingrediente</label>
+                                </div>
+                            </div>-->
+                             
+                        </div>
+                        <!--<a id="addAnother" href="#">Agregar</a>-->
+                        }
+                        <script type="text/javascript">
+                            $(function () {
+                                $("#addIngredients").sortable()
+                            });
+                        </script>
+                    </fieldset>
+                </div>
+            </div>
+           
+
+            <div class="row align-content-start">
+                <div class="col-md mb-3">
+                    <h3 class="text-start fw-bold">Preparación</h3>
+                </div>
+                <div class="col-sm mb-3">
+                    <table>
+                        <tr>
+                            <th><input asp-for="Recipe.RecipeTime" type="text" class="form-control" id="timepicker" /></th> <!--Time picker-->
+                            <th><i class="bi bi-clock"></i></th>
+                            <th><label>Mins.</label></th>
+                        </tr>
+                    </table>
+                    <script>
+                        $('#timepicker').clockTimePicker()
+                    </script>
+                </div>
+            </div>
+            <div class="row align-content-start">
+                <div class="col-sm mb-3">
+                    <textarea asp-for="RecipePrep" class="form-control" rows="10" placeholder="Pasos para preparar la receta..." required></textarea>
+
+                    <!--await Html.PartialAsync("_StepsPartial")-->
+                </div>
+            </div>
+
+            <div class="row align-content-start">
+                <div class="col-sm mb-3">
+                    <h3 class="text-start fw-bold">Tips</h3>
+                </div>
+                <div class="row align-content-start">
+                    <div class="col-sm mb-3">
+                        <textarea asp-for="Recipe.RecipeTips" class="form-control" rows="4" placeholder="Algún consejo, técnica o para la presentación"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-content-start">
+                <div class="col-sm mb-3">
+                    <h3 class="text-start fw-bold">Tags</h3>
+                </div>
+            </div>
+            <!--<div class="row align-content-start">
+                <div class="col mb-3">
+                    <table>
+                        <tr>
+                            <th><input asp-for="Recipe.RecipeTags" type="text" class="form-control" placeholder="#etiqueta"></th>
+                            <th><button type="button" class="btn btn_contra rounded-pill">Agregar</button></th>
+                        </tr>
+                    </table>
+                </div>
+            </div>-->
+            <div class="row align-content-center align-items-center">
+                <div class="col mb-3">
+                    <table>
+                        <tr>
+                            <td><input asp-for="TagIt[0]" type="text" class="form-control" placeholder="etiqueta" /></td>
+                            <td><input asp-for="TagIt[1]" type="text" class="form-control" placeholder="etiqueta" /></td>
+                            <td><input asp-for="TagIt[2]" type="text" class="form-control" placeholder="etiqueta" /></td>
+                            <td><input asp-for="TagIt[3]" type="text" class="form-control" placeholder="etiqueta" /></td>
+                            <!--<th><input asp-for="Tags" type="text" class="form-control" placeholder="etiqueta"></th>-->
+                            <!--<th><button type="button" class="btn btn_contra rounded-pill">Agregar</button></th>-->
+                        </tr>
+                        <tr>
+                            <td><input asp-for="TagIt[4]" type="text" class="form-control" placeholder="etiqueta" /></td>
+                            <td><input asp-for="TagIt[5]" type="text" class="form-control" placeholder="etiqueta" /></td>
+                            <td><input asp-for="TagIt[6]" type="text" class="form-control" placeholder="etiqueta" /></td>
+                            <td><input asp-for="TagIt[7]" type="text" class="form-control" placeholder="etiqueta" /></td>
+                        </tr>
+                    </table>
+                </div>
+                
+            </div>
+
+            <div class="row text-center align-items-center justify-content-center">
+                <div class="mb-3 div_base">
+                    <img id="imgUpdateSelect" src="/pics/@Model.picto" class="btn_base rounded-photo w-50 text-center" />
+                        <div class="div_interno text-white">Subir una foto <i class="bi bi-camera"></i></div>
+                    <br />
+                        <input asp-for="rimage" type="file" accept="image/*" class="form-control btn_base recipe_btn w-50" onchange="displaySelectedImage(event, 'imgUpdateSelect')" />
+                </div>
+                <div class="mb-3">
+                    <button type="button" class="btn btn_blanco w-50 rounded-pill" id="preview">Vista Previa<br /><i class="bi bi-eye"></i></button>
+                </div>
+                <div class="mb-3">
+                    <input type="submit" class="btn btn_base w-50 rounded-pill" value="Publicar" />
+                </div>
+                <div class="mb-3">
+                    <input type="submit" name="btnDraft" class="btn btn_contra w-50 rounded-pill" value="Guardar" asp-page-handler="SaveDraft" />
+                </div>
+                <div class="mb-3">
+                    <button type="button" class="btn btn_avance w-50 rounded-pill"><a asp-page="./Index">Volver</a></button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

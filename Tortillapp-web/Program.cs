@@ -1,7 +1,25 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using Tortillapp_web.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<tortillaContext>(options =>
+    //options.UseMySQL("server=localhost;port=3306;uid=root;pwd=Lord0Rings;database=tortilla;"));
+	options.UseMySQL(builder.Configuration.GetConnectionString("tortilla") ?? throw new InvalidOperationException("Connection string 'Tortilla' not found.")));
+
+//builder.Services.AddMvc();
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(600);
+    options.Cookie.HttpOnly = true;
+});
 
 var app = builder.Build();
 
@@ -22,4 +40,8 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
+app.UseSession();
+//app.UseMvc();
+
 app.Run();
+
