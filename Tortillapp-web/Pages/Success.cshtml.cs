@@ -5,7 +5,7 @@ using System.Net.Mail;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using Tortillapp_web.Control;
-using Tortillapp_web.Model;
+using Tortillapp_web.Models;
 using static System.Net.WebRequestMethods;
 
 namespace Tortillapp_web.Pages
@@ -24,7 +24,7 @@ namespace Tortillapp_web.Pages
         [HttpGet]
         public async Task<IActionResult> OnGetAsync(int id, string type)
         {
-            var user = _context.UserDatas.FirstOrDefault(u => u.UserId == id);
+            var user = _context.UserData.FirstOrDefault(u => u.UserId == id);
             utype = type;
 
             if (id != null)

@@ -9,7 +9,7 @@ using System.Web.Helpers;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Tortillapp_web.Model;
+using Tortillapp_web.Models;
 using System.Drawing;
 using System.Buffers.Text;
 using NuGet.Packaging;
@@ -59,7 +59,7 @@ namespace Tortillapp_web.Pages.Users
                 return NotFound();
             }
 
-            var user = await _context.UserDatas.FirstOrDefaultAsync(u => u.UserName == iUser);
+            var user = await _context.UserData.FirstOrDefaultAsync(u => u.UserName == iUser);
 
             if (user == null)
             {
@@ -96,7 +96,7 @@ namespace Tortillapp_web.Pages.Users
                 }
             }
 
-            var userToUpdate = await _context.UserDatas.FindAsync(User.UserId);
+            var userToUpdate = await _context.UserData.FindAsync(User.UserId);
 
             if (userToUpdate == null)
             {

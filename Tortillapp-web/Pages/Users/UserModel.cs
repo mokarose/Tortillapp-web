@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data.Entity;
-using Tortillapp_web.Model;
+using Tortillapp_web.Models;
 
 namespace Tortillapp_web.Pages.Users;
 
@@ -19,9 +19,9 @@ public class UserModel : PageModel
 
 	public async Task OnGetAsync()
 	{
-		if (_context.UserDatas != null)
+		if (_context.UserData != null)
 		{
-			UserData = await _context.UserDatas.ToListAsync();
+			UserData = await _context.UserData.ToListAsync();
 		}
 
 	}

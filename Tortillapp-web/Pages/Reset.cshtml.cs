@@ -43,7 +43,7 @@ namespace Tortillapp_web.Pages
                 return Page();
             }
 
-            var user = _context.UserDatas.FirstOrDefault(u => u.UserMail.Equals(umail));
+            var user = _context.UserData.FirstOrDefault(u => u.UserMail.Equals(umail));
 
             if (user != null)
             {

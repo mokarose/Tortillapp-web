@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using Tortillapp_web.Data;
-using Tortillapp_web.Model;
+using Tortillapp_web.Models;
 
 namespace Tortillapp_web.Pages
 {
@@ -65,7 +65,7 @@ namespace Tortillapp_web.Pages
 
         public UserData Login(string iUseMail, string iUserPass)
         {
-            var user = _context.UserDatas.SingleOrDefault(u => u.UserMail.Equals(iUseMail));
+            var user = _context.UserData.SingleOrDefault(u => u.UserMail.Equals(iUseMail));
             
             if (user != null)
             {

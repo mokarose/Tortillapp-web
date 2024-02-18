@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography;
 using System.Linq;
-using Tortillapp_web.Model;
+using Tortillapp_web.Models;
 
 namespace Tortillapp_web.Pages
 {
@@ -29,7 +29,7 @@ namespace Tortillapp_web.Pages
         [HttpGet]
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            var user = await _context.UserDatas.FirstOrDefaultAsync(u => u.UserId == id);
+            var user = await _context.UserData.FirstOrDefaultAsync(u => u.UserId == id);
             TempData[nameof(uname)] = user.UserName;
             uid = user.UserId;
 
@@ -62,7 +62,7 @@ namespace Tortillapp_web.Pages
             }
             
             string epass = EcryptPass(npass);
-            var user = await _context.UserDatas.FirstOrDefaultAsync(u => u.UserId == uid);
+            var user = await _context.UserData.FirstOrDefaultAsync(u => u.UserId == uid);
 
             user.UserPass = epass;
 

@@ -5,7 +5,7 @@ using System.Net.Security;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using Tortillapp_web.Model;
+using Tortillapp_web.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace Tortillapp_web.Control

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using NuGet.Packaging;
 using Org.BouncyCastle.Utilities.Collections;
 using Tortillapp_web.Data;
-using Tortillapp_web.Model;
+using Tortillapp_web.Models;
 
 namespace Tortillapp_web.Pages.Receta
 {

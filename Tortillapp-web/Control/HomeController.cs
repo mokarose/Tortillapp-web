@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net.Sockets;
 using System.Text;
 using Tortillapp_web.Data;
-using Tortillapp_web.Model;
+using Tortillapp_web.Models;
 
 namespace Tortillapp_web.Control
 {

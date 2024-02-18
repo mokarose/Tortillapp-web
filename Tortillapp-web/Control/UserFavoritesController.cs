@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Xml.Linq;
 using Tortillapp_web.Data;
-using Tortillapp_web.Model;
+using Tortillapp_web.Models;
 using static System.Formats.Asn1.AsnWriter;
 
 namespace Tortillapp_web.Control

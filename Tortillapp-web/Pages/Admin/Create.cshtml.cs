@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Tortillapp_web.Data;
-using Tortillapp_web.Model;
+using Tortillapp_web.Models;
 
 namespace Tortillapp_web.Pages.Admin
 {
@@ -36,12 +36,12 @@ namespace Tortillapp_web.Pages.Admin
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid || _context.UserDatas == null || UserData == null)
+            if (!ModelState.IsValid || _context.UserData == null || UserData == null)
               {
                   return Page();
               }
 
-              _context.UserDatas.Add(UserData);
+              _context.UserData.Add(UserData);
               await _context.SaveChangesAsync();
 
               return RedirectToPage("./Index");

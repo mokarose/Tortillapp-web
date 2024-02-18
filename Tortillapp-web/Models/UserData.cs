@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
-namespace Tortillapp_web.Model
+namespace Tortillapp_web.Models
 {
     public partial class UserData
     {
@@ -24,9 +23,7 @@ namespace Tortillapp_web.Model
         /// 1 = No, 2 = Si
         /// </summary>
         public sbyte RemenberMe { get; set; }
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime UserCreated { get; set; }
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MM-yyyy}")]
         public DateTime LastUpdated { get; set; }
 
         public virtual UserRole Role { get; set; } = null!;

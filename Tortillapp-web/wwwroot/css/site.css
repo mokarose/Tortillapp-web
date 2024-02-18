@@ -324,7 +324,7 @@ i {
 }
 
 .title-height {
-    height: 100px;
+    height: 105px;
 }
 
 .link-white {
@@ -338,10 +338,6 @@ i {
 }
 
 @media screen and (max-width: 768px) {
-    .title-height {
-        width: 100%;
-    }
-
     .title-width {
         width: 250px;
     }

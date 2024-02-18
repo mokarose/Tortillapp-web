@@ -15,7 +15,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using NuGet.Packaging;
 using Org.BouncyCastle.Utilities.Collections;
 using Tortillapp_web.Data;
-using Tortillapp_web.Model;
+using Tortillapp_web.Models;
 
 namespace Tortillapp_web.Pages
 {
@@ -146,8 +146,8 @@ namespace Tortillapp_web.Pages
             float sumScore = 0;
             float scoreTotal = 0;
 
-            var scoreall = _context.Scores
-                .Where(r => r.Title == id_recipe.ToString()).ToList();
+            var scoreall = _context.UserRatings
+                .Where(r => r.RecipeId == id_recipe).ToList();
 
             if (scoreall.Count() > 0)
             {

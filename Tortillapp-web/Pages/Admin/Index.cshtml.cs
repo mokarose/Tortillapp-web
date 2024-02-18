@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Tortillapp_web.Data;
-using Tortillapp_web.Model;
+using Tortillapp_web.Models;
 
 namespace Tortillapp_web.Pages.Admin
 {
@@ -23,9 +23,9 @@ namespace Tortillapp_web.Pages.Admin
 
         public async Task OnGetAsync()
         {
-            if (_context.UserDatas != null)
+            if (_context.UserData != null)
             {
-                UserData = await _context.UserDatas
+                UserData = await _context.UserData
                 .Include(u => u.Role).ToListAsync();
             }
         }

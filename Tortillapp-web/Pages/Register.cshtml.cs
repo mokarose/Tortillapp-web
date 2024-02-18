@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Security.Cryptography;
 using System.Text;
 using Tortillapp_web.Data;
-using Tortillapp_web.Model;
+using Tortillapp_web.Models;
 
 namespace Tortillapp_web.Pages.Users
 {
@@ -70,7 +70,7 @@ namespace Tortillapp_web.Pages.Users
 
                  bytes = AddImage();
                 
-                _context.UserDatas.Add(new UserData
+                _context.UserData.Add(new UserData
                 {
                     UserMail = umail,
                     UserName = uname,
@@ -82,14 +82,14 @@ namespace Tortillapp_web.Pages.Users
                 await _context.SaveChangesAsync();
             }
 			
-            ushort last_insert = _context.UserDatas.Max(r => r.UserId);
+            ushort last_insert = _context.UserData.Max(r => r.UserId);
 
 			return Redirect("/Success?id=" + last_insert + "&type=registro");
 		}
 
 		public bool ExistMail(string email)
 		{
-            if(_context.UserDatas.FirstOrDefault(u => u.UserMail == email) == null)
+            if(_context.UserData.FirstOrDefault(u => u.UserMail == email) == null)
 			{
 				return false;
 			}

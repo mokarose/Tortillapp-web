@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Tortillapp_web.Model;
+using Tortillapp_web.Models;
 
 namespace Tortillapp_web.Data
 {
@@ -21,9 +21,8 @@ namespace Tortillapp_web.Data
         public virtual DbSet<RecipeIngredient> RecipeIngredients { get; set; } = null!;
         public virtual DbSet<RecipeStep> RecipeSteps { get; set; } = null!;
         public virtual DbSet<RecipeTag> RecipeTags { get; set; } = null!;
-        public virtual DbSet<Score> Scores { get; set; } = null!;
         public virtual DbSet<Tag> Tags { get; set; } = null!;
-        public virtual DbSet<UserData> UserDatas { get; set; } = null!;
+        public virtual DbSet<UserData> UserData { get; set; } = null!;
         public virtual DbSet<UserFavorite> UserFavorites { get; set; } = null!;
         public virtual DbSet<UserRating> UserRatings { get; set; } = null!;
         public virtual DbSet<UserRole> UserRoles { get; set; } = null!;
@@ -33,7 +32,7 @@ namespace Tortillapp_web.Data
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseMySQL("server=localhost;port=3306;uid=root;pwd=Lord0Rings;database=tortilla;");
+                optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=Lord0Rings;database=tortilla_db");
             }
         }
 
@@ -46,7 +45,7 @@ namespace Tortillapp_web.Data
 
                 entity.ToTable("recipe_info");
 
-                entity.HasIndex(e => e.UserId, "recipe_info_user_idx");
+                entity.HasIndex(e => e.UserId, "recipe_info_user_key");
 
                 entity.Property(e => e.RecipeId).HasColumnName("recipe_id");
 
@@ -89,7 +88,7 @@ namespace Tortillapp_web.Data
                     .WithMany(p => p.RecipeInfos)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("recipe_info_user");
+                    .HasConstraintName("recipe_info_user_id");
             });
 
             modelBuilder.Entity<RecipeIngredient>(entity =>
@@ -99,7 +98,7 @@ namespace Tortillapp_web.Data
 
                 entity.ToTable("recipe_ingredients");
 
-                entity.HasIndex(e => e.RecipeId, "recipe_ingredients_idpk_1_idx");
+                entity.HasIndex(e => e.RecipeId, "ingredients_recipe_key");
 
                 entity.Property(e => e.IngredientId).HasColumnName("ingredient_id");
 
@@ -110,7 +109,7 @@ namespace Tortillapp_web.Data
                     .HasColumnName("ingredient_name");
 
                 entity.Property(e => e.IngredientUnit)
-                    .HasColumnType("set('Litro','Mililitro','Kilo','Gramo','Cucharada','Cucharadita','Taza')")
+                    .HasColumnType("set('Pieza','Litro','Mililitro','Cuarto de kilo','Medio kilo','Kilo','Gramo','Cucharada','Cucharadita','Media taza','Taza','Pizca','Al gusto')")
                     .HasColumnName("ingredient_unit");
 
                 entity.Property(e => e.RecipeId).HasColumnName("recipe_id");
@@ -118,8 +117,7 @@ namespace Tortillapp_web.Data
                 entity.HasOne(d => d.Recipe)
                     .WithMany(p => p.RecipeIngredients)
                     .HasForeignKey(d => d.RecipeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("recipe_ingredients_idpk_1");
+                    .HasConstraintName("ingredients_recipe_id");
             });
 
             modelBuilder.Entity<RecipeStep>(entity =>
@@ -129,7 +127,7 @@ namespace Tortillapp_web.Data
 
                 entity.ToTable("recipe_steps");
 
-                entity.HasIndex(e => e.RecipeId, "recipe_id");
+                entity.HasIndex(e => e.RecipeId, "steps_recipe_key");
 
                 entity.Property(e => e.StepId).HasColumnName("step_id");
 
@@ -144,8 +142,7 @@ namespace Tortillapp_web.Data
                 entity.HasOne(d => d.Recipe)
                     .WithMany(p => p.RecipeSteps)
                     .HasForeignKey(d => d.RecipeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("recipe_steps_idffk_1");
+                    .HasConstraintName("steps_recipe_id");
             });
 
             modelBuilder.Entity<RecipeTag>(entity =>
@@ -155,9 +152,9 @@ namespace Tortillapp_web.Data
 
                 entity.ToTable("recipe_tags");
 
-                entity.HasIndex(e => e.RecipeId, "recipe_id");
+                entity.HasIndex(e => e.RecipeId, "tags_recipe_key");
 
-                entity.HasIndex(e => e.TagId, "recipe_tags");
+                entity.HasIndex(e => e.TagId, "tags_tags_key");
 
                 entity.Property(e => e.RecipeId).HasColumnName("recipe_id");
 
@@ -170,38 +167,13 @@ namespace Tortillapp_web.Data
                 entity.HasOne(d => d.Recipe)
                     .WithMany(p => p.RecipeTags)
                     .HasForeignKey(d => d.RecipeId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("recipe_tags_recipe");
+                    .HasConstraintName("tags_recipe_id");
 
                 entity.HasOne(d => d.Tag)
                     .WithMany(p => p.RecipeTags)
                     .HasForeignKey(d => d.TagId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("recipe_tags_tags");
-            });
-
-            modelBuilder.Entity<Score>(entity =>
-            {
-                entity.ToTable("score");
-
-                entity.Property(e => e.ScoreId).HasColumnName("score_id");
-
-                entity.Property(e => e.Comment).HasColumnName("comment");
-
-                entity.Property(e => e.ScoreModified)
-                    .HasColumnType("timestamp")
-                    .HasColumnName("score_modified");
-
-                entity.Property(e => e.ScorePoints).HasColumnName("score_points");
-
-                entity.Property(e => e.ScoreStatus)
-                    .HasColumnName("score_status")
-                    .HasDefaultValueSql("'1'")
-                    .HasComment("1 = Oculto, 2 = Visible");
-
-                entity.Property(e => e.Title)
-                    .HasMaxLength(45)
-                    .HasColumnName("title");
+                    .HasConstraintName("tags_tags_id");
             });
 
             modelBuilder.Entity<Tag>(entity =>
@@ -228,7 +200,7 @@ namespace Tortillapp_web.Data
 
                 entity.ToTable("user_data");
 
-                entity.HasIndex(e => e.RoleId, "role_id");
+                entity.HasIndex(e => e.RoleId, "user_data_role_key");
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
 
@@ -273,7 +245,7 @@ namespace Tortillapp_web.Data
                     .WithMany(p => p.UserData)
                     .HasForeignKey(d => d.RoleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("user_data_roles");
+                    .HasConstraintName("user_data_role_id");
             });
 
             modelBuilder.Entity<UserFavorite>(entity =>
@@ -283,7 +255,7 @@ namespace Tortillapp_web.Data
 
                 entity.ToTable("user_favorites");
 
-                entity.HasIndex(e => e.UserId, "user_id");
+                entity.HasIndex(e => e.UserId, "favorites_user_key");
 
                 entity.Property(e => e.RecipeId).HasColumnName("recipe_id");
 
@@ -297,25 +269,29 @@ namespace Tortillapp_web.Data
                     .WithMany(p => p.UserFavorites)
                     .HasForeignKey(d => d.RecipeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("user_favorites_recipe");
+                    .HasConstraintName("favorites_recipe_id");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserFavorites)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("user_favorites_user");
+                    .HasConstraintName("favorites_user_id");
             });
 
             modelBuilder.Entity<UserRating>(entity =>
             {
-                entity.HasKey(e => new { e.RecipeId, e.UserId })
+                entity.HasKey(e => new { e.ScoreId, e.RecipeId, e.UserId })
                     .HasName("PRIMARY");
 
                 entity.ToTable("user_rating");
 
-                entity.HasIndex(e => e.UserId, "user_id");
+                entity.HasIndex(e => e.RecipeId, "user_rating_recipe_id");
 
-                entity.HasIndex(e => e.UserScore, "user_rating_score_idx");
+                entity.HasIndex(e => e.UserId, "user_rating_user_id");
+
+                entity.Property(e => e.ScoreId)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("score_id");
 
                 entity.Property(e => e.RecipeId).HasColumnName("recipe_id");
 
@@ -325,25 +301,30 @@ namespace Tortillapp_web.Data
                     .HasColumnType("timestamp")
                     .HasColumnName("score_added");
 
-                entity.Property(e => e.UserScore).HasColumnName("user_score");
+                entity.Property(e => e.ScoreComment).HasColumnName("score_comment");
+
+                entity.Property(e => e.ScoreModified)
+                    .HasColumnType("timestamp")
+                    .ValueGeneratedOnAddOrUpdate()
+                    .HasColumnName("score_modified")
+                    .HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+                entity.Property(e => e.ScorePoints).HasColumnName("score_points");
+
+                entity.Property(e => e.ScoreStatus)
+                    .HasColumnName("score_status")
+                    .HasDefaultValueSql("'1'")
+                    .HasComment("1 = Oculto, 2 = Visible");
 
                 entity.HasOne(d => d.Recipe)
                     .WithMany(p => p.UserRatings)
                     .HasForeignKey(d => d.RecipeId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("user_rating_recipe");
+                    .HasConstraintName("user_rating_recipe_id");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.UserRatings)
                     .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("user_rating_user");
-
-                entity.HasOne(d => d.UserScoreNavigation)
-                    .WithMany(p => p.UserRatings)
-                    .HasForeignKey(d => d.UserScore)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("user_rating_score");
+                    .HasConstraintName("user_rating_user_id");
             });
 
             modelBuilder.Entity<UserRole>(entity =>

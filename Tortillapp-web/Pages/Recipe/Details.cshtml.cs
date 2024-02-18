@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Tortillapp_web.Data;
-using Tortillapp_web.Model;
+using Tortillapp_web.Models;
 
 namespace Tortillapp_web.Pages.Receta
 {
@@ -27,7 +27,6 @@ namespace Tortillapp_web.Pages.Receta
         public IList<RecipeIngredient> Ingredient { get; set; } = default!;
         public IList<RecipeTag> Tag { get; set; } = default!;
         public List<Tag> NameTags { get; set; } = new List<Tag>();
-        public List<Score> AllScore { get; set; } = default!;
         public UserRating Score { get; set; } = default!;
         public UserData User { get; set; } = default!;
         public UserData UserLogged { get; set; } = default!;
@@ -63,7 +62,7 @@ namespace Tortillapp_web.Pages.Receta
 
             var scorerating = await _context.UserRatings.FirstOrDefaultAsync(s => s.RecipeId == id);
 
-            var userinfo = await _context.UserDatas.FirstOrDefaultAsync(u => u.UserId == recipeinfo.UserId);
+            var userinfo = await _context.UserData.FirstOrDefaultAsync(u => u.UserId == recipeinfo.UserId);
 
             if (recipeinfo == null)
             {
@@ -140,8 +139,8 @@ namespace Tortillapp_web.Pages.Receta
             float sumScore = 0;
             float scoreTotal = 0;
 
-            var scoreall = _context.Scores
-                .Where(r => r.Title == id_recipe.ToString()).ToList();
+            var scoreall = _context.UserRatings
+                .Where(r => r.RecipeId == id_recipe).ToList();
 
             for (int i = 0; i < scoreall.Count(); i++)
             {

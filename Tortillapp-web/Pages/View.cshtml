@@ -15,63 +15,64 @@
                 </div>
 
                 <div class="container" id="TitleSection">
-                    <div class="row">
-                        <div class="col-9 title-height">
-                            <div class="row">
-                                <div class="col-6 div_base title-width">
-                                    <div class="div_start">
-                                        <h1 class="text-start">@Html.DisplayFor(r => r.RecipeInfo.RecipeTitle)</h1>
-                                    </div>
-                                </div>
-                                
-                                <div class="col div_base"><!--Icono Me gusta-->
-                                    <div class="div_start" id="div-like">
-                                        @if (Model.actualUserLog == 0) {
-                                            <button class="btn rounded btn_like"><i class="bi bi-heart-fill"></i></button>
-                                        }
-                                        else
-                                        {
-                                            @if(Model.UserFavorites != null){
-                                                <!--<button class="btn rounded btn_like" onclick="Remove(Model.idRecipe,Model.actualUserLog)"><i class="bi bi-heart-fill"></i></button>-->
-                                                <form method="post">
-                                                    <input asp-for="actualUserLog" hidden />
-                                                    <input asp-for="idRecipe" hidden />
-                                                    <button type="submit" name="removeLike" class="btn rounded btn_like_this" asp-page-handler="RemoveFavorite"><i class="bi bi-heart-fill icons-like"></i></button>
-                                                </form>
-                                            }
-                                            else
-                                            {
-                                                <form method="post">
-                                                    <input asp-for="actualUserLog" hidden />
-                                                    <input asp-for="idRecipe" hidden />
-                                                    <button type="submit" name="addLike" class="btn rounded btn_like" asp-page-handler="AddFavorite"> <i class="bi bi-heart-fill"></i></button>
-                                                </form> 
-                                            }
-                                        }
-                                    </div>
-                                </div>
-                                <script>
-                                    function Add(id_recipe, id_user)
-                                    {
-                                        $.ajax({
-                                            type: "POST",
-                                            data: { id_recipe: id_recipe, id_user: id_user },
-                                            url: 'View?id=' + id_recipe + '/Add',
-                                        }).done(function (result) {
-                                            var html = ""
-                                            html = '<button class="btn rounded btn_like_this" onclick="Remove(' + result.id_recipe + ',' + result.id_user + ')"><i class="bi bi-heart-fill icons-like"></i></button>'
-                                            document.getElementById("div-like").innerHTML = html;
-                                        });
-                                    }
-                                </script>
+                    <div class="row mb-3 text-center align-items-center justify-content-center">
+                        
+                        <div class="col-md-6 col-sm-6 div_base title-height title-width">
+                            <div class="div_interno w-100">
+                                <h1 class="text-start">@Html.DisplayFor(r => r.RecipeInfo.RecipeTitle)</h1>
                             </div>
                         </div>
-                        <div class="col title-height">
-                            <div class="container"><!--Imagen usuario dueño-->
-                                <h6 class="text-center">@Model.userShow</h6>
-                                <div class="div_base">
-                                    <div class="div_interno h-25">  
-                                        <img src="~/pics/@Model.picUser" class="profile_pic profile_mini" />
+                                
+                        <div class="col-md-3 col-sm-auto div_base">
+                            <!--Icono Me gusta-->
+                            <div class="div_interno" id="div-like">
+                                @if (Model.actualUserLog == 0) {
+                                    <button class="btn rounded btn_like"><i class="bi bi-heart-fill"></i></button>
+                                }
+                                else
+                                {
+                                    @if(Model.UserFavorites != null){
+                                        <!--<button class="btn rounded btn_like" onclick="Remove(Model.idRecipe,Model.actualUserLog)"><i class="bi bi-heart-fill"></i></button>-->
+                                        <form method="post">
+                                            <input asp-for="actualUserLog" hidden />
+                                            <input asp-for="idRecipe" hidden />
+                                            <button type="submit" name="removeLike" class="btn rounded btn_like_this" asp-page-handler="RemoveFavorite"><i class="bi bi-heart-fill icons-like"></i></button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <form method="post">
+                                            <input asp-for="actualUserLog" hidden />
+                                            <input asp-for="idRecipe" hidden />
+                                            <button type="submit" name="addLike" class="btn rounded btn_like" asp-page-handler="AddFavorite"> <i class="bi bi-heart-fill"></i></button>
+                                        </form> 
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <script>
+                            function Add(id_recipe, id_user)
+                            {
+                                $.ajax({
+                                    type: "POST",
+                                    data: { id_recipe: id_recipe, id_user: id_user },
+                                    url: 'View?id=' + id_recipe + '/Add',
+                                }).done(function (result) {
+                                    var html = ""
+                                    html = '<button class="btn rounded btn_like_this" onclick="Remove(' + result.id_recipe + ',' + result.id_user + ')"><i class="bi bi-heart-fill icons-like"></i></button>'
+                                    document.getElementById("div-like").innerHTML = html;
+                                });
+                            }
+                        </script>
+                        
+                        <div class="col-md-auto col-sm-auto container"><!--Imagen usuario dueño-->
+                            <div class="row">
+                                <div class="col div_base">
+                                    <h6 class="text-center">@Model.userShow</h6>
+                                    <div class="div_base">
+                                        <div class="div_interno h-25">  
+                                            <img src="~/pics/@Model.picUser" class="profile_pic profile_mini" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

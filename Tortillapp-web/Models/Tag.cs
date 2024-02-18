@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Tortillapp_web.Model
+namespace Tortillapp_web.Models
 {
     public partial class Tag
     {

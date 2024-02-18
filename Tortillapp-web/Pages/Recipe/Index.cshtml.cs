@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Tortillapp_web.Data;
-using Tortillapp_web.Model;
+using Tortillapp_web.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Text;
 
@@ -62,8 +62,8 @@ namespace Tortillapp_web.Pages.Receta
             float sumScore = 0;
             float scoreTotal = 0;
 
-            var scoreall = _context.Scores
-                .Where(r => r.Title == id_recipe.ToString()).ToList();
+            var scoreall = _context.UserRatings
+                .Where(r => r.RecipeId == id_recipe).ToList();
 
             if (scoreall.Count() > 0)
             {

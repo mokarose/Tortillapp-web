@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using Org.BouncyCastle.Utilities.Collections;
 using Tortillapp_web.Data;
-using Tortillapp_web.Model;
+using Tortillapp_web.Models;
 using Tortillapp_web.Control;
 using System.Text;
 using NuGet.Packaging;
@@ -28,7 +28,6 @@ namespace Tortillapp_web.Pages
         public IList<RecipeIngredient> Ingredient { get; set; } = default!;
         public IList<RecipeTag> Tag { get; set; } = default!;
         public List<Tag> NameTags { get; set; } = new List<Tag>();
-        public List<Score> AllScore { get; set; } = default!;
         public UserRating Score { get; set; } = default!;
         public UserData User { get; set; } = default!;
         public UserData UserLogged { get; set; } = default!;
@@ -62,9 +61,9 @@ namespace Tortillapp_web.Pages
             var tags = await _context.RecipeTags
                 .Where(r => r.RecipeId == recipeinfo.RecipeId).ToListAsync();
 
-            var scorerating = await _context.UserRatings.FirstOrDefaultAsync(s => s.RecipeId == id);
+            //var scorerating = await _context.UserRatings.FirstOrDefaultAsync(s => s.RecipeId == id);
 
-            var userinfo = await _context.UserDatas.FirstOrDefaultAsync(u => u.UserId == recipeinfo.UserId);
+            var userinfo = await _context.UserData.FirstOrDefaultAsync(u => u.UserId == recipeinfo.UserId);
 
             if (recipeinfo == null)
             {
@@ -74,7 +73,7 @@ namespace Tortillapp_web.Pages
             {
                 RecipeInfo = recipeinfo;
                 User = userinfo;
-                Score = scorerating;
+                //Score = scorerating;
                 idRecipe = RecipeInfo.RecipeId;
                 Tag = tags;
 
@@ -125,7 +124,7 @@ namespace Tortillapp_web.Pages
             }
 
             string iUser = HttpContext.Session.GetString("Usuario");
-            var userlogged = await _context.UserDatas.FirstOrDefaultAsync(u => u.UserName.Equals(iUser));
+            var userlogged = await _context.UserData.FirstOrDefaultAsync(u => u.UserName.Equals(iUser));
 
             if (userlogged != null)
             {
@@ -176,7 +175,7 @@ namespace Tortillapp_web.Pages
             if (idRecipe > 0 && actualUserLog > 0)
             {
                 var recipe = await _context.RecipeInfos.FindAsync(idRecipe);
-                var user = await _context.UserDatas.FindAsync(actualUserLog);
+                var user = await _context.UserData.FindAsync(actualUserLog);
 
                 if (user != null && recipe != null)
                 {
@@ -222,44 +221,35 @@ namespace Tortillapp_web.Pages
 
             if (uscore > 0)
             {
-                var userComment = await _context.UserDatas.FirstOrDefaultAsync(u => u.UserName.Equals(userShowLog));
+                var userComment = await _context.UserData.FirstOrDefaultAsync(u => u.UserName.Equals(userShowLog));
 
-                if (ucomment != null)
+                if (ucomment == null)
                 {
-                    _context.Scores.Add(new Score
-                    {
-                        ScorePoints = uscore,
-                        Title = idRecipe.ToString(),
-                        Comment = ucomment,
-                        ScoreStatus = 1,
-                        ScoreModified = DateTime.Now
-
-                    });
+                    ucomment = "";
                 }
-                else
+
+                _context.UserRatings.Add(new UserRating
                 {
-                    _context.Scores.Add(new Score
-                    {
-                        ScorePoints = uscore,
-                        Title = idRecipe.ToString(),
-                        Comment = "",
-                        ScoreStatus = 1,
-                        ScoreModified = DateTime.Now
+                    UserId = actualUserLog,
+                    RecipeId = idRecipe,
+                    ScorePoints = uscore,
+                    ScoreComment = ucomment,
+                    ScoreStatus = 1,
+                    ScoreAdded = DateTime.Now
+                });
 
-                    });
-                }
                 await _context.SaveChangesAsync();
 
-                ushort last_insert = _context.Scores.Max(r => r.ScoreId);
+                ushort last_insert = _context.UserRatings.Max(r => r.ScoreId);
 
-                UpdateRating(idRecipe, actualUserLog, last_insert);
+                //UpdateRating(idRecipe, actualUserLog, last_insert);
 
                 return Redirect("View?id=" + idRecipe);
             }
             return Redirect("View?id=" + idRecipe);
         }
 
-        public void UpdateRating(ushort id_recipe, ushort id_user, ushort id_score)
+        /*public void UpdateRating(ushort id_recipe, ushort id_user, ushort id_score)
         {
             //var scorerating = _context.UserRatings.FirstOrDefault(s => s.RecipeId == id_recipe);
 
@@ -274,15 +264,15 @@ namespace Tortillapp_web.Pages
                 });
                 _context.SaveChanges();
             //}
-        }
+        }*/
 
         public float GetRecipeRating(ushort id_recipe)
         {
             float sumScore = 0;
             float scoreTotal = 0;
-            
-            var scoreall = _context.Scores
-                .Where(r => r.Title == id_recipe.ToString()).ToList();
+
+            var scoreall = _context.UserRatings
+                .Where(r => r.RecipeId == id_recipe).ToList();
 
             for (int i = 0; i < scoreall.Count(); i++)
             {
