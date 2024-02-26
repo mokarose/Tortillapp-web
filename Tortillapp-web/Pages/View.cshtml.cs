@@ -61,7 +61,7 @@ namespace Tortillapp_web.Pages
             var tags = await _context.RecipeTags
                 .Where(r => r.RecipeId == recipeinfo.RecipeId).ToListAsync();
 
-            //var scorerating = await _context.UserRatings.FirstOrDefaultAsync(s => s.RecipeId == id);
+            var scorerating = await _context.UserRatings.FirstOrDefaultAsync(s => s.RecipeId == id);
 
             var userinfo = await _context.UserData.FirstOrDefaultAsync(u => u.UserId == recipeinfo.UserId);
 
@@ -73,7 +73,7 @@ namespace Tortillapp_web.Pages
             {
                 RecipeInfo = recipeinfo;
                 User = userinfo;
-                //Score = scorerating;
+                Score = scorerating;
                 idRecipe = RecipeInfo.RecipeId;
                 Tag = tags;
 
@@ -272,14 +272,24 @@ namespace Tortillapp_web.Pages
             float scoreTotal = 0;
 
             var scoreall = _context.UserRatings
-                .Where(r => r.RecipeId == id_recipe).ToList();
-
-            for (int i = 0; i < scoreall.Count(); i++)
-            {
-                sumScore += scoreall[i].ScorePoints;
-            }
-            scoreTotal = sumScore / scoreall.Count();
+                .Where(r => r.RecipeId == id_recipe)
+                .Average(r => r.ScorePoints).ToString();
             
+
+            /*var scoreall = _context.UserRatings
+                 .Where(r => r.RecipeId == id_recipe).ToList();
+
+            if (scoreall.Count() > 0)
+            {
+                for (int i = 0; i < scoreall.Count(); i++)
+                {
+                    sumScore += scoreall[i].ScorePoints;
+                }
+                scoreTotal = sumScore / scoreall.Count();
+            }*/
+
+            scoreTotal = float.Parse(scoreall);
+
             return scoreTotal;
         }
 

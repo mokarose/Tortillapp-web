@@ -146,16 +146,17 @@ namespace Tortillapp_web.Pages
             float sumScore = 0;
             float scoreTotal = 0;
 
-            var scoreall = _context.UserRatings
-                .Where(r => r.RecipeId == id_recipe).ToList();
-
-            if (scoreall.Count() > 0)
+            try
             {
-                for (int i = 0; i < scoreall.Count(); i++)
-                {
-                    sumScore += scoreall[i].ScorePoints;
-                }
-                scoreTotal = sumScore / scoreall.Count();
+                var scoreall = _context.UserRatings
+                    .Where(r => r.RecipeId == id_recipe)
+                    .Average(r => r.ScorePoints).ToString();
+
+                scoreTotal = float.Parse(scoreall);
+            }
+            catch (Exception ex)
+            {
+                return 0;
             }
 
             return scoreTotal;
