@@ -24,6 +24,13 @@ namespace Tortillapp_web.Pages
             _logger = logger;
 		}*/
 
+        public partial class RecipeView //Modelo para mostrar las recetas
+        {
+            public string? RecipeTitle { get; set; }
+            public byte[]? RecipePicture { get; set; }
+            public double RecipeRating { get; set; }
+        }   
+
         private readonly Tortillapp_web.Data.tortillaContext _context;
 
         public IndexModel(Tortillapp_web.Data.tortillaContext context)
@@ -31,6 +38,7 @@ namespace Tortillapp_web.Pages
             _context = context;
         }
 
+        public IList<RecipeView> RecipeV { get; set; } = default!;
         public IList<RecipeInfo> RecipeInfo { get; set; } = default!;
         public IList<Tag> Tags { get; set; } = default!;
         public IList<RecipeTag> RecipeTags { get; set; } = default!;
@@ -46,6 +54,21 @@ namespace Tortillapp_web.Pages
         {
             if (_context.RecipeInfos != null)
             {
+                /*var query = _context.RecipeInfos
+                    .GroupJoin(_context.UserRatings,
+                    r => r.RecipeId,
+                    s => s.ScorePoints,
+                    //t => t.Tags,
+                    (r, s) => new { r, s })
+                    .SelectMany(t => t.s.DefaultIfEmpty(),
+                    (t, s) => new RecipeView
+                    {
+                        RecipeTitle = t.r.RecipeTitle,
+                        RecipePicture = t.r.RecipePic,
+                        //RecipeRating = s.ScorePoints
+                    }
+                    ).ToList();*/
+
                 RecipeInfo = await _context.RecipeInfos
                 .Include(r => r.User).ToListAsync();
 
