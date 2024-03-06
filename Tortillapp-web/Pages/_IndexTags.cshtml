@@ -3,6 +3,6 @@
 @foreach (var tag in Model.Tags)
 {
     <label>
-        <a class="mb-2 tag_base tag_deco button_deco">@Html.DisplayFor(modelItem => tag.TagName)</a>
+        <a asp-page="TagFilter" class="mb-2 tag_base tag_deco button_deco" asp-route-id="@tag.TagId">@Html.DisplayFor(modelItem => tag.TagName)</a>
     </label>
 }

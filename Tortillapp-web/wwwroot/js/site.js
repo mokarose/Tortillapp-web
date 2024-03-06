@@ -7,6 +7,23 @@ function addLabel(label) {
     
 }
 
+$(document).ready(function () {
+    $("#btnocultar").click(function () {
+        $("#ocultar").each(function () {
+            displaying = $(this).css("display");
+            if (displaying == "block") {
+                $(this).fadeOut('slow', function () {
+                    $(this).css("display", "none");
+                });
+            } else {
+                $(this).fadeIn('slow', function () {
+                    $(this).css("display", "block");
+                });
+            }
+        });
+    });
+});
+
 function increment(boton, pos) {
     const botones = document.querySelector(".buttons");
     const vista = document.getElementById("Ingredient_" + pos + "__IngredientAmount");

@@ -509,6 +509,35 @@ i {
     }
 }
 
+.avanzada-search {
+    position: relative;
+}
+
+.avanzada-option {
+    display: none;
+    position: absolute;
+    width: 900px;
+    height: 200px;
+    background-color: var(--azul_verde);
+    border-radius: 0px 25px 25px 25px;
+    color: var(--blanco_base);
+}
+
+.text-check {
+    margin: 6px;
+}
+
+.circle-check {
+    margin: 12px;
+    background-color: var(--blanco_base);
+}
+
+.circle-check:checked {
+    margin: 12px;
+    background-color: var(--azul_gris)!important;
+    border-color: var(--azul_gris)!important; 
+}
+
 @media screen and (min-width: 769px) and (max-width: 990px) {
     .button-search {
         transform: translateY(-60%);
