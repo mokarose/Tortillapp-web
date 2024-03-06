@@ -39,16 +39,22 @@ namespace Tortillapp_web.Pages.Recipe
         {
             "",
             "Pieza",
+            "Media pieza",
+            "Cuarto de pieza",
             "Litro",
+            "Medio litro",
             "Mililitro",
             "Cuarto de kilo",
             "Medio kilo",
             "Kilo",
+            "Kilo y medio",
             "Gramo",
             "Cucharada",
             "Cucharadita",
             "Media taza",
             "Taza",
+            "Taza y media",
+            "Tres cuartos de taza",
             "Pizca",
             "Al gusto"
 
