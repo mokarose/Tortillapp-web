@@ -35,21 +35,21 @@ namespace Tortillapp_web.Pages
 
             foreach ( var recipe in query )
             {
-                RecipeInfo = _context.RecipeInfos
+                var recipe_query = _context.RecipeInfos
                     .Where(r => r.RecipeId.Equals(recipe)).ToList();
 
-                rscore.Add(GetRecipeRating(RecipeInfo[0].RecipeId));
+                rscore.Add(GetRecipeRating(recipe_query[0].RecipeId));
 
-                if (RecipeInfo[0].RecipePic != null)
+                if (recipe_query[0].RecipePic != null)
                 {
-                    rpicto.Add(Load(RecipeInfo[0].RecipePic));
+                    rpicto.Add(Load(recipe_query[0].RecipePic));
                 }
                 else
                 {
                     rpicto.Add("tortilla-basic-cuadro.jpg");
                 }
                 var recipeTags = _context.RecipeTags.
-                        Where(t => t.RecipeId == RecipeInfo[0].RecipeId).ToList();
+                        Where(t => t.RecipeId == recipe_query[0].RecipeId).ToList();
 
                 if (recipeTags != null)
                 {
@@ -60,7 +60,9 @@ namespace Tortillapp_web.Pages
                     }
                 }
                 listOfLists.Add(tags);
+                iRecipe.Add(recipe_query[0]);
             }
+            RecipeInfo = iRecipe;
             return Page();
         }
 
