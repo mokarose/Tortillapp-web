@@ -4,6 +4,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Tortillapp_web.Data;
 using Microsoft.Extensions.Azure;
+using Tortillapp_web;
+using Tortillapp_web.Kmeans;
+using System.Data.Entity;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,5 +57,7 @@ app.MapRazorPages();
 app.UseSession();
 //app.UseMvc();
 
-app.Run();
+//Kmeans kmeansito = new Kmeans();
+//kmeansito.KmeansMain();
 
+app.Run();

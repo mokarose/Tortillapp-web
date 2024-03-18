@@ -1,5 +1,11 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using Tortillapp_web.Data;
 using Tortillapp_web.Models;
 
 namespace Tortillapp_web.Pages.Admin
@@ -13,25 +19,15 @@ namespace Tortillapp_web.Pages.Admin
             _context = context;
         }
 
-        public UserData User { get; set; } = default!;
+        public IList<UserData> UserData { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(UserData iUser)
+        public async Task OnGetAsync()
         {
-            if (iUser == null || _context.UserData == null)
+            if (_context.UserData != null)
             {
-                return NotFound();
+                UserData = await _context.UserData
+                .Include(u => u.Role).ToListAsync();
             }
-
-            var user = await _context.UserData.FindAsync(iUser.UserId);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                User = user;
-            }
-            return Page();
         }
     }
 }

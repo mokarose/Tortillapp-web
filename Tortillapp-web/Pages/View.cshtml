@@ -123,9 +123,60 @@
                                     @for (int i = 0; i < Model.Ingredient.Count; i++)
                                     {
                                         <li>
-                                            @Html.DisplayFor(r => r.Ingredient[i].IngredientAmount)
-                                            @Html.DisplayFor(r => r.Ingredient[i].IngredientUnit)
-                                            @Html.DisplayFor(r => r.Ingredient[i].IngredientName)
+                                            @if (Model.Ingredient[i].IngredientUnit == "Al gusto" || Model.Ingredient[i].IngredientUnit == "Pizca")
+                                            {
+                                                @Html.DisplayFor(r => r.Ingredient[i].IngredientUnit)
+                                                <label></label>
+                                                @Html.DisplayFor(r => r.Ingredient[i].IngredientName)
+                                            }
+                                            else if (Model.Ingredient[i].IngredientAmount == 1)
+                                            {
+                                                @if (Model.Ingredient[i].IngredientUnit == "Pieza")
+                                                {
+                                                    @Html.DisplayFor(r => r.Ingredient[i].IngredientAmount)
+                                                    <label> </label>
+                                                    @Html.DisplayFor(r => r.Ingredient[i].IngredientName)
+                                                    <label> </label>
+                                                }
+                                                else if (Model.Ingredient[i].IngredientUnit == "Media pieza")
+                                                {
+                                                    <text>1/2 </text>@Html.DisplayFor(r => r.Ingredient[i].IngredientName)
+                                                }
+                                                else
+                                                {
+                                                    @Html.DisplayFor(r => r.Ingredient[i].IngredientUnit)
+                                                    <label> </label>
+                                                    @Html.DisplayFor(r => r.Ingredient[i].IngredientName)
+                                                    <label> </label>
+                                                }
+                                            }
+                                            else if (Model.Ingredient[i].IngredientAmount > 1)
+                                            {
+                                                @if (Model.Ingredient[i].IngredientUnit == "Pieza")
+                                                {
+                                                    @Html.DisplayFor(r => r.Ingredient[i].IngredientAmount)
+                                                    <label></label>
+                                                    @Html.DisplayFor(r => r.Ingredient[i].IngredientName)
+                                                    <label> </label>
+                                                }
+                                                else
+                                                {
+                                                    @Html.DisplayFor(r => r.Ingredient[i].IngredientAmount)
+                                                    <label></label>
+                                                    @Html.DisplayFor(r => r.Ingredient[i].IngredientUnit)
+                                                    <text>s </text>
+                                                    @Html.DisplayFor(r => r.Ingredient[i].IngredientName)
+                                                    <label> </label>
+                                                }
+                                                @if (Model.Ingredient[i].IngredientUnit == "Media pieza")
+                                                {
+                                                    @Html.DisplayFor(r => r.Ingredient[i].IngredientAmount)
+                                                    <label></label>
+                                                    <label>1/2</label>
+                                                    @Html.DisplayFor(r => r.Ingredient[i].IngredientName)
+                                                }
+                                            }
+                                            
                                         </li>
                                     }
                                 }

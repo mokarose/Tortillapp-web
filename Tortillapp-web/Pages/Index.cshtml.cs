@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Tortillapp_web.Data;
 using Tortillapp_web.Models;
+using Tortillapp_web.Kmeans;
 
 namespace Tortillapp_web.Pages
 {
@@ -23,12 +24,14 @@ namespace Tortillapp_web.Pages
         {
             _logger = logger;
 		}*/
+        //private readonly Tortillapp_web.Kmeans _kmeans;
 
         private readonly Tortillapp_web.Data.tortillaContext _context;
 
-        public IndexModel(Tortillapp_web.Data.tortillaContext context)
+        public IndexModel(Tortillapp_web.Data.tortillaContext context)//, Tortillapp_web.Kmeans kmeans)
         {
             _context = context;
+            //_kmeans = kmeans;
         }
 
         public IList<RecipeInfo> RecipeInfo { get; set; } = default!;
@@ -44,10 +47,14 @@ namespace Tortillapp_web.Pages
 
         public async Task OnGetAsync()
         {
+            //Llamar metodo Kmeans aquí
+            //Kmeans kmeans = new Kmeans();
+            //Kmeans(GetIngredients);
+
             if (_context.RecipeInfos != null)
             {
                 RecipeInfo = await _context.RecipeInfos
-                .Include(r => r.User).ToListAsync();
+                    .Include(r => r.User).ToListAsync();
 
                 Tags = await _context.Tags.ToListAsync();
             }
@@ -58,8 +65,8 @@ namespace Tortillapp_web.Pages
                 if (recipe.RecipePic != null) { rpicto.Add(Load(recipe.RecipePic)); }
                 else { rpicto.Add("tortilla-basic-cuadro.jpg"); }
 
-                var recipeTags = await _context.RecipeTags.
-                    Where(t => t.RecipeId == recipe.RecipeId).ToListAsync();
+                var recipeTags = await _context.RecipeTags
+                    .Where(t => t.RecipeId == recipe.RecipeId).ToListAsync();
                 
                 if (recipeTags != null)
                 {
@@ -114,7 +121,13 @@ namespace Tortillapp_web.Pages
             return Encoding.UTF8.GetString(data);
         }
 
-        
+        private List<string> GetIngredients()
+        {
+            var ingredients = _context.RecipeIngredients
+                .Select(i => i.IngredientName.ToString());
+
+            return ingredients.ToList();
+        }
 
     }
 }

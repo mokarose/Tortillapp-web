@@ -2,83 +2,93 @@
 @model Tortillapp_web.Pages.Admin.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Usuarios registrados";
 }
 
-<h1>Index</h1>
+<div class="bg-white">
+    <div class="container">
+        <h1 class="text-center">Usuarios</h1>
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UserData[0].UserMail)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UserData[0].UserName)
+                        </th>
+                        <!--<th>
+                            Html.DisplayNameFor(model => model.UserData[0].UserPass)
+                        </th>-->
+                        <th>
+                            @Html.DisplayNameFor(model => model.UserData[0].ShowName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UserData[0].ShowPic)
+                        </th>
+                        <!--<th>
+                            Html.DisplayNameFor(model => model.UserData[0].RemenberMe)
+                        </th>-->
+                        <th>
+                            @Html.DisplayNameFor(model => model.UserData[0].UserCreated)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UserData[0].LastUpdated)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.UserData[0].Role)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+            @foreach (var item in Model.UserData) {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserMail)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        <!--<td>
+                            Html.DisplayFor(modelItem => item.UserPass)
+                        </td>-->
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ShowName)
+                        </td>
+                        <td>
+                            @if (item.ShowPic != null)
+                            {
+                                 <label>Agregada</label>   
+                            }
+                            else{
+                                <label>No hay</label>
+                            }
+                                <!--Html.DisplayFor(modelItem => item.ShowPic)-->
+                        </td>
+                        <!--<td>
+                            Html.DisplayFor(modelItem => item.RemenberMe)
+                        </td>-->
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserCreated)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastUpdated)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Role.RoleName)
+                        </td>
+                        <td>
+                            <a asp-page="./Edit" asp-route-id="@item.UserId">Editar</a> |
+                            <a asp-page="./Details" asp-route-id="@item.UserId">Detalles</a> |
+                            <a asp-page="./Delete" asp-route-id="@item.UserId">Eliminar</a>
+                        </td>
+                    </tr>
+            }
+                </tbody>
+            </table>
+         </div>
+    </div>
+</div>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.UserData[0].UserMail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserData[0].UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserData[0].UserPass)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserData[0].ShowName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserData[0].ShowPic)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserData[0].RemenberMe)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserData[0].UserCreated)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserData[0].LastUpdated)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserData[0].Role)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.UserData) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserMail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserPass)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShowName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShowPic)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RemenberMe)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserCreated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastUpdated)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Role.RoleId)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.UserId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.UserId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.UserId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
