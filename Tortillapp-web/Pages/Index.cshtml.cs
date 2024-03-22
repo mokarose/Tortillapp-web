@@ -24,11 +24,11 @@ namespace Tortillapp_web.Pages
         {
             _logger = logger;
 		}*/
-        //private readonly Tortillapp_web.Kmeans _kmeans;
+        //private readonly Tortillapp_web.Kmeans.Kmeans _kmeans;
 
         private readonly Tortillapp_web.Data.tortillaContext _context;
 
-        public IndexModel(Tortillapp_web.Data.tortillaContext context)//, Tortillapp_web.Kmeans kmeans)
+        public IndexModel(Tortillapp_web.Data.tortillaContext context)//, Tortillapp_web.Kmeans.Kmeans kmeans)
         {
             _context = context;
             //_kmeans = kmeans;
@@ -48,13 +48,16 @@ namespace Tortillapp_web.Pages
         public async Task OnGetAsync()
         {
             //Llamar metodo Kmeans aquí
-            //Kmeans kmeans = new Kmeans();
-            //Kmeans(GetIngredients);
+            Kmeans.Kmeans kmeans = new Kmeans.Kmeans();
+            kmeans.Process(GetIngredients());
+            //Mejorar los tiempos de carga, ¿Procesar los ingredientes aparte?
 
             if (_context.RecipeInfos != null)
             {
                 RecipeInfo = await _context.RecipeInfos
-                    .Include(r => r.User).ToListAsync();
+                    .Include(r => r.User)
+                    .Take(9)
+                    .ToListAsync();
 
                 Tags = await _context.Tags.ToListAsync();
             }
